@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>CINEFILOS</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{background:#000;font-family:'Inter',-apple-system,sans-serif;color:#fff;overflow-x:hidden;min-height:100vh}
+.screen{display:none;padding-bottom:90px;min-height:100vh}
+.screen.active{display:block}
+.top-header{padding:18px 22px 12px;display:flex;justify-content:space-between;align-items:center}
+.top-header h1{font-size:32px;font-weight:800;letter-spacing:-1px;display:flex;align-items:center;gap:12px}
+.top-header h1 svg{width:22px;height:22px;stroke:#fff;stroke-width:2;fill:none;cursor:pointer}
+.header-right{display:flex;align-items:center;gap:8px}
+.avatar{width:40px;height:40px;border-radius:50%;background:#1c1c1e;border:1.5px solid #2c2c2e;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600}
+.admin-btn{width:40px;height:40px;border-radius:50%;background:#fff;color:#000;border:none;font-size:22px;font-weight:900;cursor:pointer;display:none;align-items:center;justify-content:center;font-family:'Inter',sans-serif}
+.search-overlay{display:none;margin:0 22px 14px;background:#1c1c1e;border-radius:12px;padding:12px 16px;align-items:center;gap:10px}
+.search-overlay.active{display:flex}
+.search-overlay svg{width:18px;height:18px;stroke:#8e8e93;stroke-width:2;fill:none;flex-shrink:0}
+.search-overlay input{flex:1;background:transparent;border:none;color:#fff;font-size:15px;outline:none;font-family:'Inter',sans-serif}
+.search-overlay input::placeholder{color:#8e8e93}
+.search-results{padding:0 22px 30px}
+.search-section-title{font-size:14px;font-weight:700;color:#8e8e93;letter-spacing:1px;text-transform:uppercase;margin:20px 0 12px}
+.search-empty{text-align:center;padding:60px 22px;color:#8e8e93}
+.hero{position:relative;margin:0 16px;height:540px;border-radius:20px;overflow:hidden;background:#0a0a0a}
+.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center 30%;transition:opacity .4s ease}
+.hero-bg.fade{opacity:0}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1) 0%,rgba(0,0,0,.3) 40%,rgba(0,0,0,.85) 75%,#000 100%)}
+.hero-content{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding:24px 22px 28px;text-align:center}
+.emmy{margin-bottom:18px}
+.emmy-text .year{font-size:12px;letter-spacing:.5px}
+.emmy-text .award{font-size:18px;font-weight:700;margin-top:4px}
+.tags{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;margin-bottom:22px}
+.tags .dot{width:3px;height:3px;background:#8e8e93;border-radius:50%}
+.tags .age{border:1.5px solid #8e8e93;padding:1px 6px;border-radius:4px;font-size:10px;font-weight:600;margin-left:4px}
+.appletv-icon{width:18px;height:18px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#000;font-size:9px;font-weight:700}
+.actions{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.btn-play{background:#fff;color:#000;border:none;padding:14px 52px;border-radius:50px;font-size:17px;font-weight:600;display:flex;align-items:center;gap:8px;cursor:pointer;font-family:'Inter',sans-serif}
+.btn-plus{width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.12);border:none;color:#fff;font-size:26px;cursor:pointer;transition:background .2s,transform .2s}
+.btn-plus:active{transform:scale(.92)}
+.btn-plus.saved{background:#fff;color:#000}
+.dots{display:flex;gap:7px;align-items:center}
+.dots span{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35);transition:all .3s;cursor:pointer}
+.dots span.active{background:#fff;width:22px;border-radius:3px}
+.section{margin-top:30px;padding:0 22px}
+.section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.section-header h2{font-size:22px;font-weight:700;letter-spacing:-.5px}
+.section-header .arrow{color:#8e8e93;font-size:22px}
+.carousel{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none}
+.carousel::-webkit-scrollbar{display:none}
+.chart-card{flex:0 0 200px;display:flex;align-items:flex-end;gap:6px}
+.chart-number{font-size:80px;font-weight:800;line-height:.8;letter-spacing:-6px;color:#000;-webkit-text-stroke:2px #fff;flex-shrink:0}
+.chart-poster{width:110px;height:160px;border-radius:10px;background-size:cover;background-position:center;filter:grayscale(100%);flex-shrink:0;cursor:pointer}
+.poster-wide{flex:0 0 280px;height:160px;border-radius:12px;background-size:cover;background-position:center;filter:grayscale(100%);border:1px solid #1c1c1e;cursor:pointer}
+.news-mini{flex:0 0 220px;background:#0d0d0d;border:1px solid #1c1c1e;border-radius:12px;overflow:hidden}
+.news-mini-img{width:100%;height:120px;background-size:cover;background-position:center;filter:grayscale(100%)}
+.news-mini-body{padding:12px 14px}
+.news-mini-tag{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#8e8e93;margin-bottom:6px}
+.news-mini-title{font-size:13px;font-weight:600;line-height:1.3}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:0 22px}
+.grid-poster{width:100%;aspect-ratio:2/3;border-radius:12px;background-size:cover;background-position:center;filter:grayscale(100%);border:1px solid #1c1c1e}
+.grid-title{margin-top:8px;font-size:14px;font-weight:600}
+.grid-meta{font-size:12px;color:#8e8e93;margin-top:2px}
+.tabs{display:flex;gap:8px;padding:0 22px 12px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;padding:10px 18px;border-radius:20px;background:#1c1c1e;color:#8e8e93;font-size:13px;font-weight:600;border:none;font-family:'Inter',sans-serif;white-space:nowrap}
+.tab.active{background:#fff;color:#000}
+.genres{display:flex;gap:8px;padding:0 22px 20px;overflow-x:auto;scrollbar-width:none}
+.genres::-webkit-scrollbar{display:none}
+.genre{flex:0 0 auto;padding:8px 14px;border-radius:16px;background:transparent;border:1px solid #2c2c2e;color:#8e8e93;font-size:12px;font-weight:500;font-family:'Inter',sans-serif;white-space:nowrap}
+.genre.active{background:#fff;color:#000;border-color:#fff}
+.top-rated{margin:0 22px 24px;padding:20px;background:#0d0d0d;border:1px solid #1c1c1e;border-radius:18px;display:flex;gap:16px;align-items:center}
+.top-rated-poster{width:90px;height:130px;border-radius:10px;background-size:cover;background-position:center;filter:grayscale(100%);flex-shrink:0}
+.top-rated-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#8e8e93;margin-bottom:6px}
+.top-rated-title{font-size:19px;font-weight:700;margin-bottom:8px}
+.stars{display:flex;gap:3px;margin-bottom:6px}
+.stars svg{width:15px;height:15px}
+.rating-num{font-size:12px;color:#ccc}
+.comments-title{font-size:15px;font-weight:700;padding:0 22px;margin-bottom:12px}
+.comment{margin:0 22px 10px;padding:14px;background:#0d0d0d;border:1px solid #1c1c1e;border-radius:14px;display:flex;gap:12px}
+.comment-avatar{width:36px;height:36px;border-radius:50%;background:#1c1c1e;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0}
+.comment-user{font-size:13px;font-weight:600;margin-bottom:4px}
+.comment-text{font-size:13px;color:#bbb;line-height:1.5}
+.comment-form{margin:0 22px 16px;display:flex;gap:10px}
+.comment-form input{flex:1;background:#1c1c1e;border:none;border-radius:20px;padding:12px 16px;color:#fff;font-size:14px;outline:none;font-family:'Inter',sans-serif}
+.comment-form input::placeholder{color:#636366}
+.comment-form button{background:#fff;color:#000;border:none;padding:0 20px;border-radius:20px;font-size:13px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer}
+.ranking-item{display:flex;align-items:center;gap:14px;margin:0 22px 10px;padding:10px;background:#0d0d0d;border:1px solid #1c1c1e;border-radius:12px}
+.ranking-num{font-size:22px;font-weight:800;width:34px;text-align:center;color:#555}
+.ranking-poster{width:46px;height:66px;border-radius:6px;background-size:cover;background-position:center;filter:grayscale(100%)}
+.ranking-title{font-size:13px;font-weight:600;margin-bottom:4px}
+.ranking-rating{font-size:11px;color:#8e8e93}
+/* PERFIL estilo Letterboxd */
+.profile-hero{padding:30px 22px 0;text-align:center}
+.profile-avatar-lg{width:110px;height:110px;border-radius:50%;background:#1c1c1e;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:800;position:relative}
+.profile-avatar-lg::after{content:'';position:absolute;inset:-4px;border-radius:50%;background:linear-gradient(135deg,#2AABEE,#229ED9,#9b59b6);z-index:-1}
+.profile-display-name{font-size:28px;font-weight:800;letter-spacing:-1px;margin-bottom:6px;display:flex;align-items:center;justify-content:center;gap:8px}
+.profile-bio-small{font-size:13px;color:#8e8e93;margin-bottom:18px}
+.profile-chips{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.chip{padding:6px 14px;background:#1c1c1e;border-radius:16px;font-size:12px;font-weight:600;color:#bbb;display:flex;align-items:center;gap:5px}
+.chip.blue{background:#2AABEE;color:#fff}
+.follow-btn{padding:10px 30px;background:#fff;color:#000;border:none;border-radius:22px;font-size:14px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;margin-bottom:24px}
+.profile-tabs{display:flex;justify-content:center;gap:22px;padding:0 22px 14px;border-bottom:1px solid #1c1c1e;margin-bottom:20px}
+.profile-tab{padding:8px 4px;background:transparent;border:none;color:#636366;font-size:14px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;position:relative}
+.profile-tab.active{color:#fff}
+.profile-tab.active::after{content:'';position:absolute;bottom:-14px;left:0;right:0;height:2px;background:#fff}
+.profile-section-title{font-size:16px;font-weight:800;padding:0 22px 12px;display:flex;align-items:center;gap:6px}
+.profile-section-title .star-icon{color:#FFD700;font-size:14px}
+.profile-section-title .see-all{margin-left:auto;font-size:12px;color:#8e8e93;font-weight:600}
+.fav-row{display:flex;gap:8px;overflow-x:auto;padding:0 22px 20px;scrollbar-width:none}
+.fav-row::-webkit-scrollbar{display:none}
+.fav-poster{flex:0 0 90px;height:130px;border-radius:8px;background-size:cover;background-position:center;cursor:pointer}
+.rating-card{margin:0 22px 12px;background:#0d0d0d;border:1px solid #1c1c1e;border-radius:14px;padding:14px;display:flex;gap:12px;align-items:center}
+.rating-card-poster{width:60px;height:90px;border-radius:8px;background-size:cover;background-position:center;flex-shrink:0}
+.rating-card-info{flex:1}
+.rating-card-label{font-size:10px;color:#8e8e93;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}
+.rating-card-title{font-size:15px;font-weight:700;margin-bottom:6px}
+.rating-card-stars{display:flex;gap:2px;margin-bottom:4px}
+.rating-card-stars svg{width:14px;height:14px}
+.rating-card-time{font-size:11px;color:#8e8e93}
+
+.detail-back{position:absolute;top:20px;left:20px;z-index:10;width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.6);backdrop-filter:blur(20px);border:none;color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center}
+.detail-hero{position:relative;height:480px;background-size:cover;background-position:center 20%;filter:grayscale(100%)}
+.detail-hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.3) 0%,transparent 30%,rgba(0,0,0,.9) 85%,#000 100%)}
+.detail-content{position:relative;z-index:2;padding:24px 22px}
+.detail-title{font-size:32px;font-weight:800;letter-spacing:-1px;line-height:1.05;margin-bottom:14px;margin-top:-80px}
+.detail-meta-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.detail-chip{padding:5px 12px;background:#1c1c1e;border-radius:10px;font-size:11px;color:#bbb;font-weight:600;letter-spacing:.3px}
+.detail-chip.year{background:#fff;color:#000}
+.detail-synopsis-title{font-size:11px;font-weight:700;color:#8e8e93;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px}
+.detail-synopsis{font-size:14px;line-height:1.7;color:#ddd;margin-bottom:26px}
+.detail-rating-row{display:flex;align-items:center;gap:14px;padding:16px 18px;background:#0d0d0d;border:1px solid #1c1c1e;border-radius:14px;margin-bottom:26px}
+.detail-rating-stars{display:flex;gap:2px}
+.detail-rating-stars svg{width:18px;height:18px}
+.detail-rating-info{flex:1}
+.detail-rating-value{font-size:18px;font-weight:800;line-height:1}
+.detail-rating-count{font-size:11px;color:#8e8e93;margin-top:4px}
+.episode-title{font-size:16px;font-weight:700;padding:0 22px;margin-bottom:12px}
+.season-tabs{display:flex;gap:8px;padding:0 22px;margin-bottom:14px;overflow-x:auto;scrollbar-width:none}
+.season-tabs::-webkit-scrollbar{display:none}
+.season-tab{flex:0 0 auto;padding:8px 16px;border-radius:16px;background:#1c1c1e;color:#8e8e93;font-size:12px;font-weight:600;border:none;font-family:'Inter',sans-serif;white-space:nowrap}
+.season-tab.active{background:#fff;color:#000}
+.episodes-carousel{display:flex;gap:12px;overflow-x:auto;padding:0 22px 10px;scrollbar-width:none}
+.episodes-carousel::-webkit-scrollbar{display:none}
+.episode{flex:0 0 200px;background:#0d0d0d;border:1px solid #1c1c1e;border-radius:12px;overflow:hidden;cursor:pointer}
+.episode-img{width:100%;height:110px;background-size:cover;background-position:center;filter:grayscale(100%)}
+.episode-info{padding:10px 12px}
+.episode-num{font-size:10px;color:#8e8e93;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.episode-name{font-size:13px;font-weight:600;line-height:1.3}
+.related-title{font-size:16px;font-weight:700;padding:0 22px;margin:26px 0 14px}
+.related-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:0 22px 40px}
+.related-item{cursor:pointer}
+.related-poster{width:100%;aspect-ratio:2/3;border-radius:10px;background-size:cover;background-position:center;filter:grayscale(100%);border:1px solid #1c1c1e;margin-bottom:6px}
+.related-name{font-size:11px;font-weight:600;line-height:1.3}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(10,10,10,.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid #1c1c1e;display:flex;justify-content:space-around;align-items:center;padding:10px 4px 16px;z-index:999}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10px;font-weight:500;color:#636366;flex:1;padding:6px 4px;border:none;background:transparent;font-family:'Inter',sans-serif}
+.nav-item.active{color:#fff}
+.nav-item svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.nav-tg{width:46px;height:46px;border-radius:50%;background:#fff;border:none;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-tg svg{width:24px;height:24px;fill:#000}
+.empty-state{text-align:center;padding:80px 30px;color:#636366}
+.empty-state svg{width:60px;height:60px;stroke:#333;stroke-width:1.5;fill:none;margin-bottom:20px}
+.empty-state h3{font-size:18px;font-weight:700;color:#fff;margin-bottom:8px}
+.empty-state p{font-size:13px;line-height:1.5}
+.welcome{position:fixed;inset:0;background:#000;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:40px 30px;z-index:9999;overflow:hidden}
+.welcome-bg{position:absolute;inset:-50%;display:flex;flex-direction:column;gap:14px;transform:rotate(-10deg);opacity:.9;filter:contrast(1.1) saturate(1.2);pointer-events:none}
+.welcome-row{display:flex;gap:14px;width:max-content;animation:scrollLeft 60s linear infinite}
+.welcome-row.reverse{animation:scrollRight 70s linear infinite}
+.welcome-row:nth-child(2){animation-duration:55s}
+.welcome-row:nth-child(3){animation-duration:75s}
+.welcome-row:nth-child(4){animation-duration:65s}
+.welcome-row:nth-child(5){animation-duration:80s}
+.welcome-row:nth-child(6){animation-duration:70s}
+.welcome-row img{width:110px;height:165px;border-radius:10px;object-fit:cover;flex-shrink:0;background:#1a1a1a}
+@keyframes scrollLeft{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes scrollRight{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.welcome-overlay{position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(0,0,0,.4) 0%,rgba(0,0,0,.9) 75%);z-index:1}
+.welcome-content{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;align-items:center;width:100%;max-width:400px}
+.welcome-brand{font-size:44px;font-weight:900;letter-spacing:16px;margin-bottom:50px;text-shadow:0 6px 40px rgba(0,0,0,.95);text-align:center;padding-left:16px}
+.welcome input{width:100%;max-width:340px;background:rgba(28,28,30,.85);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:16px 20px;color:#fff;font-size:16px;outline:none;font-family:'Inter',sans-serif;margin-bottom:12px;text-align:center}
+.welcome input::placeholder{color:#8e8e93}
+.welcome .err{color:#ff453a;font-size:12px;margin-bottom:8px;height:16px}
+.welcome button{width:100%;max-width:340px;background:#fff;color:#000;border:none;padding:16px;border-radius:14px;font-size:16px;font-weight:700;font-family:'Inter',sans-serif;box-shadow:0 8px 30px rgba(255,255,255,.2);margin-bottom:14px}
+.welcome .welcome-hint{font-size:11px;color:#636366;text-align:center;line-height:1.5;max-width:320px;letter-spacing:.3px}
+
+.admin-screen{position:fixed;inset:0;background:#000;z-index:9998;overflow-y:auto;padding:20px 22px 100px;display:none}
+.admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.admin-header h1{font-size:26px;font-weight:800}
+.admin-close{width:36px;height:36px;border-radius:50%;background:#1c1c1e;border:none;color:#fff;font-size:20px;display:flex;align-items:center;justify-content:center}
+.admin-tabs{display:flex;gap:8px;margin-bottom:24px}
+.admin-tab{padding:10px 18px;border-radius:20px;background:#1c1c1e;color:#8e8e93;font-size:13px;font-weight:600;border:none;font-family:'Inter',sans-serif}
+.admin-tab.active{background:#fff;color:#000}
+.form-group{margin-bottom:18px}
+.form-label{display:block;font-size:12px;font-weight:700;color:#8e8e93;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.form-input{width:100%;background:#1c1c1e;border:none;border-radius:12px;padding:14px 16px;color:#fff;font-size:15px;outline:none;font-family:'Inter',sans-serif}
+.form-input-area{min-height:100px;resize:vertical}
+.img-preview{width:100%;height:200px;border-radius:14px;background:#1c1c1e;background-size:cover;background-position:center;margin-bottom:12px;display:flex;align-items:center;justify-content:center;color:#636366;font-size:13px;filter:grayscale(100%)}
+.file-label{display:block;margin-top:8px;padding:12px 16px;background:#1c1c1e;border-radius:12px;text-align:center;font-size:13px;font-weight:600;cursor:pointer;color:#fff;border:1px dashed #2c2c2e}
+.link-group{background:#0d0d0d;border:1px solid #1c1c1e;border-radius:12px;padding:14px;margin-bottom:10px;display:flex;align-items:center;gap:12px}
+.link-lang{font-size:12px;font-weight:700;color:#8e8e93;min-width:70px;text-transform:uppercase;letter-spacing:1px}
+.link-input{flex:1;background:transparent;border:none;color:#fff;font-size:14px;outline:none;font-family:'Inter',sans-serif}
+.cat-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.cat-btn{padding:10px 16px;border-radius:18px;background:#1c1c1e;border:1px solid #2c2c2e;color:#8e8e93;font-size:13px;font-weight:600;font-family:'Inter',sans-serif}
+.cat-btn.active{background:#fff;color:#000;border-color:#fff}
+.admin-publish{position:fixed;bottom:0;left:0;right:0;padding:16px 22px 24px;background:rgba(0,0,0,.95);border-top:1px solid #1c1c1e}
+.btn-publish{width:100%;background:#fff;color:#000;border:none;padding:16px;border-radius:14px;font-size:16px;font-weight:700;font-family:'Inter',sans-serif}
+.user-row{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:#0d0d0d;border:1px solid #1c1c1e;border-radius:12px;margin-bottom:10px}
+.u-info{display:flex;align-items:center;gap:12px}
+.u-avatar{width:38px;height:38px;border-radius:50%;background:#1c1c1e;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+.u-name{font-size:14px;font-weight:600}
+.u-role{font-size:11px;color:#8e8e93;margin-top:2px}
+.user-toggle{padding:8px 14px;border-radius:14px;border:none;font-size:12px;font-weight:700;font-family:'Inter',sans-serif}
+.user-toggle.on{background:#fff;color:#000}
+.user-toggle.off{background:#1c1c1e;color:#8e8e93}
+.about-hero-big{position:relative;width:100%;height:520px;background-size:cover;background-position:center;overflow:hidden;margin-bottom:36px}
+.about-hero-big::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1) 0%,rgba(0,0,0,.3) 50%,rgba(0,0,0,.95) 100%)}
+.about-hero-content{position:absolute;bottom:50px;left:0;right:0;text-align:center;z-index:2;padding:0 22px}
+.about-logo{font-size:44px;font-weight:900;letter-spacing:16px;padding-left:16px;margin-bottom:0;text-shadow:0 4px 30px rgba(0,0,0,.9)}
+.social-list{padding:0 22px;display:flex;flex-direction:column;gap:12px;margin-bottom:50px}
+.social-btn{display:flex;align-items:center;gap:14px;padding:18px 20px;background:#0d0d0d;border:1px solid #1c1c1e;border-radius:18px;text-decoration:none;color:#fff;font-family:'Inter',sans-serif}
+.social-btn:active{background:#1a1a1a;border-color:#2c2c2e}
+.social-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.social-icon.tg{background:linear-gradient(135deg,#2AABEE,#229ED9)}
+.social-icon.fb{background:#1877F2}
+.social-icon.tk{background:#111;border:1px solid #2c2c2e}
+.social-icon svg{width:24px;height:24px;fill:#fff}
+.social-info{flex:1;text-align:left}
+.social-name{font-size:15px;font-weight:700}
+.social-handle{font-size:12px;color:#8e8e93;margin-top:3px}
+.social-arrow{color:#555;font-size:22px}
+.player-screen{position:fixed;inset:0;background:#000;z-index:99999;display:none;overflow:hidden}
+.player-screen.active{display:block}
+.player-rotate-msg{position:absolute;inset:0;background:#000;z-index:20;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px}
+.player-rotate-msg svg{width:70px;height:70px;stroke:#fff;stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round;margin-bottom:24px;animation:rotateHint 2s ease-in-out infinite}
+@keyframes rotateHint{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-90deg)}}
+.player-rotate-msg p{font-size:16px;color:#fff;font-weight:600;margin-top:6px}
+.player-rotate-msg .sub{font-size:13px;color:#8e8e93;margin-top:8px}
+.player-rotate-msg .dismiss{margin-top:30px;padding:10px 24px;background:#fff;color:#000;border:none;border-radius:20px;font-size:13px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer}
+@media (orientation:landscape){.player-rotate-msg{display:none !important}}
+.player-video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}
+.player-controls{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55) 0%,transparent 25%,transparent 60%,rgba(0,0,0,.85) 100%);opacity:1;transition:opacity .3s;z-index:2}
+.player-controls.hidden{opacity:0;pointer-events:none}
+.player-top{position:absolute;top:0;left:0;right:0;padding:18px 20px;display:flex;justify-content:space-between;align-items:center}
+.player-icon{width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.5);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.2);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.player-icon svg{width:20px;height:20px;stroke:#fff;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.player-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:flex;gap:50px;align-items:center}
+.player-skip{width:66px;height:66px;border-radius:50%;background:rgba(0,0,0,.45);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.2);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative}
+.player-skip svg{width:28px;height:28px;stroke:#fff;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.player-skip-num{position:absolute;bottom:-24px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:700;color:#fff;background:rgba(0,0,0,.7);padding:3px 10px;border-radius:10px;pointer-events:none;white-space:nowrap}
+.player-play{width:84px;height:84px;border-radius:50%;background:rgba(0,0,0,.55);backdrop-filter:blur(24px);border:2px solid rgba(255,255,255,.25);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.player-play svg{width:34px;height:34px;fill:#fff}
+.player-bottom{position:absolute;bottom:0;left:0;right:0;padding:20px 20px 30px}
+.player-title{font-size:13px;color:#bbb;margin-bottom:4px}
+.player-subtitle{font-size:22px;font-weight:700;margin-bottom:18px}
+.player-progress-row{display:flex;align-items:center;gap:12px}
+.player-time{font-size:12px;color:#fff;font-weight:500;min-width:42px}
+.player-bar{flex:1;height:4px;background:rgba(255,255,255,.25);border-radius:3px;position:relative;cursor:pointer}
+.player-bar-fill{position:absolute;left:0;top:0;bottom:0;background:#fff;border-radius:3px;width:0%}
+.player-bar-thumb{position:absolute;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;background:#fff;border-radius:50%;left:0%;box-shadow:0 2px 6px rgba(0,0,0,.6)}
+</style>
+</head>
+<body>
+
+<div class="welcome" id="welcomeScreen">
+<div class="welcome-bg">
+<div class="welcome-row"><img src="https://image.tmdb.org/t/p/w300/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg"><img src="https://image.tmdb.org/t/p/w300/74xTEgt7R36Fpooo50r9T25onhq.jpg"><img src="https://image.tmdb.org/t/p/w300/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg"><img src="https://image.tmdb.org/t/p/w300/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg"><img src="https://image.tmdb.org/t/p/w300/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg"><img src="https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg"><img src="https://image.tmdb.org/t/p/w300/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg"><img src="https://image.tmdb.org/t/p/w300/saHP97rTPS5eLmrLQEcANmKrsFl.jpg"><img src="https://image.tmdb.org/t/p/w300/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg"><img src="https://image.tmdb.org/t/p/w300/74xTEgt7R36Fpooo50r9T25onhq.jpg"><img src="https://image.tmdb.org/t/p/w300/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg"><img src="https://image.tmdb.org/t/p/w300/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg"><img src="https://image.tmdb.org/t/p/w300/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg"><img src="https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg"><img src="https://image.tmdb.org/t/p/w300/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg"><img src="https://image.tmdb.org/t/p/w300/saHP97rTPS5eLmrLQEcANmKrsFl.jpg"></div>
+<div class="welcome-row reverse"><img src="https://image.tmdb.org/t/p/w300/74xTEgt7R36Fpooo50r9T25onhq.jpg"><img src="https://image.tmdb.org/t/p/w300/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg"><img src="https://image.tmdb.org/t/p/w300/saHP97rTPS5eLmrLQEcANmKrsFl.jpg"><img src="https://image.tmdb.org/t/p/w300/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg"><img src="https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg"><img src="https://image.tmdb.org/t/p/w300/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg"><img src="https://image.tmdb.org/t/p/w300/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg"><img src="https://image.tmdb.org/t/p/w300/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg"><img src="https://image.tmdb.org/t/p/w300/74xTEgt7R36Fpooo50r9T25onhq.jpg"><img src="https://image.tmdb.org/t/p/w300/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg"><img src="https://image.tmdb.org/t/p/w300/saHP97rTPS5eLmrLQEcANmKrsFl.jpg"><img src="https://image.tmdb.org/t/p/w300/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg"><img src="https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg"><img src="https://image.tmdb.org/t/p/w300/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg"><img src="https://image.tmdb.org/t/p/w300/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg"><img src="https://image.tmdb.org/t/p/w300/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg"></div>
+<div class="welcome-row"><img src="https://image.tmdb.org/t/p/w300/saHP97rTPS5eLmrLQEcANmKrsFl.jpg"><img src="https://image.tmdb.org/t/p/w300/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg"><img src="https://image.tmdb.org/t/p/w300/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg"><img src="https://image.tmdb.org/t/p/w300/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg"><img src="https://image.tmdb.org/t/p/w300/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg"><img src="https://image.tmdb.org/t/p/w300/74xTEgt7R36Fpooo50r9T25onhq.jpg"><img src="https://image.tmdb.org/t/p/w300/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg"><img src="https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg"><img src="https://image.tmdb.org/t/p/w300/saHP97rTPS5eLmrLQEcANmKrsFl.jpg"><img src="https://image.tmdb.org/t/p/w300/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg"><img src="https://image.tmdb.org/t/p/w300/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg"><img src="https://image.tmdb.org/t/p/w300/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg"><img src="https://image.tmdb.org/t/p/w300/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg"><img src="https://image.tmdb.org/t/p/w300/74xTEgt7R36Fpooo50r9T25onhq.jpg"><img src="https://image.tmdb.org/t/p/w300/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg"><img src="https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg"></div>
+<div class="welcome-row reverse"><img src="https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg"><img src="https://image.tmdb.org/t/p/w300/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg"><img src="https://image.tmdb.org/t/p/w300/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg"><img src="https://image.tmdb.org/t/p/w300/74xTEgt7R36Fpooo50r9T25onhq.jpg"><img src="https://image.tmdb.org/t/p/w300/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg"><img src="https://image.tmdb.org/t/p/w300/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg"><img src="https://image.tmdb.org/t/p/w300/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg"><img src="https://image.tmdb.org/t/p/w300/saHP97rTPS5eLmrLQEcANmKrsFl.jpg"><img src="https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg"><img src="https://image.tmdb.org/t/p/w300/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg"><img src="https://image.tmdb.org/t/p/w300/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg"><img src="https://image.tmdb.org/t/p/w300/74xTEgt7R36Fpooo50r9T25onhq.jpg"><img src="https://image.tmdb.org/t/p/w300/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg"><img src="https://image.tmdb.org/t/p/w300/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg"><img src="https://image.tmdb.org/t/p/w300/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg"><img src="https://image.tmdb.org/t/p/w300/saHP97rTPS5eLmrLQEcANmKrsFl.jpg"></div>
+<div class="welcome-row"><img src="https://image.tmdb.org/t/p/w300/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg"><img src="https://image.tmdb.org/t/p/w300/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg"><img src="https://image.tmdb.org/t/p/w300/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg"><img src="https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg"><img src="https://image.tmdb.org/t/p/w300/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg"><img src="https://image.tmdb.org/t/p/w300/saHP97rTPS5eLmrLQEcANmKrsFl.jpg"><img src="https://image.tmdb.org/t/p/w300/74xTEgt7R36Fpooo50r9T25onhq.jpg"><img src="https://image.tmdb.org/t/p/w300/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg"><img src="https://image.tmdb.org/t/p/w300/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg"><img src="https://image.tmdb.org/t/p/w300/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg"><img src="https://image.tmdb.org/t/p/w300/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg"><img src="https://image.tmdb.org/t/p/w300/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg"><img src="https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg"><img src="https://image.tmdb.org/t/p/w300/saHP97rTPS5eLmrLQEcANmKrsFl.jpg"><img src="https://image.tmdb.org/t/p/w300/74xTEgt7R36Fpooo50r9T25onhq.jpg"><img src="https://image.tmdb.org/t/p/w300/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg"></div>
+<div class="welcome-row reverse"><img src="https://image.tmdb.org/t/p/w300/74xTEgt7R36Fpooo50r9T25onhq.jpg"><img src="https://image.tmdb.org/t/p/w300/saHP97rTPS5eLmrLQEcANmKrsFl.jpg"><img src="https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg"><img src="https://image.tmdb.org/t/p/w300/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg"><img src="https://image.tmdb.org/t/p/w300/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg"><img src="https://image.tmdb.org/t/p/w300/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg"><img src="https://image.tmdb.org/t/p/w300/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg"><img src="https://image.tmdb.org/t/p/w300/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg"><img src="https://image.tmdb.org/t/p/w300/74xTEgt7R36Fpooo50r9T25onhq.jpg"><img src="https://image.tmdb.org/t/p/w300/saHP97rTPS5eLmrLQEcANmKrsFl.jpg"><img src="https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg"><img src="https://image.tmdb.org/t/p/w300/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg"><img src="https://image.tmdb.org/t/p/w300/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg"><img src="https://image.tmdb.org/t/p/w300/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg"><img src="https://image.tmdb.org/t/p/w300/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg"><img src="https://image.tmdb.org/t/p/w300/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg"></div>
+<div class="welcome-row"><img src="https://image.tmdb.org/t/p/w300/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg"><img src="https://image.tmdb.org/t/p/w300/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg"><img src="https://image.tmdb.org/t/p/w300/74xTEgt7R36Fpooo50r9T25onhq.jpg"><img src="https://image.tmdb.org/t/p/w300/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg"><img src="https://image.tmdb.org/t/p/w300/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg"><img src="https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg"><img src="https://image.tmdb.org/t/p/w300/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg"><img src="https://image.tmdb.org/t/p/w300/saHP97rTPS5eLmrLQEcANmKrsFl.jpg"><img src="https://image.tmdb.org/t/p/w300/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg"><img src="https://image.tmdb.org/t/p/w300/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg"><img src="https://image.tmdb.org/t/p/w300/74xTEgt7R36Fpooo50r9T25onhq.jpg"><img src="https://image.tmdb.org/t/p/w300/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg"><img src="https://image.tmdb.org/t/p/w300/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg"><img src="https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg"><img src="https://image.tmdb.org/t/p/w300/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg"><img src="https://image.tmdb.org/t/p/w300/saHP97rTPS5eLmrLQEcANmKrsFl.jpg"></div>
+</div>
+<div class="welcome-overlay"></div>
+<div class="welcome-content">
+<div class="welcome-brand">CINEFILOS</div>
+<input type="text" id="nameInput" placeholder="Tu nombre" maxlength="20">
+<input type="text" id="codeInput" placeholder="Código de acceso" maxlength="20">
+<div class="err" id="nameError"></div>
+<button onclick="enterApp()">Entrar</button>
+<div class="welcome-hint">Para ingresar a CINEFILOS necesitas un nombre y un código de acceso que te proporcionará la comunidad.</div>
+</div>
+</div>
+
+<div class="screen active" id="s-home">
+<div class="top-header"><h1>Inicio <svg onclick="toggleSearch()" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></h1>
+<div class="header-right"><button class="admin-btn" id="adminBtn" onclick="openAdmin()">+</button><div class="avatar" id="userAvatar">?</div></div>
+</div>
+<div class="search-overlay" id="searchBox">
+<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+<input type="text" id="searchInput" placeholder="Buscar películas, series, animes..." oninput="doSearch(this.value)">
+</div>
+<div id="searchResults" style="display:none"></div>
+<div id="homeContent">
+<div class="hero" id="heroBox">
+<div class="hero-bg" id="heroBg" style="background-image:url('https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg')"></div>
+<div class="hero-overlay"></div>
+<div class="hero-content">
+<div class="emmy"><div class="emmy-text"><div class="year" id="heroYear">Ganador 2026</div><div class="award" id="heroAward">Premios Emmy®</div></div></div>
+<div class="tags" id="heroTags"><div class="appletv-icon">tv</div><span>Serie de TV</span><span class="dot"></span><span>Drama</span><span class="dot"></span><span>Thriller</span><span class="age">18+</span></div>
+<div class="actions"><button class="btn-play" id="heroPlayBtn" onclick="playFromHero()">▶ Reproducir</button><button class="btn-plus" id="heroPlusBtn" onclick="toggleSaveHero()">+</button></div>
+<div class="dots" id="heroDots"></div>
+</div></div>
+<div class="section"><div class="section-header"><h2>Top Semanal</h2><span class="arrow">›</span></div>
+<div class="carousel">
+<div class="chart-card" onclick="openDetail('The Last of Us','2023 · Drama · Post-apocalíptico','Joel es contratado para sacar a Ellie de una zona de cuarentena.','https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',true)"><div class="chart-number">1</div><div class="chart-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg')"></div></div>
+<div class="chart-card" onclick="openDetail('The Batman','2022 · Acción · Misterio','Batman investiga la corrupción de Gotham.','https://image.tmdb.org/t/p/original/74xTEgt7R36Fpooo50r9T25onhq.jpg',false)"><div class="chart-number">2</div><div class="chart-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg')"></div></div>
+<div class="chart-card" onclick="openDetail('White Lotus','2021 · Comedia · Drama','Vacaciones con un misterioso asesinato.','https://image.tmdb.org/t/p/original/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg',true)"><div class="chart-number">3</div><div class="chart-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg')"></div></div>
+</div></div>
+<div class="section"><div class="section-header"><h2>Últimas noticias</h2><span class="arrow">›</span></div>
+<div class="carousel">
+<div class="news-mini"><div class="news-mini-img" style="background-image:url('https://image.tmdb.org/t/p/w500/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg')"></div><div class="news-mini-body"><div class="news-mini-tag">Estreno</div><div class="news-mini-title">Nueva temporada de The Last of Us</div></div></div>
+<div class="news-mini"><div class="news-mini-img" style="background-image:url('https://image.tmdb.org/t/p/w500/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg')"></div><div class="news-mini-body"><div class="news-mini-tag">Premios</div><div class="news-mini-title">Los Emmy 2026 ya tienen fecha</div></div></div>
+</div></div>
+<div class="section"><div class="section-header"><h2>Series de la semana</h2><span class="arrow">›</span></div>
+<div class="carousel">
+<div class="poster-wide" onclick="openDetail('The Last of Us','2023 · Drama','Joel saca a Ellie.','https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',true)" style="background-image:url('https://image.tmdb.org/t/p/w780/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg')"></div>
+<div class="poster-wide" onclick="openDetail('Wednesday','2022 · Misterio','Miércoles Addams.','https://image.tmdb.org/t/p/original/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg',true)" style="background-image:url('https://image.tmdb.org/t/p/w780/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg')"></div>
+<div class="poster-wide" onclick="openDetail('Better Call Saul','2015 · Drama','Jimmy McGill.','https://image.tmdb.org/t/p/original/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg',true)" style="background-image:url('https://image.tmdb.org/t/p/w780/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg')"></div>
+</div></div>
+<div class="section"><div class="section-header"><h2>Estrenos</h2><span class="arrow">›</span></div>
+<div class="carousel">
+<div class="poster-wide" onclick="openDetail('Dune','2021 · Sci-Fi','Paul Atreides.','https://image.tmdb.org/t/p/original/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg',false)" style="background-image:url('https://image.tmdb.org/t/p/w780/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg')"></div>
+<div class="poster-wide" onclick="openDetail('Oppenheimer','2023 · Drama','Oppenheimer.','https://image.tmdb.org/t/p/original/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg',false)" style="background-image:url('https://image.tmdb.org/t/p/w780/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg')"></div>
+<div class="poster-wide" onclick="openDetail('Joker','2019 · Drama','Arthur Fleck.','https://image.tmdb.org/t/p/original/saHP97rTPS5eLmrLQEcANmKrsFl.jpg',false)" style="background-image:url('https://image.tmdb.org/t/p/w780/saHP97rTPS5eLmrLQEcANmKrsFl.jpg')"></div>
+</div></div>
+</div>
+</div>
+
+<div class="screen" id="s-explore">
+<div class="top-header"><h1>Explorar</h1><div class="header-right"><button class="admin-btn" onclick="openAdmin()">+</button><div class="avatar" id="userAvatar2">?</div></div></div>
+<div class="search-overlay active"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input type="text" id="searchInputEx" placeholder="Buscar en CINEFILOS..." oninput="doSearchEx(this.value)"></div>
+<div id="searchResultsEx" style="display:none"></div>
+<div id="exploreContent">
+<div class="tabs">
+<button class="tab active" onclick="switchCat('peliculas',this)">Películas</button>
+<button class="tab" onclick="switchCat('series',this)">Series</button>
+<button class="tab" onclick="switchCat('animes',this)">Animes</button>
+<button class="tab" onclick="switchCat('kdramas',this)">Kdramas</button>
+<button class="tab" onclick="switchCat('documentales',this)">Documentales</button>
+<button class="tab" onclick="switchCat('telenovelas',this)">Telenovelas</button>
+</div>
+<div class="genres">
+<button class="genre active" onclick="pickGenre(this)">Todos</button>
+<button class="genre" onclick="pickGenre(this)">Terror</button>
+<button class="genre" onclick="pickGenre(this)">Acción</button>
+<button class="genre" onclick="pickGenre(this)">Drama</button>
+<button class="genre" onclick="pickGenre(this)">Comedia</button>
+<button class="genre" onclick="pickGenre(this)">Sci-Fi</button>
+<button class="genre" onclick="pickGenre(this)">Romance</button>
+<button class="genre" onclick="pickGenre(this)">Misterio</button>
+</div>
+<div class="cat-pane" id="cat-peliculas"><div class="grid">
+<div onclick="openDetail('Oppenheimer','2023 · Drama · Historia','La historia del científico J. Robert Oppenheimer y su papel en el desarrollo de la bomba atómica.','https://image.tmdb.org/t/p/original/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg',false)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg')"></div><div class="grid-title">Oppenheimer</div><div class="grid-meta">2023 · Drama</div></div>
+<div onclick="openDetail('Dune','2021 · Sci-Fi · Aventura','Paul Atreides viaja al planeta más peligroso del universo.','https://image.tmdb.org/t/p/original/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg',false)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg')"></div><div class="grid-title">Dune</div><div class="grid-meta">2021 · Sci-Fi</div></div>
+<div onclick="openDetail('Interstellar','2014 · Sci-Fi · Drama','Agujero de gusano para salvar a la humanidad.','https://image.tmdb.org/t/p/original/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg',false)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg')"></div><div class="grid-title">Interstellar</div><div class="grid-meta">2014 · Sci-Fi</div></div>
+<div onclick="openDetail('Joker','2019 · Drama · Thriller','Arthur Fleck se transforma en el Joker.','https://image.tmdb.org/t/p/original/saHP97rTPS5eLmrLQEcANmKrsFl.jpg',false)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/saHP97rTPS5eLmrLQEcANmKrsFl.jpg')"></div><div class="grid-title">Joker</div><div class="grid-meta">2019 · Drama</div></div>
+<div onclick="openDetail('The Batman','2022 · Acción · Misterio','Batman investiga la corrupción de Gotham.','https://image.tmdb.org/t/p/original/74xTEgt7R36Fpooo50r9T25onhq.jpg',false)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg')"></div><div class="grid-title">The Batman</div><div class="grid-meta">2022 · Acción</div></div>
+</div></div>
+<div class="cat-pane" id="cat-series" style="display:none"><div class="grid">
+<div onclick="openDetail('The Last of Us','2023 · Drama · Post-apocalíptico','Joel es contratado para sacar a Ellie de una zona de cuarentena.','https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',true)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg')"></div><div class="grid-title">The Last of Us</div><div class="grid-meta">2023 · Drama</div></div>
+<div onclick="openDetail('White Lotus','2021 · Comedia · Drama','Vacaciones con un misterioso asesinato.','https://image.tmdb.org/t/p/original/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg',true)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg')"></div><div class="grid-title">White Lotus</div><div class="grid-meta">2021 · Comedia</div></div>
+<div onclick="openDetail('Better Call Saul','2015 · Drama · Crimen','Jimmy McGill antes de Saul Goodman.','https://image.tmdb.org/t/p/original/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg',true)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg')"></div><div class="grid-title">Better Call Saul</div><div class="grid-meta">2015 · Drama</div></div>
+<div onclick="openDetail('Wednesday','2022 · Misterio · Comedia','Miércoles Addams investiga crímenes.','https://image.tmdb.org/t/p/original/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg',true)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg')"></div><div class="grid-title">Wednesday</div><div class="grid-meta">2022 · Misterio</div></div>
+</div></div>
+<div class="cat-pane" id="cat-animes" style="display:none"><div class="grid">
+<div onclick="openDetail('One Piece','1999 · Animación · Aventura','Luffy busca el tesoro One Piece.','https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',true)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg')"></div><div class="grid-title">One Piece</div><div class="grid-meta">1999 · Animación</div></div>
+<div onclick="openDetail('Attack on Titan','2013 · Animación · Acción','La humanidad lucha contra titanes.','https://image.tmdb.org/t/p/original/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg',true)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg')"></div><div class="grid-title">Attack on Titan</div><div class="grid-meta">2013 · Animación</div></div>
+<div onclick="openDetail('Demon Slayer','2019 · Animación · Fantasía','Tanjiro busca curar a su hermana.','https://image.tmdb.org/t/p/original/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg',true)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg')"></div><div class="grid-title">Demon Slayer</div><div class="grid-meta">2019 · Animación</div></div>
+</div></div>
+<div class="cat-pane" id="cat-kdramas" style="display:none"><div class="grid">
+<div onclick="openDetail('Squid Game','2021 · Drama · Thriller','Juegos mortales por un premio millonario.','https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',true)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg')"></div><div class="grid-title">Squid Game</div><div class="grid-meta">2021 · Drama</div></div>
+<div onclick="openDetail('Vincenzo','2021 · Crimen · Drama','Un abogado mafioso regresa a Corea.','https://image.tmdb.org/t/p/original/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg',true)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg')"></div><div class="grid-title">Vincenzo</div><div class="grid-meta">2021 · Crimen</div></div>
+</div></div>
+<div class="cat-pane" id="cat-documentales" style="display:none"><div class="grid">
+<div onclick="openDetail('Planet Earth','2006 · Documental · Naturaleza','Una mirada a la vida en la Tierra.','https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',false)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg')"></div><div class="grid-title">Planet Earth</div><div class="grid-meta">2006 · Documental</div></div>
+<div onclick="openDetail('Cosmos','2014 · Documental · Ciencia','Un viaje por el universo.','https://image.tmdb.org/t/p/original/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg',false)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg')"></div><div class="grid-title">Cosmos</div><div class="grid-meta">2014 · Documental</div></div>
+</div></div>
+<div class="cat-pane" id="cat-telenovelas" style="display:none"><div class="grid">
+<div onclick="openDetail('La Casa de las Flores','2018 · Comedia · Drama','Una familia disfuncional.','https://image.tmdb.org/t/p/original/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg',true)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg')"></div><div class="grid-title">La Casa de las Flores</div><div class="grid-meta">2018 · Comedia</div></div>
+<div onclick="openDetail('Élite','2018 · Drama · Misterio','Misterio en un colegio de élite.','https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',true)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg')"></div><div class="grid-title">Élite</div><div class="grid-meta">2018 · Drama</div></div>
+</div></div>
+</div>
+</div>
+
+<div class="screen" id="s-imdb">
+<div class="top-header"><h1>Reseñas</h1><div class="header-right"><button class="admin-btn" onclick="openAdmin()">+</button><div class="avatar" id="userAvatar3">?</div></div></div>
+<div style="padding-top:12px">
+<div class="top-rated">
+<div class="top-rated-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg')"></div>
+<div><div class="top-rated-label">TOP #1 DE LA SEMANA</div><div class="top-rated-title">The Last of Us</div>
+<div class="stars"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z" fill="#FFD700"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z" fill="#FFD700"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z" fill="#FFD700"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z" fill="#FFD700"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z" fill="#555"/></svg></div>
+<div class="rating-num">4.7 / 5 · 128 reseñas</div></div>
+</div>
+<div class="comments-title">Comentarios</div>
+<div class="comment"><div class="comment-avatar">JP</div><div><div class="comment-user">JuanPerez</div><div class="comment-text">Increíble serie, la fotografía es de otro nivel.</div></div></div>
+<div class="comment"><div class="comment-avatar">MR</div><div><div class="comment-user">MariaR</div><div class="comment-text">Buena, pero el final me dejó con ganas de más.</div></div></div>
+<div class="comments-title" style="margin-top:22px">Siguientes en el ranking</div>
+<div class="ranking-item"><div class="ranking-num">2</div><div class="ranking-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg')"></div><div><div class="ranking-title">The Batman</div><div class="ranking-rating">★ 4.5 · 98 reseñas</div></div></div>
+<div class="ranking-item"><div class="ranking-num">3</div><div class="ranking-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg')"></div><div><div class="ranking-title">White Lotus</div><div class="ranking-rating">★ 4.4 · 76 reseñas</div></div></div>
+</div></div>
+
+<div class="screen" id="s-list">
+<div class="top-header"><h1>Mi Lista</h1><div class="header-right"><button class="admin-btn" onclick="openAdmin()">+</button><div class="avatar" id="userAvatar6">?</div></div></div>
+<div id="listContent">
+<div class="empty-state" id="listEmpty">
+<svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+<h3>Tu lista está vacía</h3>
+<p>Guarda películas y series tocando el botón <strong>+</strong> para verlas después.</p>
+</div>
+<div class="grid" id="listGrid" style="display:none"></div>
+</div>
+</div>
+
+<div class="screen" id="s-profile">
+<div class="top-header"><h1>Perfil</h1><div class="header-right"><button class="admin-btn" onclick="openAdmin()">+</button><div class="avatar" id="userAvatar4">?</div></div></div>
+<div class="profile-hero">
+<div class="profile-avatar-lg" id="profileAvatar">?</div>
+<div class="profile-display-name"><span id="profileName">Usuario</span><span class="verified-badge" id="verifiedBadge" style="display:none"><svg viewBox="0 0 24 24"><polyline points="9 12 11 14 15 10"/></svg></span></div>
+<div class="profile-bio-small" id="profileHandle">@usuario</div>
+<div class="profile-chips">
+<span class="chip blue" id="roleBadge">TOP 19.9%</span>
+<span class="chip" id="statListChip">0 MI LISTA</span>
+<span class="chip">42 VISTAS</span>
+</div>
+<button class="follow-btn">Siguiendo</button>
+</div>
+<div class="profile-tabs">
+<button class="profile-tab active">Favoritos</button>
+<button class="profile-tab">Actividad</button>
+<button class="profile-tab">Reseñas</button>
+</div>
+<div class="profile-section-title"><span class="star-icon">★</span> Favoritos<span class="see-all" id="favCount">3</span></div>
+<div class="fav-row" id="favRow">
+<div class="fav-poster" onclick="openDetail('The Last of Us','2023 · Drama','Joel saca a Ellie.','https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',true)" style="background-image:url('https://image.tmdb.org/t/p/w300/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg')"></div>
+<div class="fav-poster" onclick="openDetail('The Batman','2022 · Acción','Batman.','https://image.tmdb.org/t/p/original/74xTEgt7R36Fpooo50r9T25onhq.jpg',false)" style="background-image:url('https://image.tmdb.org/t/p/w300/74xTEgt7R36Fpooo50r9T25onhq.jpg')"></div>
+<div class="fav-poster" onclick="openDetail('Wednesday','2022 · Misterio','Miércoles.','https://image.tmdb.org/t/p/original/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg',true)" style="background-image:url('https://image.tmdb.org/t/p/w300/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg')"></div>
+</div>
+<div class="profile-section-title">Actividad reciente</div>
+<div class="rating-card">
+<div class="rating-card-poster" style="background-image:url('https://image.tmdb.org/t/p/w300/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg')"></div>
+<div class="rating-card-info">
+<div class="rating-card-label">Última calificación</div>
+<div class="rating-card-title">The Last of Us</div>
+<div class="rating-card-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z" fill="#FFD700"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z" fill="#FFD700"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z" fill="#FFD700"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z" fill="#FFD700"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z" fill="#FFD700"/></svg></div>
+<div class="rating-card-time">Hace 2 horas</div>
+</div>
+</div>
+<div class="rating-card">
+<div class="rating-card-poster" style="background-image:url('https://image.tmdb.org/t/p/w300/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg')"></div>
+<div class="rating-card-info">
+<div class="rating-card-label">Última calificación</div>
+<div class="rating-card-title">Wednesday</div>
+<div class="rating-card-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z" fill="#FFD700"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z" fill="#FFD700"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z" fill="#FFD700"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z" fill="#FFD700"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z" fill="#555"/></svg></div>
+<div class="rating-card-time">Hace 2 días</div>
+</div>
+</div>
+</div>
+
+<div class="screen" id="s-detail">
+<button class="detail-back" onclick="backFromDetail()">‹</button>
+<div class="detail-hero" id="d-hero"><div class="detail-hero-overlay"></div></div>
+<div class="detail-content">
+<h1 class="detail-title" id="d-title">Título</h1>
+<div class="detail-meta-row">
+<span class="detail-chip year" id="d-year">2024</span>
+<span class="detail-chip" id="d-cat">Drama</span>
+<span class="detail-chip" id="d-dur">2h 15min</span>
+</div>
+<div class="actions" style="margin-bottom:22px;justify-content:center">
+<button class="btn-play" onclick="playFromDetail()" style="flex:1;justify-content:center">▶ Reproducir</button>
+<button class="btn-plus" id="dPlusBtn" onclick="toggleSaveDetail()">+</button>
+</div>
+<div class="detail-synopsis-title">Sinopsis</div>
+<div class="detail-synopsis" id="d-synopsis">Sinopsis</div>
+<div class="detail-rating-row">
+<div class="detail-rating-stars" id="d-stars"></div>
+<div class="detail-rating-info"><div class="detail-rating-value" id="d-rating-val">4.7</div><div class="detail-rating-count" id="d-rating-cnt">128 valoraciones</div></div>
+</div>
+<div class="comments-title">Comentarios</div>
+<div class="comment-form">
+<input type="text" id="commentInput" placeholder="Escribe un comentario...">
+<button onclick="addComment()">Enviar</button>
+</div>
+<div id="commentList"></div>
+</div>
+<div id="episodesSection" style="display:none;padding-bottom:20px">
+<div class="episode-title">Episodios</div>
+<div class="season-tabs">
+<button class="season-tab active" onclick="switchSeason('t1',this)">Temporada 1</button>
+<button class="season-tab" onclick="switchSeason('t2',this)">Temporada 2</button>
+</div>
+<div class="season-pane" id="season-t1">
+<div class="episodes-carousel">
+<div class="episode" onclick="playEpisode('Cuando estés perdido en la oscuridad','Temporada 1 · Episodio 1')"><div class="episode-img" style="background-image:url('https://image.tmdb.org/t/p/w500/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg')"></div><div class="episode-info"><div class="episode-num">EPISODIO 1</div><div class="episode-name">Cuando estés perdido en la oscuridad</div></div></div>
+<div class="episode" onclick="playEpisode('Infectados','Temporada 1 · Episodio 2')"><div class="episode-img" style="background-image:url('https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg')"></div><div class="episode-info"><div class="episode-num">EPISODIO 2</div><div class="episode-name">Infectados</div></div></div>
+<div class="episode" onclick="playEpisode('Larga, larga vez','Temporada 1 · Episodio 3')"><div class="episode-img" style="background-image:url('https://image.tmdb.org/t/p/w500/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg')"></div><div class="episode-info"><div class="episode-num">EPISODIO 3</div><div class="episode-name">Larga, larga vez</div></div></div>
+</div>
+</div>
+<div class="season-pane" id="season-t2" style="display:none">
+<div class="episodes-carousel">
+<div class="episode" onclick="playEpisode('El futuro empieza aquí','Temporada 2 · Episodio 1')"><div class="episode-img" style="background-image:url('https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg')"></div><div class="episode-info"><div class="episode-num">EPISODIO 1</div><div class="episode-name">El futuro empieza aquí</div></div></div>
+</div>
+</div>
+</div>
+<div class="related-title">Tal vez te interese ver</div>
+<div class="related-grid" id="relatedGrid"></div>
+</div>
+
+<div class="screen" id="s-about">
+<div class="top-header"><h1>Quiénes somos</h1><div class="header-right"><button class="admin-btn" onclick="openAdmin()">+</button><div class="avatar" id="userAvatar5">?</div></div></div>
+<div class="about-hero-big" style="background-image:url('https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg')">
+<div class="about-hero-content">
+<div class="about-logo">CINEFILOS</div>
+</div>
+</div>
+<div class="social-list">
+<a href="https://t.me/" target="_blank" class="social-btn">
+<div class="social-icon tg"><svg viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg></div>
+<div class="social-info"><div class="social-name">Telegram</div><div class="social-handle">@cinefilos_oficial</div></div>
+<div class="social-arrow">›</div>
+</a>
+<a href="https://www.facebook.com/share/1J9imPxWnb/" target="_blank" class="social-btn">
+<div class="social-icon fb"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></div>
+<div class="social-info"><div class="social-name">Facebook</div><div class="social-handle">Cinefilos Comunidad</div></div>
+<div class="social-arrow">›</div>
+</a>
+<a href="https://www.tiktok.com/" target="_blank" class="social-btn">
+<div class="social-icon tk"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg></div>
+<div class="social-info"><div class="social-name">TikTok</div><div class="social-handle">@cinefilos</div></div>
+<div class="social-arrow">›</div>
+</a>
+</div>
+</div>
+
+<div class="admin-screen" id="adminScreen">
+<div class="admin-header"><h1>Panel Admin</h1><button class="admin-close" onclick="closeAdmin()">✕</button></div>
+<div class="admin-tabs">
+<button class="admin-tab active" onclick="adminTab('add',this)">Agregar</button>
+<button class="admin-tab" onclick="adminTab('users',this)">Usuarios</button>
+</div>
+<div id="adminAdd">
+<div class="form-group"><label class="form-label">Imagen (URL o archivo)</label><div class="img-preview" id="imgPreview">Vista previa</div><input type="text" class="form-input" id="imgUrl" placeholder="https://..." oninput="document.getElementById('imgPreview').style.backgroundImage='url('+this.value+')'"><label class="file-label">📁 Subir desde el celular<input type="file" accept="image/*" style="display:none" onchange="loadLocalImage(event)"></label></div>
+<div class="form-group"><label class="form-label">Nombre</label><input type="text" class="form-input" placeholder="Ej: The Last of Us"></div>
+<div class="form-group"><label class="form-label">Descripción</label><textarea class="form-input form-input-area" placeholder="Sinopsis..."></textarea></div>
+<div class="form-group"><label class="form-label">Links de video (Telegram)</label>
+<div class="link-group"><span class="link-lang">Latino</span><input type="text" class="link-input" placeholder="https://t.me/tucanal/123"></div>
+<div class="link-group"><span class="link-lang">Inglés</span><input type="text" class="link-input" placeholder="https://t.me/tucanal/123"></div>
+<div class="link-group"><span class="link-lang">Castellano</span><input type="text" class="link-input" placeholder="https://t.me/tucanal/123"></div>
+</div>
+<div class="form-group"><label class="form-label">Categoría</label>
+<div class="cat-btns">
+<button class="cat-btn active">Película</button>
+<button class="cat-btn">Serie</button>
+<button class="cat-btn">Anime</button>
+<button class="cat-btn">Kdrama</button>
+<button class="cat-btn">Documental</button>
+<button class="cat-btn">Telenovela</button>
+</div>
+</div>
+</div>
+<div id="adminUsers" style="display:none">
+<div class="user-row"><div class="u-info"><div class="u-avatar" id="adminSelf">?</div><div><div class="u-name" id="adminSelfName">Tú</div><div class="u-role">Administrador</div></div></div><button class="user-toggle on">Admin</button></div>
+<div class="user-row"><div class="u-info"><div class="u-avatar">JP</div><div><div class="u-name">JuanPerez</div><div class="u-role">Usuario</div></div></div><button class="user-toggle off" onclick="toggleAdmin(this)">Usuario</button></div>
+</div>
+<div class="admin-publish"><button class="btn-publish" onclick="publish()">Publicar</button></div>
+</div>
+
+<div class="player-screen" id="playerScreen" onclick="screenTap(event)">
+<div class="player-rotate-msg" id="rotateMsg">
+<svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M12 18h.01"/></svg>
+<p>Gira tu celular</p>
+<div class="sub">Para ver la película en pantalla completa</div>
+<button class="dismiss" onclick="document.getElementById('rotateMsg').style.display='none'">Ver en vertical</button>
+</div>
+<video class="player-video" id="playerVideo" playsinline></video>
+<div class="player-controls" id="playerControls">
+<div class="player-top">
+<div class="player-icon" onclick="closePlayer();event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6l-12 12"/></svg></div>
+<div class="player-icon" onclick="toggleFullscreen();event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></div>
+</div>
+<div class="player-center">
+<button class="player-skip" onclick="skip(-10);event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M11 4 L4 12 L11 20 Z"/></svg><span class="player-skip-num">-10s</span></button>
+<button class="player-play" onclick="togglePlay();event.stopPropagation()"><svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5 L19 12 L8 19 Z"/></svg></button>
+<button class="player-skip" onclick="skip(10);event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M13 4 L20 12 L13 20 Z M4 4 L11 12 L4 20 Z"/></svg><span class="player-skip-num">+10s</span></button>
+</div>
+<div class="player-bottom" onclick="event.stopPropagation()">
+<div class="player-title" id="pTitle">The Last of Us</div>
+<div class="player-subtitle" id="pSubtitle">Temporada 1 · Episodio 1</div>
+<div class="player-progress-row">
+<span class="player-time" id="pCurrent">0:00</span>
+<div class="player-bar" id="pBar" onclick="seek(event)"><div class="player-bar-fill" id="pFill"></div><div class="player-bar-thumb" id="pThumb"></div></div>
+<span class="player-time" id="pDuration">0:00</span>
+</div>
+</div>
+</div>
+</div>
+
+<div class="bottom-nav">
+<button class="nav-item active" onclick="go('home',this)"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg><span>Inicio</span></button>
+<button class="nav-item" onclick="go('explore',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15 9l-2 5-5 2 2-5z"/></svg><span>Explorar</span></button>
+<button class="nav-tg" onclick="go('about',this)"><svg viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg></button>
+<button class="nav-item" onclick="go('list',this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg><span>Mi Lista</span></button>
+<button class="nav-item" onclick="go('profile',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg><span>Perfil</span></button>
+</div>
+
+<script>
+var lastScreen='home';
+var userName='';
+var userCode='';
+var savedAccounts={};
+var HERO_ITEMS=[
+{title:'The Last of Us',year:'Ganador 2026',award:'Premios Emmy®',img:'https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',cat:'Drama',dur:'Serie'},
+{title:'The Batman',year:'Nominado 2022',award:'Premios Oscar®',img:'https://image.tmdb.org/t/p/original/74xTEgt7R36Fpooo50r9T25onhq.jpg',cat:'Acción',dur:'2h 56min'},
+{title:'White Lotus',year:'Ganador 2023',award:'Premios Emmy®',img:'https://image.tmdb.org/t/p/original/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg',cat:'Comedia',dur:'Serie'},
+{title:'Oppenheimer',year:'Ganador 2024',award:'Premios Oscar®',img:'https://image.tmdb.org/t/p/original/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg',cat:'Drama',dur:'3h 0min'}
+];
+var heroIdx=0;
+var ALL_ITEMS=[
+{title:'The Last of Us',meta:'2023 · Drama · Post-apocalíptico',img:'https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',syn:'Joel es contratado para sacar a Ellie de una zona de cuarentena.',isSerie:true},
+{title:'The Batman',meta:'2022 · Acción · Misterio',img:'https://image.tmdb.org/t/p/original/74xTEgt7R36Fpooo50r9T25onhq.jpg',syn:'Batman investiga la corrupción de Gotham.',isSerie:false},
+{title:'White Lotus',meta:'2021 · Comedia · Drama',img:'https://image.tmdb.org/t/p/original/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg',syn:'Vacaciones con un misterioso asesinato.',isSerie:true},
+{title:'Wednesday',meta:'2022 · Misterio · Comedia',img:'https://image.tmdb.org/t/p/original/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg',syn:'Miércoles Addams investiga crímenes sobrenaturales.',isSerie:true},
+{title:'Better Call Saul',meta:'2015 · Drama · Crimen',img:'https://image.tmdb.org/t/p/original/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg',syn:'Jimmy McGill antes de Saul Goodman.',isSerie:true},
+{title:'Oppenheimer',meta:'2023 · Drama · Historia',img:'https://image.tmdb.org/t/p/original/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg',syn:'La historia del científico Oppenheimer.',isSerie:false},
+{title:'Dune',meta:'2021 · Sci-Fi · Aventura',img:'https://image.tmdb.org/t/p/original/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg',syn:'Paul Atreides viaja al planeta más peligroso.',isSerie:false},
+{title:'Interstellar',meta:'2014 · Sci-Fi · Drama',img:'https://image.tmdb.org/t/p/original/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg',syn:'Agujero de gusano para salvar a la humanidad.',isSerie:false},
+{title:'Joker',meta:'2019 · Drama · Thriller',img:'https://image.tmdb.org/t/p/original/saHP97rTPS5eLmrLQEcANmKrsFl.jpg',syn:'Arthur Fleck se transforma en el Joker.',isSerie:false},
+{title:'One Piece',meta:'1999 · Animación · Aventura',img:'https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',syn:'Luffy busca el tesoro One Piece.',isSerie:true},
+{title:'Attack on Titan',meta:'2013 · Animación · Acción',img:'https://image.tmdb.org/t/p/original/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg',syn:'La humanidad lucha contra titanes.',isSerie:true},
+{title:'Demon Slayer',meta:'2019 · Animación · Fantasía',img:'https://image.tmdb.org/t/p/original/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg',syn:'Tanjiro busca curar a su hermana.',isSerie:true},
+{title:'Squid Game',meta:'2021 · Drama · Thriller',img:'https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',syn:'Juegos mortales por un premio millonario.',isSerie:true},
+{title:'Vincenzo',meta:'2021 · Crimen · Drama',img:'https://image.tmdb.org/t/p/original/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg',syn:'Un abogado mafioso regresa a Corea.',isSerie:true},
+{title:'Planet Earth',meta:'2006 · Documental · Naturaleza',img:'https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',syn:'Vida en la Tierra.',isSerie:false},
+{title:'Cosmos',meta:'2014 · Documental · Ciencia',img:'https://image.tmdb.org/t/p/original/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg',syn:'Un viaje por el universo.',isSerie:false}
+];
+var myList=[];
+var currentDetail=null;
+var commentsByTitle={};
+
+function getSaved(){try{return JSON.parse(localStorage.getItem('cinefilos_accounts')||'{}');}catch(e){return {};}}
+function saveAccount(name,code){var a=getSaved();a[name.toLowerCase()]={name:name,code:code};localStorage.setItem('cinefilos_accounts',JSON.stringify(a));}
+
+function enterApp(){
+var n=document.getElementById('nameInput').value.trim();
+var c=document.getElementById('codeInput').value.trim();
+if(!n){document.getElementById('nameError').innerText='Debes escribir un nombre';return;}
+if(!c){document.getElementById('nameError').innerText='Debes escribir un código';return;}
+var accounts=getSaved();
+var key=n.toLowerCase();
+if(accounts[key]){
+if(accounts[key].code!==c){document.getElementById('nameError').innerText='Código incorrecto';return;}
+}else{
+saveAccount(n,c);
+}
+userName=n;
+userCode=c;
+var ini=n.substring(0,2).toUpperCase();
+['userAvatar','userAvatar2','userAvatar3','userAvatar4','userAvatar5','userAvatar6','profileAvatar','postAv1','adminSelf'].forEach(function(id){var el=document.getElementById(id);if(el)el.innerText=ini;});
+['profileName','postName1','adminSelfName'].forEach(function(id){var el=document.getElementById(id);if(el)el.innerText=n;});
+var handle=document.getElementById('profileHandle');
+if(handle)handle.innerText='@'+n.toLowerCase().replace(/\s+/g,'');
+document.getElementById('welcomeScreen').style.display='none';
+document.querySelectorAll('.admin-btn').forEach(b=>b.style.display='flex');
+var vb=document.getElementById('verifiedBadge');
+if(vb)vb.style.display='inline-flex';
+var rb=document.getElementById('roleBadge');
+if(rb)rb.innerText='TOP 19.9%';
+initHero();
+}
+['nameInput','codeInput'].forEach(function(id){var el=document.getElementById(id);el.addEventListener('keypress',function(e){if(e.key==='Enter')enterApp();});});
+
+function initHero(){
+var dots=document.getElementById('heroDots');
+dots.innerHTML='';
+HERO_ITEMS.forEach(function(item,i){
+var s=document.createElement('span');
+if(i===0)s.classList.add('active');
+s.onclick=function(){setHero(i);};
+dots.appendChild(s);
+});
+setHero(0);
+}
+
+function setHero(i){
+heroIdx=i;
+var item=HERO_ITEMS[i];
+var bg=document.getElementById('heroBg');
+bg.style.backgroundImage="url('"+item.img+"')";
+document.getElementById('heroYear').innerText=item.year;
+document.getElementById('heroAward').innerText=item.award;
+var dots=document.querySelectorAll('#heroDots span');
+dots.forEach(function(d,idx){d.classList.toggle('active',idx===i);});
+updatePlusButtons();
+}
+
+var heroStartX=0;
+document.addEventListener('DOMContentLoaded',function(){
+var box=document.getElementById('heroBox');
+if(!box)return;
+box.addEventListener('touchstart',function(e){heroStartX=e.touches[0].clientX;},{passive:true});
+box.addEventListener('touchend',function(e){
+var dx=e.changedTouches[0].clientX-heroStartX;
+if(dx<-50){setHero((heroIdx+1)%HERO_ITEMS.length);}
+else if(dx>50){setHero((heroIdx-1+HERO_ITEMS.length)%HERO_ITEMS.length);}
+});
+});
+
+function go(id,btn){
+lastScreen=id;
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+var t=document.getElementById('s-'+id);
+if(t)t.classList.add('active');
+document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+if(btn&&btn.classList.contains('nav-item'))btn.classList.add('active');
+if(id==='list')renderList();
+window.scrollTo(0,0);
+}
+function toggleSearch(){
+var box=document.getElementById('searchBox');
+var home=document.getElementById('homeContent');
+var res=document.getElementById('searchResults');
+box.classList.toggle('active');
+if(box.classList.contains('active')){box.querySelector('input').focus();home.style.display='none';res.style.display='block';}
+else{home.style.display='block';res.style.display='none';document.getElementById('searchInput').value='';}
+}
+function doSearch(q){
+q=q.toLowerCase().trim();
+var res=document.getElementById('searchResults');
+if(!q){res.innerHTML='';return;}
+var m=ALL_ITEMS.filter(it=>it.title.toLowerCase().includes(q)||it.meta.toLowerCase().includes(q)||it.syn.toLowerCase().includes(q));
+if(m.length===0){res.innerHTML='<div class="search-empty"><p style="font-size:40px">🔍</p><p>Sin resultados para "'+q+'"</p></div>';return;}
+var h='<div class="search-results"><div class="search-section-title">Resultados ('+m.length+')</div><div class="grid">';
+m.forEach(x=>{h+='<div onclick="openDetail(\''+x.title+'\',\''+x.meta+'\',\''+x.syn+'\',\''+x.img+'\','+x.isSerie+')"><div class="grid-poster" style="background-image:url(\''+x.img+'\')"></div><div class="grid-title">'+x.title+'</div><div class="grid-meta">'+x.meta+'</div></div>';});
+res.innerHTML=h+'</div></div>';
+}
+function doSearchEx(q){
+q=q.toLowerCase().trim();
+var res=document.getElementById('searchResultsEx');
+var cont=document.getElementById('exploreContent');
+if(!q){res.innerHTML='';res.style.display='none';cont.style.display='block';return;}
+cont.style.display='none';res.style.display='block';
+var m=ALL_ITEMS.filter(it=>it.title.toLowerCase().includes(q)||it.meta.toLowerCase().includes(q)||it.syn.toLowerCase().includes(q));
+if(m.length===0){res.innerHTML='<div class="search-empty"><p style="font-size:40px">🔍</p><p>Sin resultados para "'+q+'"</p></div>';return;}
+var h='<div class="search-results"><div class="search-section-title">Resultados ('+m.length+')</div><div class="grid">';
+m.forEach(x=>{h+='<div onclick="openDetail(\''+x.title+'\',\''+x.meta+'\',\''+x.syn+'\',\''+x.img+'\','+x.isSerie+')"><div class="grid-poster" style="background-image:url(\''+x.img+'\')"></div><div class="grid-title">'+x.title+'</div><div class="grid-meta">'+x.meta+'</div></div>';});
+res.innerHTML=h+'</div></div>';
+}
+function switchCat(cat,btn){
+document.querySelectorAll('.cat-pane').forEach(p=>p.style.display='none');
+var t=document.getElementById('cat-'+cat);
+if(t)t.style.display='block';
+document.querySelectorAll('.tabs .tab').forEach(x=>x.classList.remove('active'));
+btn.classList.add('active');
+window.scrollTo(0,0);
+}
+function pickGenre(btn){document.querySelectorAll('.genre').forEach(g=>g.classList.remove('active'));btn.classList.add('active');}
+function switchSeason(id,btn){
+document.querySelectorAll('.season-pane').forEach(p=>p.style.display='none');
+var t=document.getElementById('season-'+id);
+if(t)t.style.display='block';
+document.querySelectorAll('.season-tab').forEach(x=>x.classList.remove('active'));
+btn.classList.add('active');
+}
+function openDetail(title,meta,syn,img,isSerie){
+currentDetail={title:title,meta:meta,syn:syn,img:img,isSerie:isSerie};
+document.getElementById('d-title').innerText=title;
+document.getElementById('d-synopsis').innerText=syn;
+document.getElementById('d-hero').style.backgroundImage="url('"+img+"')";
+var parts=meta.split('·').map(function(s){return s.trim();});
+document.getElementById('d-year').innerText=parts[0]||'2024';
+document.getElementById('d-cat').innerText=parts[1]||'Drama';
+document.getElementById('d-dur').innerText=parts[2]||(isSerie?'Serie':'1h 45min');
+var r=4+(title.length%10)/10;
+if(r>5)r=5;
+document.getElementById('d-rating-val').innerText=r.toFixed(1);
+document.getElementById('d-rating-cnt').innerText=Math.floor(50+title.length*17)+' valoraciones';
+var stars='';
+for(var i=1;i<=5;i++){var fill=i<=Math.round(r)?'#FFD700':'#555';stars+='<svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z" fill="'+fill+'"/></svg>';}
+document.getElementById('d-stars').innerHTML=stars;
+document.getElementById('episodesSection').style.display=isSerie?'block':'none';
+var others=ALL_ITEMS.filter(function(x){return x.title!==title;}).slice(0,6);
+var h='';
+others.forEach(function(x){h+='<div class="related-item" onclick="openDetail(\''+x.title+'\',\''+x.meta+'\',\''+x.syn+'\',\''+x.img+'\','+x.isSerie+')"><div class="related-poster" style="background-image:url(\''+x.img+'\')"></div><div class="related-name">'+x.title+'</div></div>';});
+document.getElementById('relatedGrid').innerHTML=h;
+renderComments(title);
+updatePlusButtons();
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+document.getElementById('s-detail').classList.add('active');
+document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+window.scrollTo(0,0);
+}
+function renderComments(title){
+var arr=commentsByTitle[title]||[
+{user:'JuanPerez',text:'Increíble, la fotografía es de otro nivel.'},
+{user:'MariaR',text:'Buena, pero el final me dejó con ganas de más.'}
+];
+if(!commentsByTitle[title])commentsByTitle[title]=arr;
+var h='';
+arr.forEach(function(c){
+h+='<div class="comment"><div class="comment-avatar">'+c.user.substring(0,2).toUpperCase()+'</div><div><div class="comment-user">'+c.user+'</div><div class="comment-text">'+c.text+'</div></div></div>';
+});
+document.getElementById('commentList').innerHTML=h;
+}
+function addComment(){
+var inp=document.getElementById('commentInput');
+var txt=inp.value.trim();
+if(!txt||!currentDetail)return;
+if(!commentsByTitle[currentDetail.title])commentsByTitle[currentDetail.title]=[];
+commentsByTitle[currentDetail.title].push({user:userName||'Tú',text:txt});
+inp.value='';
+renderComments(currentDetail.title);
+}
+</script>
+
+<script>
+function toggleSaveDetail(){
+if(!currentDetail)return;
+var idx=myList.findIndex(function(x){return x.title===currentDetail.title;});
+if(idx>=0){myList.splice(idx,1);}
+else{myList.push(currentDetail);}
+updatePlusButtons();
+updateListCount();
+}
+function toggleSaveHero(){
+var item=HERO_ITEMS[heroIdx];
+var found=ALL_ITEMS.find(function(x){return x.title===item.title;});
+if(!found)return;
+var idx=myList.findIndex(function(x){return x.title===found.title;});
+if(idx>=0){myList.splice(idx,1);}
+else{myList.push(found);}
+updatePlusButtons();
+updateListCount();
+}
+function updatePlusButtons(){
+var found=currentDetail&&myList.find(function(x){return x.title===currentDetail.title;});
+var b1=document.getElementById('dPlusBtn');
+if(b1)b1.classList.toggle('saved',!!found);
+var heroTitle=HERO_ITEMS[heroIdx].title;
+var heroSaved=myList.find(function(x){return x.title===heroTitle;});
+var b2=document.getElementById('heroPlusBtn');
+if(b2)b2.classList.toggle('saved',!!heroSaved);
+}
+function updateListCount(){
+var el=document.getElementById('statListChip');
+if(el)el.innerText=myList.length+' MI LISTA';
+}
+function renderList(){
+var empty=document.getElementById('listEmpty');
+var grid=document.getElementById('listGrid');
+if(myList.length===0){empty.style.display='block';grid.style.display='none';return;}
+empty.style.display='none';
+grid.style.display='grid';
+var h='';
+myList.forEach(function(x){
+h+='<div onclick="openDetail(\''+x.title+'\',\''+x.meta+'\',\''+x.syn+'\',\''+x.img+'\','+x.isSerie+')"><div class="grid-poster" style="background-image:url(\''+x.img+'\')"></div><div class="grid-title">'+x.title+'</div><div class="grid-meta">'+x.meta+'</div></div>';
+});
+grid.innerHTML=h;
+}
+function backFromDetail(){
+go(lastScreen,null);
+document.querySelectorAll('.nav-item').forEach((n,i)=>{
+if(i===0&&lastScreen==='home')n.classList.add('active');
+if(i===1&&lastScreen==='explore')n.classList.add('active');
+if(i===3&&lastScreen==='list')n.classList.add('active');
+if(i===4&&lastScreen==='profile')n.classList.add('active');
+});
+}
+function openAdmin(){document.getElementById('adminScreen').style.display='block';}
+function closeAdmin(){document.getElementById('adminScreen').style.display='none';}
+function adminTab(tab,btn){
+document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
+btn.classList.add('active');
+document.getElementById('adminAdd').style.display=tab==='add'?'block':'none';
+document.getElementById('adminUsers').style.display=tab==='users'?'block':'none';
+}
+function publish(){alert('Publicado (visual por ahora)');closeAdmin();}
+function toggleAdmin(btn){
+if(btn.classList.contains('off')){btn.classList.remove('off');btn.classList.add('on');btn.innerText='Admin';}
+else{btn.classList.remove('on');btn.classList.add('off');btn.innerText='Usuario';}
+}
+function loadLocalImage(e){
+var file=e.target.files[0];
+if(!file)return;
+var reader=new FileReader();
+reader.onload=function(ev){
+document.getElementById('imgPreview').style.backgroundImage='url('+ev.target.result+')';
+document.getElementById('imgUrl').value='(archivo local)';
+};
+reader.readAsDataURL(file);
+}
+document.querySelectorAll('.cat-btn').forEach(b=>b.addEventListener('click',function(){document.querySelectorAll('.cat-btn').forEach(x=>x.classList.remove('active'));this.classList.add('active');}));
+
+var playerVideo,controlsTimer,isPlaying=false;
+function playFromHero(){openPlayer(HERO_ITEMS[heroIdx].title,HERO_ITEMS[heroIdx].cat+' · '+HERO_ITEMS[heroIdx].dur);}
+function playFromDetail(){openPlayer(document.getElementById('d-title').innerText,document.getElementById('d-cat').innerText+' · '+document.getElementById('d-year').innerText);}
+function playEpisode(name,subtitle){openPlayer(document.getElementById('d-title').innerText,subtitle+': '+name);}
+function openPlayer(title,subtitle){
+document.getElementById('playerScreen').classList.add('active');
+document.getElementById('pTitle').innerText=title||'Reproduciendo';
+document.getElementById('pSubtitle').innerText=subtitle||'';
+playerVideo=document.getElementById('playerVideo');
+if(!playerVideo.src){playerVideo.src='https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';}
+playerVideo.currentTime=0;
+playerVideo.play().catch(function(){});
+isPlaying=true;
+updatePlayIcon();
+showControls();
+var p=document.getElementById('playerScreen');
+if(p.requestFullscreen){p.requestFullscreen().then(function(){if(screen.orientation&&screen.orientation.lock){screen.orientation.lock('landscape').catch(function(){});}}).catch(function(){});}
+checkOrientation();
+window.addEventListener('resize',checkOrientation);
+window.addEventListener('orientationchange',checkOrientation);
+}
+function checkOrientation(){
+var msg=document.getElementById('rotateMsg');
+if(!msg)return;
+var isPortrait=window.innerHeight>window.innerWidth;
+var isFullscreen=!!document.fullscreenElement;
+var active=document.getElementById('playerScreen').classList.contains('active');
+if(active&&isPortrait&&!isFullscreen){msg.style.display='flex';}else{msg.style.display='none';}
+}
+function closePlayer(){
+var p=document.getElementById('playerScreen');
+p.classList.remove('active');
+if(playerVideo){playerVideo.pause();playerVideo.currentTime=0;}
+isPlaying=false;
+if(document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen();
+if(screen.orientation&&screen.orientation.unlock)screen.orientation.unlock();
+window.removeEventListener('resize',checkOrientation);
+window.removeEventListener('orientationchange',checkOrientation);
+}
+function togglePlay(){
+if(!playerVideo)return;
+if(playerVideo.paused){playerVideo.play();isPlaying=true;}else{playerVideo.pause();isPlaying=false;}
+updatePlayIcon();
+showControls();
+}
+function updatePlayIcon(){
+var icon=document.getElementById('playIcon');
+if(!icon)return;
+if(isPlaying){icon.innerHTML='<rect x="7" y="5" width="3.5" height="14" rx="1"/><rect x="13.5" y="5" width="3.5" height="14" rx="1"/>';}
+else{icon.innerHTML='<path d="M8 5 L19 12 L8 19 Z"/>';}
+}
+function skip(sec){if(!playerVideo)return;playerVideo.currentTime=Math.max(0,playerVideo.currentTime+sec);showControls();}
+function screenTap(e){
+if(e.target.closest('.player-icon')||e.target.closest('.player-play')||e.target.closest('.player-skip')||e.target.closest('.player-bottom'))return;
+var c=document.getElementById('playerControls');
+if(c.classList.contains('hidden')){c.classList.remove('hidden');showControls();}else{c.classList.add('hidden');}
+}
+function showControls(){var c=document.getElementById('playerControls');if(!c)return;c.classList.remove('hidden');clearTimeout(controlsTimer);controlsTimer=setTimeout(function(){c.classList.add('hidden');},3500);}
+function seek(e){
+if(!playerVideo)return;
+var bar=document.getElementById('pBar');
+var rect=bar.getBoundingClientRect();
+var pct=(e.clientX-rect.left)/rect.width;
+playerVideo.currentTime=pct*playerVideo.duration;
+}
+function formatTime(s){if(isNaN(s))return '0:00';var m=Math.floor(s/60);var sec=Math.floor(s%60);return m+':'+(sec<10?'0':'')+sec;}
+function toggleFullscreen(){
+var p=document.getElementById('playerScreen');
+if(!document.fullscreenElement){if(p.requestFullscreen)p.requestFullscreen();}else{if(document.exitFullscreen)document.exitFullscreen();}
+}
+document.addEventListener('DOMContentLoaded',function(){
+playerVideo=document.getElementById('playerVideo');
+if(!playerVideo)return;
+playerVideo.addEventListener('timeupdate',function(){
+var pct=(playerVideo.currentTime/playerVideo.duration)*100;
+document.getElementById('pFill').style.width=pct+'%';
+document.getElementById('pThumb').style.left=pct+'%';
+document.getElementById('pCurrent').innerText=formatTime(playerVideo.currentTime);
+document.getElementById('pDuration').innerText=formatTime(playerVideo.duration);
+});
+playerVideo.addEventListener('ended',function(){isPlaying=false;updatePlayIcon();});
+});
+</script>
+</body>
+</html>
+
