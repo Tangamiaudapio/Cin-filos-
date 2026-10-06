@@ -10,11 +10,18 @@
 body{background:#000;font-family:'Inter',-apple-system,sans-serif;color:#fff;overflow-x:hidden;min-height:100vh}
 .screen{display:none;padding-bottom:90px;min-height:100vh}
 .screen.active{display:block}
+html{transition:filter .5s ease}
+html.bw-mode{filter:grayscale(1) contrast(1.12) brightness(1.05)}
+html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,html.bw-mode .poster-wide,html.bw-mode .poster-vert,html.bw-mode .grid-poster,html.bw-mode .chart-poster,html.bw-mode .episode-img,html.bw-mode .news-mini-img,html.bw-mode .fav-poster,html.bw-mode .rating-card-poster,html.bw-mode .detail-hero,html.bw-mode .about-hero-big,html.bw-mode .welcome-bg-img,html.bw-mode .img-preview{filter:grayscale(1) contrast(1.1) brightness(1.05)}
+.bw-btn{width:40px;height:40px;border-radius:50%;background:#1c1c1e;border:1px solid #2c2c2e;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;flex-shrink:0}
+.bw-btn svg{width:20px;height:20px;stroke:#fff;stroke-width:1.8;fill:none}
+.bw-btn.active{background:#fff;color:#000}
+.bw-btn.active svg{stroke:#000}
 .top-header{padding:18px 22px 12px;display:flex;justify-content:space-between;align-items:center}
 .top-header h1{font-size:32px;font-weight:800;letter-spacing:-1px;display:flex;align-items:center;gap:12px}
 .top-header h1 svg{width:22px;height:22px;stroke:#fff;stroke-width:2;fill:none;cursor:pointer}
 .header-right{display:flex;align-items:center;gap:8px}
-.avatar{position:relative;width:40px;height:40px;border-radius:50%;background:#1c1c1e;border:1.5px solid #2c2c2e;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;overflow:visible}
+.avatar{position:relative;width:40px;height:40px;border-radius:50%;background:#1c1c1e;border:1.5px solid #2c2c2e;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;overflow:visible;cursor:pointer}
 .avatar-verified{position:absolute;bottom:-2px;right:-2px;width:16px;height:16px;background:linear-gradient(135deg,#2AABEE,#229ED9);border-radius:50%;display:none;align-items:center;justify-content:center;border:2px solid #000}
 .avatar-verified svg{width:8px;height:8px;stroke:#fff;stroke-width:3;fill:none}
 .avatar.verified .avatar-verified{display:flex}
@@ -23,6 +30,7 @@ body{background:#000;font-family:'Inter',-apple-system,sans-serif;color:#fff;ove
 .search-overlay.active{display:flex}
 .search-overlay svg{width:18px;height:18px;stroke:#8e8e93;stroke-width:2;fill:none;flex-shrink:0}
 .search-overlay input{flex:1;background:transparent;border:none;color:#fff;font-size:15px;outline:none;font-family:'Inter',sans-serif}
+
 .hero{position:relative;margin:0 16px;height:540px;border-radius:20px;overflow:hidden;background:#0a0a0a}
 .hero-bg{position:absolute;inset:0;background-size:cover;background-position:center 30%;transition:opacity .4s ease}
 .hero-bg.fade{opacity:0}
@@ -31,7 +39,7 @@ body{background:#000;font-family:'Inter',-apple-system,sans-serif;color:#fff;ove
 .emmy{margin-bottom:18px}
 .emmy-text .year{font-size:12px;letter-spacing:.5px}
 .emmy-text .award{font-size:18px;font-weight:700;margin-top:4px}
-.tags{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;margin-bottom:22px}
+.tags{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;margin-bottom:22px;justify-content:center;flex-wrap:wrap}
 .tags .dot{width:3px;height:3px;background:#8e8e93;border-radius:50%}
 .tags .age{border:1.5px solid #8e8e93;padding:1px 6px;border-radius:4px;font-size:10px;font-weight:600;margin-left:4px}
 .appletv-icon{width:18px;height:18px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#000;font-size:9px;font-weight:700}
@@ -46,38 +54,73 @@ body{background:#000;font-family:'Inter',-apple-system,sans-serif;color:#fff;ove
 .section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;position:relative;padding-bottom:10px}
 .section-header::after{content:'';position:absolute;bottom:0;left:0;width:40px;height:2px;background:#fff;border-radius:2px}
 .section-header h2{font-size:22px;font-weight:700;letter-spacing:-.5px}
-.section-header .arrow{color:#8e8e93;font-size:22px}
+.see-more-btn{margin-left:auto;font-size:11px;font-weight:700;background:#1c1c1e;border:1px solid #2c2c2e;color:#fff;padding:5px 12px;border-radius:14px;cursor:pointer;font-family:'Inter',sans-serif;letter-spacing:.3px}
+.see-more-btn:active{background:#2c2c2e}
 .carousel{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none}
 .carousel::-webkit-scrollbar{display:none}
 .chart-card{flex:0 0 200px;display:flex;align-items:flex-end;gap:6px}
 .chart-number{font-size:80px;font-weight:800;line-height:.8;letter-spacing:-6px;color:#000;-webkit-text-stroke:2px #fff;flex-shrink:0}
 .chart-poster{width:110px;height:160px;border-radius:10px;background-size:cover;background-position:center;flex-shrink:0;cursor:pointer}
 .poster-wide{flex:0 0 280px;height:160px;border-radius:12px;background-size:cover;background-position:center;border:1px solid #1c1c1e;cursor:pointer}
-.news-mini{flex:0 0 220px;background:#0d0d0d;border:1px solid #1c1c1e;border-radius:12px;overflow:hidden}
-.news-mini-img{width:100%;height:120px;background-size:cover;background-position:center}
+.poster-vert{flex:0 0 140px;height:210px;border-radius:12px;background-size:cover;background-position:center;border:1px solid #1c1c1e;cursor:pointer}
+.news-mini{flex:0 0 260px;background:#0d0d0d;border:1px solid #1c1c1e;border-radius:12px;overflow:hidden;cursor:pointer}
+.news-mini-img{width:100%;height:140px;background-size:cover;background-position:center}
 .news-mini-body{padding:12px 14px}
 .news-mini-tag{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#8e8e93;margin-bottom:6px}
 .news-mini-title{font-size:13px;font-weight:600;line-height:1.3}
 
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:0 22px}
 .grid-poster{width:100%;aspect-ratio:2/3;border-radius:12px;background-size:cover;background-position:center;border:1px solid #1c1c1e}
+.grid-poster.horizontal{aspect-ratio:16/9}
 .grid-title{margin-top:8px;font-size:14px;font-weight:600}
 .grid-meta{font-size:12px;color:#8e8e93;margin-top:2px}
 .tabs{display:flex;gap:8px;padding:0 22px 12px;overflow-x:auto;scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
-.tab{flex:0 0 auto;padding:10px 18px;border-radius:20px;background:#1c1c1e;color:#8e8e93;font-size:13px;font-weight:600;border:none;font-family:'Inter',sans-serif;white-space:nowrap}
+.tab{flex:0 0 auto;padding:10px 18px;border-radius:20px;background:#1c1c1e;color:#8e8e93;font-size:13px;font-weight:600;border:none;font-family:'Inter',sans-serif;white-space:nowrap;cursor:pointer}
 .tab.active{background:#fff;color:#000}
 .genres{display:flex;gap:8px;padding:0 22px 20px;overflow-x:auto;scrollbar-width:none}
 .genres::-webkit-scrollbar{display:none}
-.genre{flex:0 0 auto;padding:8px 14px;border-radius:16px;background:transparent;border:1px solid #2c2c2e;color:#8e8e93;font-size:12px;font-weight:500;font-family:'Inter',sans-serif;white-space:nowrap}
+.genre{flex:0 0 auto;padding:8px 14px;border-radius:16px;background:transparent;border:1px solid #2c2c2e;color:#8e8e93;font-size:12px;font-weight:500;font-family:'Inter',sans-serif;white-space:nowrap;cursor:pointer}
 .genre.active{background:#fff;color:#000;border-color:#fff}
-.top-rated{margin:0 22px 24px;padding:20px;background:#0d0d0d;border:1px solid #1c1c1e;border-radius:18px;display:flex;gap:16px;align-items:center}
-.top-rated-poster{width:90px;height:130px;border-radius:10px;background-size:cover;background-position:center;flex-shrink:0}
-.top-rated-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#8e8e93;margin-bottom:6px}
-.top-rated-title{font-size:19px;font-weight:700;margin-bottom:8px}
-.stars{display:flex;gap:3px;margin-bottom:6px}
-.stars svg{width:15px;height:15px}
-.rating-num{font-size:12px;color:#ccc}
+.filter-row{display:flex;gap:8px;padding:0 22px 20px;overflow-x:auto;scrollbar-width:none}
+.filter-row::-webkit-scrollbar{display:none}
+.filter-btn{flex:0 0 auto;padding:10px 18px;border-radius:20px;background:#1c1c1e;color:#8e8e93;font-size:12px;font-weight:600;border:1px solid #2c2c2e;font-family:'Inter',sans-serif;white-space:nowrap;cursor:pointer}
+.filter-btn.active{background:#fff;color:#000;border-color:#fff}
+
+.detail-back{position:absolute;top:20px;left:20px;z-index:10;width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.6);backdrop-filter:blur(20px);border:none;color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.detail-hero{position:relative;height:480px;background-size:cover;background-position:center 20%}
+.detail-hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.3) 0%,transparent 30%,rgba(0,0,0,.9) 85%,#000 100%)}
+.detail-content{position:relative;z-index:2;padding:24px 22px}
+.detail-title{font-size:32px;font-weight:800;letter-spacing:-1px;line-height:1.05;margin-bottom:14px;margin-top:-80px}
+.detail-meta-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.detail-chip{padding:5px 12px;background:#1c1c1e;border-radius:10px;font-size:11px;color:#bbb;font-weight:600}
+.detail-chip.year{background:#fff;color:#000}
+.detail-synopsis-title{font-size:11px;font-weight:700;color:#8e8e93;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px}
+.detail-synopsis{font-size:14px;line-height:1.7;color:#ddd;margin-bottom:26px}
+.detail-rating-row{display:flex;align-items:center;gap:14px;padding:16px 18px;background:#0d0d0d;border:1px solid #1c1c1e;border-radius:14px;margin-bottom:26px}
+.detail-rating-stars{display:flex;gap:2px}
+.detail-rating-stars svg{width:18px;height:18px;cursor:pointer}
+.detail-rating-info{flex:1}
+.detail-rating-value{font-size:18px;font-weight:800;line-height:1}
+.detail-rating-count{font-size:11px;color:#8e8e93;margin-top:4px}
+.episode-title{font-size:16px;font-weight:700;padding:0 22px;margin-bottom:12px}
+.season-tabs{display:flex;gap:8px;padding:0 22px;margin-bottom:14px;overflow-x:auto;scrollbar-width:none}
+.season-tabs::-webkit-scrollbar{display:none}
+.season-tab{flex:0 0 auto;padding:8px 16px;border-radius:16px;background:#1c1c1e;color:#8e8e93;font-size:12px;font-weight:600;border:none;font-family:'Inter',sans-serif;white-space:nowrap;cursor:pointer}
+.season-tab.active{background:#fff;color:#000}
+.episodes-carousel{display:flex;gap:12px;overflow-x:auto;padding:0 22px 10px;scrollbar-width:none}
+.episodes-carousel::-webkit-scrollbar{display:none}
+.episode{flex:0 0 200px;background:#0d0d0d;border:1px solid #1c1c1e;border-radius:12px;overflow:hidden;cursor:pointer}
+.episode-img{width:100%;height:110px;background-size:cover;background-position:center}
+.episode-info{padding:10px 12px}
+.episode-num{font-size:10px;color:#8e8e93;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.episode-name{font-size:13px;font-weight:600;line-height:1.3}
+.related-title{font-size:16px;font-weight:700;padding:0 22px;margin:26px 0 14px;position:relative;padding-bottom:10px}
+.related-title::after{content:'';position:absolute;bottom:0;left:22px;width:40px;height:2px;background:#fff;border-radius:2px}
+.related-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:20px 22px 40px}
+.related-item{cursor:pointer}
+.related-poster{width:100%;aspect-ratio:2/3;border-radius:10px;background-size:cover;background-position:center;border:1px solid #1c1c1e;margin-bottom:6px}
+.related-name{font-size:11px;font-weight:600;line-height:1.3}
 .comments-title{font-size:15px;font-weight:700;padding:0 22px;margin-bottom:12px}
 .comment{margin:0 22px 10px;padding:14px;background:#0d0d0d;border:1px solid #1c1c1e;border-radius:14px;display:flex;gap:12px}
 .comment-avatar{width:36px;height:36px;border-radius:50%;background:#1c1c1e;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0}
@@ -86,11 +129,6 @@ body{background:#000;font-family:'Inter',-apple-system,sans-serif;color:#fff;ove
 .comment-form{margin:0 22px 16px;display:flex;gap:10px}
 .comment-form input{flex:1;background:#1c1c1e;border:none;border-radius:20px;padding:12px 16px;color:#fff;font-size:14px;outline:none;font-family:'Inter',sans-serif}
 .comment-form button{background:#fff;color:#000;border:none;padding:0 20px;border-radius:20px;font-size:13px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer}
-.ranking-item{display:flex;align-items:center;gap:14px;margin:0 22px 10px;padding:10px;background:#0d0d0d;border:1px solid #1c1c1e;border-radius:12px}
-.ranking-num{font-size:22px;font-weight:800;width:34px;text-align:center;color:#555}
-.ranking-poster{width:46px;height:66px;border-radius:6px;background-size:cover;background-position:center}
-.ranking-title{font-size:13px;font-weight:600;margin-bottom:4px}
-.ranking-rating{font-size:11px;color:#8e8e93}
 
 .profile-avatar-wrap{position:relative;width:110px;height:110px;margin:30px auto 14px;cursor:pointer}
 .profile-avatar-wrap::after{content:'+';position:absolute;bottom:2px;right:2px;background:#fff;color:#000;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;line-height:1}
@@ -111,8 +149,6 @@ body{background:#000;font-family:'Inter',-apple-system,sans-serif;color:#fff;ove
 .profile-tab.active{color:#fff}
 .profile-tab.active::after{content:'';position:absolute;bottom:-14px;left:0;right:0;height:2px;background:#fff}
 .profile-section-title{font-size:16px;font-weight:800;padding:0 22px 12px;display:flex;align-items:center;gap:6px}
-.profile-section-title .star-icon{color:#FFD700;font-size:14px}
-.profile-section-title .see-all{margin-left:auto;font-size:12px;color:#8e8e93;font-weight:600}
 .fav-row{display:flex;gap:8px;overflow-x:auto;padding:0 22px 20px;scrollbar-width:none}
 .fav-row::-webkit-scrollbar{display:none}
 .fav-poster{flex:0 0 90px;height:130px;border-radius:8px;background-size:cover;background-position:center;cursor:pointer}
@@ -124,86 +160,26 @@ body{background:#000;font-family:'Inter',-apple-system,sans-serif;color:#fff;ove
 .rating-card-stars{display:flex;gap:2px;margin-bottom:4px}
 .rating-card-stars svg{width:14px;height:14px}
 .rating-card-time{font-size:11px;color:#8e8e93}
-.detail-back{position:absolute;top:20px;left:20px;z-index:10;width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.6);backdrop-filter:blur(20px);border:none;color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center}
-.detail-hero{position:relative;height:480px;background-size:cover;background-position:center 20%}
-.detail-hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.3) 0%,transparent 30%,rgba(0,0,0,.9) 85%,#000 100%)}
-.detail-content{position:relative;z-index:2;padding:24px 22px}
-.detail-title{font-size:32px;font-weight:800;letter-spacing:-1px;line-height:1.05;margin-bottom:14px;margin-top:-80px}
-.detail-meta-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
-.detail-chip{padding:5px 12px;background:#1c1c1e;border-radius:10px;font-size:11px;color:#bbb;font-weight:600}
-.detail-chip.year{background:#fff;color:#000}
-.detail-synopsis-title{font-size:11px;font-weight:700;color:#8e8e93;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px}
-.detail-synopsis{font-size:14px;line-height:1.7;color:#ddd;margin-bottom:26px}
-.detail-rating-row{display:flex;align-items:center;gap:14px;padding:16px 18px;background:#0d0d0d;border:1px solid #1c1c1e;border-radius:14px;margin-bottom:26px}
-.detail-rating-stars{display:flex;gap:2px}
-.detail-rating-stars svg{width:18px;height:18px}
-.detail-rating-info{flex:1}
-.detail-rating-value{font-size:18px;font-weight:800;line-height:1}
-.detail-rating-count{font-size:11px;color:#8e8e93;margin-top:4px}
-.episode-title{font-size:16px;font-weight:700;padding:0 22px;margin-bottom:12px}
-.season-tabs{display:flex;gap:8px;padding:0 22px;margin-bottom:14px;overflow-x:auto;scrollbar-width:none}
-.season-tabs::-webkit-scrollbar{display:none}
-.season-tab{flex:0 0 auto;padding:8px 16px;border-radius:16px;background:#1c1c1e;color:#8e8e93;font-size:12px;font-weight:600;border:none;font-family:'Inter',sans-serif;white-space:nowrap}
-.season-tab.active{background:#fff;color:#000}
-.episodes-carousel{display:flex;gap:12px;overflow-x:auto;padding:0 22px 10px;scrollbar-width:none}
-.episodes-carousel::-webkit-scrollbar{display:none}
-.episode{flex:0 0 200px;background:#0d0d0d;border:1px solid #1c1c1e;border-radius:12px;overflow:hidden;cursor:pointer}
-.episode-img{width:100%;height:110px;background-size:cover;background-position:center}
-.episode-info{padding:10px 12px}
-.episode-num{font-size:10px;color:#8e8e93;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
-.episode-name{font-size:13px;font-weight:600;line-height:1.3}
-.related-title{font-size:16px;font-weight:700;padding:0 22px;margin:26px 0 14px;position:relative;padding-bottom:10px}
-.related-title::after{content:'';position:absolute;bottom:0;left:22px;width:40px;height:2px;background:#fff;border-radius:2px}
-.related-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:20px 22px 40px}
-.related-item{cursor:pointer}
-.related-poster{width:100%;aspect-ratio:2/3;border-radius:10px;background-size:cover;background-position:center;border:1px solid #1c1c1e;margin-bottom:6px}
-.related-name{font-size:11px;font-weight:600;line-height:1.3}
 
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(10,10,10,.95);backdrop-filter:blur(20px);border-top:1px solid #1c1c1e;display:flex;justify-content:space-around;align-items:center;padding:10px 4px 16px;z-index:999}
-.nav-item{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10px;font-weight:500;color:#636366;flex:1;padding:6px 4px;border:none;background:transparent;font-family:'Inter',sans-serif}
-.nav-item.active{color:#fff}
-.nav-item svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.nav-tg{width:46px;height:46px;border-radius:50%;background:#fff;border:none;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.nav-tg svg{width:24px;height:24px;fill:#000}
 .empty-state{text-align:center;padding:80px 30px;color:#636366}
 .empty-state svg{width:60px;height:60px;stroke:#333;stroke-width:1.5;fill:none;margin-bottom:20px}
 .empty-state h3{font-size:18px;font-weight:700;color:#fff;margin-bottom:8px}
 .empty-state p{font-size:13px;line-height:1.5}
-.filter-row{display:flex;gap:8px;padding:0 22px 20px;overflow-x:auto;scrollbar-width:none}
-.filter-row::-webkit-scrollbar{display:none}
-.filter-btn{flex:0 0 auto;padding:10px 18px;border-radius:20px;background:#1c1c1e;color:#8e8e93;font-size:12px;font-weight:600;border:1px solid #2c2c2e;font-family:'Inter',sans-serif;white-space:nowrap;cursor:pointer}
-.filter-btn.active{background:#fff;color:#000;border-color:#fff}
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;display:none;align-items:flex-end;justify-content:center}
-.modal-overlay.active{display:flex}
-.modal-sheet{background:#0d0d0d;border-radius:24px 24px 0 0;padding:24px 22px 34px;width:100%;max-width:500px;border-top:1px solid #1c1c1e}
-.modal-title{font-size:18px;font-weight:700;margin-bottom:6px;text-align:center}
-.modal-sub{font-size:13px;color:#8e8e93;text-align:center;margin-bottom:22px}
-.modal-option{background:#1c1c1e;border-radius:14px;padding:16px 18px;margin-bottom:10px;display:flex;align-items:center;gap:14px;cursor:pointer;border:1px solid #2c2c2e}
-.modal-option:active{background:#2c2c2e}
-.modal-option-icon{width:40px;height:40px;border-radius:10px;background:#000;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.modal-option-icon svg{width:20px;height:20px;stroke:#fff;stroke-width:1.8;fill:none}
-.modal-option-info{flex:1}
-.modal-option-title{font-size:15px;font-weight:600;color:#fff;margin-bottom:2px}
-.modal-option-desc{font-size:11px;color:#8e8e93}
-.modal-cancel{width:100%;padding:16px;background:transparent;border:none;color:#8e8e93;font-size:14px;font-weight:600;font-family:'Inter',sans-serif;margin-top:6px;cursor:pointer}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(10,10,10,.95);backdrop-filter:blur(20px);border-top:1px solid #1c1c1e;display:flex;justify-content:space-around;align-items:center;padding:10px 4px 16px;z-index:999}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10px;font-weight:500;color:#636366;flex:1;padding:6px 4px;border:none;background:transparent;font-family:'Inter',sans-serif;cursor:pointer}
+.nav-item.active{color:#fff}
+.nav-item svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.nav-tg{width:46px;height:46px;border-radius:50%;background:#fff;border:none;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer}
+.nav-tg svg{width:24px;height:24px;fill:#000}
 .welcome{position:fixed;inset:0;background:#000;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:40px 30px;z-index:9999;overflow:hidden}
-.welcome-bg{position:absolute;inset:-50%;display:flex;flex-direction:column;gap:14px;transform:rotate(-10deg);opacity:.85;filter:contrast(1.1) saturate(1.2);pointer-events:none;z-index:1;animation:slowPan 30s ease-in-out infinite alternate}
-@keyframes slowPan{0%{transform:rotate(-10deg) translate(0,0)}100%{transform:rotate(-10deg) translate(-20px,-20px)}}
-.welcome-row{display:flex;gap:14px;width:max-content;animation:scrollLeft 60s linear infinite;pointer-events:none}
-.welcome-row.reverse{animation:scrollRight 70s linear infinite}
-.welcome-row:nth-child(2){animation-duration:55s}
-.welcome-row:nth-child(3){animation-duration:75s}
-.welcome-row:nth-child(4){animation-duration:65s}
-.welcome-row img{width:110px;height:165px;border-radius:10px;object-fit:cover;flex-shrink:0;background:#1a1a1a;pointer-events:none}
-@keyframes scrollLeft{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@keyframes scrollRight{from{transform:translateX(-50%)}to{transform:translateX(0)}}
-.welcome-overlay{position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(0,0,0,.5) 0%,rgba(0,0,0,.95) 75%);z-index:2;pointer-events:none}
+.welcome-bg-img{position:absolute;inset:0;background-size:cover;background-position:center;z-index:1;filter:brightness(.8)}
+.welcome-overlay{position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(0,0,0,.4) 0%,rgba(0,0,0,.88) 75%);z-index:2;pointer-events:none}
 .welcome-content{position:relative;z-index:999;display:flex;flex-direction:column;justify-content:center;align-items:center;width:100%;max-width:400px;pointer-events:auto}
 .welcome-brand{font-size:44px;font-weight:900;letter-spacing:16px;margin-bottom:20px;margin-top:120px;text-shadow:0 6px 40px rgba(0,0,0,.95);text-align:center;padding-left:16px}
 .welcome input{width:100%;max-width:340px;background:rgba(28,28,30,.85);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:16px 20px;color:#fff;font-size:16px;outline:none;font-family:'Inter',sans-serif;margin-bottom:12px;text-align:center}
 .welcome input::placeholder{color:#8e8e93}
 .welcome .err{color:#ff453a;font-size:12px;margin-bottom:8px;height:16px}
-.welcome button{width:100%;max-width:340px;background:#fff;color:#000;border:none;padding:16px;border-radius:14px;font-size:16px;font-weight:700;font-family:'Inter',sans-serif;box-shadow:0 8px 30px rgba(255,255,255,.2);margin-bottom:14px}
+.welcome button{width:100%;max-width:340px;background:#fff;color:#000;border:none;padding:16px;border-radius:14px;font-size:16px;font-weight:700;font-family:'Inter',sans-serif;box-shadow:0 8px 30px rgba(255,255,255,.2);margin-bottom:14px;cursor:pointer}
 .welcome .welcome-hint{font-size:11px;color:#8e8e93;text-align:center;line-height:1.5;max-width:320px}
 .about-hero-big{position:relative;width:calc(100% - 32px);margin:16px auto 20px;height:440px;background-size:cover;background-position:center;border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.6)}
 .about-hero-big::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1) 0%,rgba(0,0,0,.3) 55%,rgba(0,0,0,.95) 100%)}
@@ -212,33 +188,41 @@ body{background:#000;font-family:'Inter',-apple-system,sans-serif;color:#fff;ove
 .about-stat-big-num{font-size:26px;font-weight:900;letter-spacing:-.5px}
 .about-stat-big-label{font-size:10px;color:#8e8e93;letter-spacing:2px;text-transform:uppercase;margin-top:6px}
 .social-icons-row{display:flex;justify-content:center;gap:16px;padding:0 22px 30px}
-.social-icon-only{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none}
+.social-icon-only{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none;transition:transform .2s}
+.social-icon-only:hover{transform:scale(1.08)}
 .social-icon-only.tg{background:linear-gradient(135deg,#2AABEE,#229ED9)}
 .social-icon-only.fb{background:#1877F2}
 .social-icon-only.tk{background:#111;border:1px solid #2c2c2e}
 .social-icon-only svg{width:28px;height:28px;fill:#fff}
 .about-footer-text{padding:0 30px 60px;text-align:center;font-size:13px;color:#8e8e93;line-height:1.7;font-style:italic}
+
 .admin-screen{position:fixed;inset:0;background:#000;z-index:9998;overflow-y:auto;padding:20px 22px 100px;display:none}
 .admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
 .admin-header h1{font-size:26px;font-weight:800}
-.admin-close{width:36px;height:36px;border-radius:50%;background:#1c1c1e;border:none;color:#fff;font-size:20px;display:flex;align-items:center;justify-content:center}
+.admin-close{width:36px;height:36px;border-radius:50%;background:#1c1c1e;border:none;color:#fff;font-size:20px;display:flex;align-items:center;justify-content:center;cursor:pointer}
 .admin-tabs{display:flex;gap:8px;margin-bottom:24px}
-.admin-tab{padding:10px 18px;border-radius:20px;background:#1c1c1e;color:#8e8e93;font-size:13px;font-weight:600;border:none;font-family:'Inter',sans-serif}
+.admin-tab{padding:10px 18px;border-radius:20px;background:#1c1c1e;color:#8e8e93;font-size:13px;font-weight:600;border:none;font-family:'Inter',sans-serif;cursor:pointer}
 .admin-tab.active{background:#fff;color:#000}
 .form-group{margin-bottom:18px}
 .form-label{display:block;font-size:12px;font-weight:700;color:#8e8e93;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
 .form-input{width:100%;background:#1c1c1e;border:none;border-radius:12px;padding:14px 16px;color:#fff;font-size:15px;outline:none;font-family:'Inter',sans-serif}
 .form-input-area{min-height:100px;resize:vertical}
 .img-preview{width:100%;height:200px;border-radius:14px;background:#1c1c1e;background-size:cover;background-position:center;margin-bottom:12px;display:flex;align-items:center;justify-content:center;color:#636366;font-size:13px}
+.img-preview.vertical{height:300px;max-width:220px;margin-left:auto;margin-right:auto}
+.img-preview.horizontal{height:180px}
 .file-label{display:block;margin-top:8px;padding:12px 16px;background:#1c1c1e;border-radius:12px;text-align:center;font-size:13px;font-weight:600;cursor:pointer;color:#fff;border:1px dashed #2c2c2e}
 .link-group{background:#0d0d0d;border:1px solid #1c1c1e;border-radius:12px;padding:14px;margin-bottom:10px;display:flex;align-items:center;gap:12px}
 .link-lang{font-size:12px;font-weight:700;color:#8e8e93;min-width:70px;text-transform:uppercase;letter-spacing:1px}
 .link-input{flex:1;background:transparent;border:none;color:#fff;font-size:14px;outline:none;font-family:'Inter',sans-serif}
 .cat-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-.cat-btn{padding:10px 16px;border-radius:18px;background:#1c1c1e;border:1px solid #2c2c2e;color:#8e8e93;font-size:13px;font-weight:600;font-family:'Inter',sans-serif}
+.cat-btn{padding:10px 16px;border-radius:18px;background:#1c1c1e;border:1px solid #2c2c2e;color:#8e8e93;font-size:13px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer}
 .cat-btn.active{background:#fff;color:#000;border-color:#fff}
-.admin-publish{position:fixed;bottom:0;left:0;right:0;padding:16px 22px 24px;background:rgba(0,0,0,.95);border-top:1px solid #1c1c1e}
-.btn-publish{width:100%;background:#fff;color:#000;border:none;padding:16px;border-radius:14px;font-size:16px;font-weight:700;font-family:'Inter',sans-serif}
+.orient-btns{display:flex;gap:8px;margin-top:8px}
+.orient-btn{flex:1;padding:12px;border-radius:12px;background:#1c1c1e;border:1px solid #2c2c2e;color:#8e8e93;font-size:13px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+.orient-btn.active{background:#fff;color:#000;border-color:#fff}
+.orient-btn svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none}
+.admin-publish{position:fixed;bottom:0;left:0;right:0;padding:16px 22px 24px;background:rgba(0,0,0,.95);border-top:1px solid #1c1c1e;z-index:10}
+.btn-publish{width:100%;background:#fff;color:#000;border:none;padding:16px;border-radius:14px;font-size:16px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer}
 .user-row{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:#0d0d0d;border:1px solid #1c1c1e;border-radius:12px;margin-bottom:10px;position:relative}
 .u-info{display:flex;align-items:center;gap:12px}
 .u-avatar{width:38px;height:38px;border-radius:50%;background:#1c1c1e;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
@@ -253,6 +237,20 @@ body{background:#000;font-family:'Inter',-apple-system,sans-serif;color:#fff;ove
 .u-menu-item:active{background:#2c2c2e}
 .u-menu-item.danger{color:#ff453a}
 .u-menu-item svg{width:16px;height:16px;stroke:currentColor;stroke-width:1.8;fill:none}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;display:none;align-items:flex-end;justify-content:center}
+.modal-overlay.active{display:flex}
+.modal-sheet{background:#0d0d0d;border-radius:24px 24px 0 0;padding:24px 22px 34px;width:100%;max-width:500px;border-top:1px solid #1c1c1e}
+.modal-title{font-size:18px;font-weight:700;margin-bottom:6px;text-align:center}
+.modal-sub{font-size:13px;color:#8e8e93;text-align:center;margin-bottom:22px}
+.modal-option{background:#1c1c1e;border-radius:14px;padding:16px 18px;margin-bottom:10px;display:flex;align-items:center;gap:14px;cursor:pointer;border:1px solid #2c2c2e}
+.modal-option:active{background:#2c2c2e}
+.modal-option-icon{width:40px;height:40px;border-radius:10px;background:#000;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.modal-option-icon svg{width:20px;height:20px;stroke:#fff;stroke-width:1.8;fill:none}
+.modal-option-info{flex:1}
+.modal-option-title{font-size:15px;font-weight:600;color:#fff;margin-bottom:2px}
+.modal-option-desc{font-size:11px;color:#8e8e93}
+.modal-cancel{width:100%;padding:16px;background:transparent;border:none;color:#8e8e93;font-size:14px;font-weight:600;font-family:'Inter',sans-serif;margin-top:6px;cursor:pointer}
 .player-screen{position:fixed;inset:0;background:#000;z-index:99999;display:none;overflow:hidden}
 .player-screen.active{display:block}
 .player-rotate-msg{position:absolute;inset:0;background:#000;z-index:20;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px}
@@ -281,74 +279,158 @@ body{background:#000;font-family:'Inter',-apple-system,sans-serif;color:#fff;ove
 .player-bar{flex:1;height:4px;background:rgba(255,255,255,.25);border-radius:3px;position:relative;cursor:pointer}
 .player-bar-fill{position:absolute;left:0;top:0;bottom:0;background:#fff;border-radius:3px;width:0%}
 .player-bar-thumb{position:absolute;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;background:#fff;border-radius:50%;left:0%;box-shadow:0 2px 6px rgba(0,0,0,.6)}
+.back-inline{background:transparent;border:none;color:#fff;font-size:32px;cursor:pointer;padding:0 6px 4px 0;line-height:1;font-family:'Inter',sans-serif}
+
+/* ============ MODO PC / TABLET (APPLE TV STYLE) ============ */
+@media(min-width:1024px){
+  body{background:#000}
+  .screen{padding-bottom:60px}
+  .bottom-nav{display:none}
+  .desktop-nav{display:flex !important}
+  .top-header{padding:22px 60px 14px;max-width:1600px;margin:0 auto}
+  .top-header h1{font-size:26px}
+  .section{padding:0 60px;margin-top:50px;max-width:1600px;margin-left:auto;margin-right:auto}
+  .section-header h2{font-size:26px}
+  .grid{padding:0 60px;grid-template-columns:repeat(5,1fr);max-width:1600px;margin:0 auto}
+  .hero{margin:0 60px;height:520px;max-width:1600px;margin-left:auto;margin-right:auto;border-radius:14px}
+  .hero-content{align-items:flex-start;text-align:left;padding:40px 60px 50px;max-width:640px}
+  .hero-content .tags{justify-content:flex-start}
+  .hero-content .emmy{text-align:left}
+  .hero-content .actions{margin-top:0}
+  .poster-wide{flex:0 0 340px;height:190px;border-radius:10px}
+  .poster-vert{flex:0 0 180px;height:270px;border-radius:10px}
+  .chart-card{flex:0 0 240px}
+  .news-mini{flex:0 0 320px}
+  .news-mini-img{height:180px}
+  .tabs{padding:0 60px 16px;max-width:1600px;margin:0 auto}
+  .genres{padding:0 60px 24px;max-width:1600px;margin:0 auto}
+  .detail-hero{height:600px;max-width:1600px;margin:0 auto;border-radius:14px;position:relative}
+  .detail-content{max-width:900px;margin:0 auto;padding:30px 60px}
+  .detail-title{font-size:52px;margin-top:-100px}
+  .detail-synopsis{font-size:16px}
+  .episodes-carousel{padding:0 60px 10px;max-width:1600px;margin:0 auto}
+  .episode-title,.season-tabs{padding-left:60px;padding-right:60px;max-width:1600px;margin-left:auto;margin-right:auto}
+  .related-grid{padding:20px 60px 40px;grid-template-columns:repeat(6,1fr);max-width:1600px;margin:0 auto}
+  .related-title{padding-left:60px}
+  .related-title::after{left:60px}
+  .comment,.comment-form,.comments-title{padding-left:60px;padding-right:60px;max-width:900px;margin-left:auto;margin-right:auto}
+  .comment-form input{max-width:none}
+  .profile-avatar-wrap{margin-top:50px}
+  .profile-stats-row,.profile-bio,.profile-tabs,.profile-section-title,.fav-row,.rating-card{max-width:900px;margin-left:auto;margin-right:auto}
+  .profile-tabs{padding-left:0;padding-right:0}
+  .profile-section-title{padding-left:0;padding-right:0}
+  .fav-row{padding-left:0;padding-right:0}
+  .rating-card{margin-left:auto;margin-right:auto}
+  .about-hero-big{height:560px;max-width:1400px;margin-left:auto;margin-right:auto}
+  .about-stats-big,.social-icons-row,.about-footer-text{max-width:900px;margin-left:auto;margin-right:auto}
+  .admin-screen{padding:30px 60px 120px}
+  .admin-header h1{font-size:30px}
+  .form-group{max-width:900px;margin-left:auto;margin-right:auto}
+  .admin-publish{padding:20px 60px 30px}
+  .modal-sheet{max-width:600px;border-radius:24px;margin-bottom:40px}
+  .modal-overlay{align-items:center}
+  .player-center{gap:80px}
+  .welcome-brand{font-size:64px;letter-spacing:24px}
+  .social-icon-only:hover{transform:scale(1.1)}
+  .grid-poster{cursor:pointer;transition:transform .25s ease,box-shadow .25s ease}
+  .grid-poster:hover{transform:scale(1.05);box-shadow:0 12px 40px rgba(255,255,255,.15)}
+  .poster-wide,.poster-vert,.chart-poster,.news-mini,.episode,.fav-poster{transition:transform .25s ease}
+  .poster-wide:hover,.poster-vert:hover,.chart-poster:hover,.news-mini:hover,.episode:hover,.fav-poster:hover{transform:scale(1.04)}
+}
+.desktop-nav{display:none;position:fixed;top:0;left:0;right:0;background:rgba(8,8,8,.85);backdrop-filter:blur(24px);border-bottom:1px solid #1c1c1e;padding:14px 60px;align-items:center;justify-content:space-between;z-index:900}
+.desktop-nav-brand{font-size:18px;font-weight:900;letter-spacing:6px}
+.desktop-nav-links{display:flex;gap:8px;align-items:center;background:rgba(28,28,30,.7);padding:6px;border-radius:24px}
+.desktop-nav-link{padding:10px 20px;border-radius:18px;background:transparent;border:none;color:#bbb;font-size:14px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;transition:all .2s}
+.desktop-nav-link:hover{color:#fff}
+.desktop-nav-link.active{background:#fff;color:#000}
+.desktop-nav-right{display:flex;align-items:center;gap:12px}
+@media(min-width:1024px){
+  body{padding-top:0}
+  .screen.active .top-header{display:none}
+}
+
 </style>
 </head>
 <body>
 
 <div class="welcome" id="welcomeScreen">
-<div class="welcome-bg">
-<div class="welcome-row"><img src="https://image.tmdb.org/t/p/w300/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg"><img src="https://image.tmdb.org/t/p/w300/74xTEgt7R36Fpooo50r9T25onhq.jpg"><img src="https://image.tmdb.org/t/p/w300/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg"><img src="https://image.tmdb.org/t/p/w300/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg"><img src="https://image.tmdb.org/t/p/w300/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg"><img src="https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg"><img src="https://image.tmdb.org/t/p/w300/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg"><img src="https://image.tmdb.org/t/p/w300/saHP97rTPS5eLmrLQEcANmKrsFl.jpg"></div>
-<div class="welcome-row reverse"><img src="https://image.tmdb.org/t/p/w300/74xTEgt7R36Fpooo50r9T25onhq.jpg"><img src="https://image.tmdb.org/t/p/w300/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg"><img src="https://image.tmdb.org/t/p/w300/saHP97rTPS5eLmrLQEcANmKrsFl.jpg"><img src="https://image.tmdb.org/t/p/w300/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg"><img src="https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg"><img src="https://image.tmdb.org/t/p/w300/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg"><img src="https://image.tmdb.org/t/p/w300/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg"><img src="https://image.tmdb.org/t/p/w300/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg"></div>
-<div class="welcome-row"><img src="https://image.tmdb.org/t/p/w300/saHP97rTPS5eLmrLQEcANmKrsFl.jpg"><img src="https://image.tmdb.org/t/p/w300/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg"><img src="https://image.tmdb.org/t/p/w300/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg"><img src="https://image.tmdb.org/t/p/w300/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg"><img src="https://image.tmdb.org/t/p/w300/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg"><img src="https://image.tmdb.org/t/p/w300/74xTEgt7R36Fpooo50r9T25onhq.jpg"><img src="https://image.tmdb.org/t/p/w300/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg"><img src="https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg"></div>
-<div class="welcome-row reverse"><img src="https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg"><img src="https://image.tmdb.org/t/p/w300/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg"><img src="https://image.tmdb.org/t/p/w300/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg"><img src="https://image.tmdb.org/t/p/w300/74xTEgt7R36Fpooo50r9T25onhq.jpg"><img src="https://image.tmdb.org/t/p/w300/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg"><img src="https://image.tmdb.org/t/p/w300/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg"><img src="https://image.tmdb.org/t/p/w300/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg"><img src="https://image.tmdb.org/t/p/w300/saHP97rTPS5eLmrLQEcANmKrsFl.jpg"></div>
+  <div class="welcome-bg-img" style="background-image:url('https://i.ibb.co/ynKQMRq6/b78f8ee5dd6fadeb43bf49e02e4af4eb-2.jpg')"></div>
+  <div class="welcome-overlay"></div>
+  <div class="welcome-content">
+    <div class="welcome-brand">CINEFILOS</div>
+    <input type="text" id="nameInput" placeholder="Tu nombre" maxlength="20">
+    <input type="text" id="codeInput" placeholder="Código de acceso" maxlength="20">
+    <div class="err" id="nameError"></div>
+    <button onclick="enterApp()">Entrar</button>
+    <div class="welcome-hint">Para ingresar a CINEFILOS necesitas un nombre y un código de acceso que te proporcionará la comunidad.</div>
+  </div>
 </div>
-<div class="welcome-overlay"></div>
-<div class="welcome-content">
-<div class="welcome-brand">CINEFILOS</div>
-<input type="text" id="nameInput" placeholder="Tu nombre" maxlength="20">
-<input type="text" id="codeInput" placeholder="Código de acceso" maxlength="20">
-<div class="err" id="nameError"></div>
-<button onclick="enterApp()">Entrar</button>
-<div class="welcome-hint">Para ingresar a CINEFILOS necesitas un nombre y un código de acceso que te proporcionará la comunidad.</div>
-</div>
-</div>
+
+<nav class="desktop-nav" id="desktopNav">
+  <div class="desktop-nav-brand">CINEFILOS</div>
+  <div class="desktop-nav-links">
+    <button class="desktop-nav-link active" onclick="go('home',null)" data-nav="home">Inicio</button>
+    <button class="desktop-nav-link" onclick="go('explore',null)" data-nav="explore">Explorar</button>
+    <button class="desktop-nav-link" onclick="go('list',null)" data-nav="list">Mi Lista</button>
+    <button class="desktop-nav-link" onclick="go('profile',null)" data-nav="profile">Perfil</button>
+    <button class="desktop-nav-link" onclick="go('about',null)" data-nav="about">Nosotros</button>
+  </div>
+  <div class="desktop-nav-right">
+    <button class="bw-btn" id="bwBtnDesktop" onclick="toggleBW()" title="Modo Blanco y Negro"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button>
+    <button class="admin-btn" id="adminBtnDesktop" onclick="openAdmin()">+</button>
+    <div class="avatar" id="userAvatarWrapD"><span id="userAvatarD">?</span><span class="avatar-verified"><svg viewBox="0 0 24 24"><polyline points="5 12 10 17 19 7"/></svg></span></div>
+  </div>
+</nav>
 
 <div class="screen active" id="s-home">
 <div class="top-header"><h1>Inicio <svg onclick="toggleSearch()" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></h1>
-<div class="header-right"><button class="admin-btn" id="adminBtn" onclick="openAdmin()">+</button><div class="avatar" id="userAvatarWrap"><span id="userAvatar">?</span><span class="avatar-verified" id="avatarVerified"><svg viewBox="0 0 24 24"><polyline points="5 12 10 17 19 7"/></svg></span></div></div>
+<div class="header-right"><button class="admin-btn" id="adminBtn" onclick="openAdmin()">+</button><div class="avatar" id="userAvatarWrap"><span id="userAvatar">?</span><span class="avatar-verified"><svg viewBox="0 0 24 24"><polyline points="5 12 10 17 19 7"/></svg></span></div></div>
 </div>
 <div class="search-overlay" id="searchBox"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input type="text" id="searchInput" placeholder="Buscar..." oninput="doSearch(this.value)"></div>
 <div id="searchResults" style="display:none"></div>
 <div id="homeContent">
 <div class="hero" id="heroBox">
-<div class="hero-bg" id="heroBg" style="background-image:url('https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg')"></div>
+<div class="hero-bg" id="heroBg"></div>
 <div class="hero-overlay"></div>
 <div class="hero-content">
 <div class="emmy"><div class="emmy-text"><div class="year" id="heroYear">Ganador 2026</div><div class="award" id="heroAward">Premios Emmy®</div></div></div>
-<div class="tags"><div class="appletv-icon">tv</div><span>Serie de TV</span><span class="dot"></span><span>Drama</span><span class="dot"></span><span>Thriller</span><span class="age">18+</span></div>
+<div class="tags"><div class="appletv-icon">cf</div><span id="heroCat">Serie de TV</span><span class="dot"></span><span id="heroGenre">Drama</span><span class="age">18+</span></div>
 <div class="actions"><button class="btn-play" onclick="playFromHero()">▶ Reproducir</button><button class="btn-plus" id="heroPlusBtn" onclick="toggleSaveHero()">+</button></div>
 <div class="dots" id="heroDots"></div>
 </div></div>
-<div class="section"><div class="section-header"><h2>Top 5 Semanal</h2><span class="arrow">›</span></div>
-<div class="carousel">
-<div class="chart-card" onclick="openDetail('The Last of Us','2023 · Drama','Joel saca a Ellie.','https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',true)"><div class="chart-number">1</div><div class="chart-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg')"></div></div>
-<div class="chart-card" onclick="openDetail('The Batman','2022 · Acción','Batman.','https://image.tmdb.org/t/p/original/74xTEgt7R36Fpooo50r9T25onhq.jpg',false)"><div class="chart-number">2</div><div class="chart-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg')"></div></div>
-<div class="chart-card" onclick="openDetail('White Lotus','2021 · Comedia','Vacaciones.','https://image.tmdb.org/t/p/original/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg',true)"><div class="chart-number">3</div><div class="chart-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg')"></div></div>
-<div class="chart-card" onclick="openDetail('Wednesday','2022 · Misterio','Miércoles.','https://image.tmdb.org/t/p/original/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg',true)"><div class="chart-number">4</div><div class="chart-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg')"></div></div>
-<div class="chart-card" onclick="openDetail('Better Call Saul','2015 · Drama','Jimmy.','https://image.tmdb.org/t/p/original/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg',true)"><div class="chart-number">5</div><div class="chart-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg')"></div></div>
-</div></div>
-<div class="section"><div class="section-header"><h2>Estrenos</h2><span class="arrow">›</span></div>
-<div class="carousel">
-<div class="poster-wide" onclick="openDetail('Dune','2021 · Sci-Fi','Paul.','https://image.tmdb.org/t/p/original/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg',false)" style="background-image:url('https://image.tmdb.org/t/p/w780/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg')"></div>
-<div class="poster-wide" onclick="openDetail('Oppenheimer','2023 · Drama','Oppenheimer.','https://image.tmdb.org/t/p/original/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg',false)" style="background-image:url('https://image.tmdb.org/t/p/w780/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg')"></div>
-<div class="poster-wide" onclick="openDetail('Joker','2019 · Drama','Arthur.','https://image.tmdb.org/t/p/original/saHP97rTPS5eLmrLQEcANmKrsFl.jpg',false)" style="background-image:url('https://image.tmdb.org/t/p/w780/saHP97rTPS5eLmrLQEcANmKrsFl.jpg')"></div>
-</div></div>
-<div class="section"><div class="section-header"><h2>Series</h2><span class="arrow">›</span></div>
-<div class="carousel">
-<div class="poster-wide" onclick="openDetail('The Last of Us','2023 · Drama','Joel.','https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',true)" style="background-image:url('https://image.tmdb.org/t/p/w780/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg')"></div>
-<div class="poster-wide" onclick="openDetail('Wednesday','2022 · Misterio','Miércoles.','https://image.tmdb.org/t/p/original/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg',true)" style="background-image:url('https://image.tmdb.org/t/p/w780/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg')"></div>
-</div></div>
-<div class="section"><div class="section-header"><h2>Documentales</h2><span class="arrow">›</span></div>
-<div class="carousel">
-<div class="poster-wide" onclick="openDetail('Planet Earth','2006 · Documental','Vida.','https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',false)" style="background-image:url('https://image.tmdb.org/t/p/w780/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg')"></div>
-<div class="poster-wide" onclick="openDetail('Cosmos','2014 · Documental','Universo.','https://image.tmdb.org/t/p/original/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg',false)" style="background-image:url('https://image.tmdb.org/t/p/w780/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg')"></div>
-</div></div>
+
+<div class="section"><div class="section-header"><h2>Top 5 Semanal</h2><button class="see-more-btn" onclick="openCategory('top5')">Ver más ›</button></div>
+<div class="carousel" id="carousel-top5"></div></div>
+
+<div class="section"><div class="section-header"><h2>Noticias</h2><button class="see-more-btn" onclick="openCategory('news')">Ver más ›</button></div>
+<div class="carousel" id="carousel-news"></div></div>
+
+<div class="section"><div class="section-header"><h2>Estrenos</h2><button class="see-more-btn" onclick="openCategory('estrenos')">Ver más ›</button></div>
+<div class="carousel" id="carousel-estrenos"></div></div>
+
+<div class="section"><div class="section-header"><h2>Películas</h2><button class="see-more-btn" onclick="openCategory('peliculas')">Ver más ›</button></div>
+<div class="carousel" id="carousel-peliculas"></div></div>
+
+<div class="section"><div class="section-header"><h2>Series</h2><button class="see-more-btn" onclick="openCategory('series')">Ver más ›</button></div>
+<div class="carousel" id="carousel-series"></div></div>
+
+<div class="section"><div class="section-header"><h2>Animes</h2><button class="see-more-btn" onclick="openCategory('animes')">Ver más ›</button></div>
+<div class="carousel" id="carousel-animes"></div></div>
+
+<div class="section"><div class="section-header"><h2>Kdramas</h2><button class="see-more-btn" onclick="openCategory('kdramas')">Ver más ›</button></div>
+<div class="carousel" id="carousel-kdramas"></div></div>
+
+<div class="section"><div class="section-header"><h2>Telenovelas</h2><button class="see-more-btn" onclick="openCategory('telenovelas')">Ver más ›</button></div>
+<div class="carousel" id="carousel-telenovelas"></div></div>
+
+<div class="section"><div class="section-header"><h2>Documentales</h2><button class="see-more-btn" onclick="openCategory('documentales')">Ver más ›</button></div>
+<div class="carousel" id="carousel-documentales"></div></div>
 </div>
 </div>
 
 <div class="screen" id="s-explore">
 <div class="top-header"><h1>Explorar</h1><div class="header-right"><button class="admin-btn" onclick="openAdmin()">+</button><div class="avatar" id="userAvatarWrap2"><span id="userAvatar2">?</span><span class="avatar-verified"><svg viewBox="0 0 24 24"><polyline points="5 12 10 17 19 7"/></svg></span></div></div></div>
-<div class="search-overlay active"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input type="text" id="searchInputEx" placeholder="Buscar en CINEFILOS..." oninput="doSearchEx(this.value)"></div>
+<div class="search-overlay active"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input type="text" id="searchInputEx" placeholder="Buscar..." oninput="doSearchEx(this.value)"></div>
 <div id="searchResultsEx" style="display:none"></div>
 <div id="exploreContent">
 <div class="tabs">
@@ -367,34 +449,12 @@ body{background:#000;font-family:'Inter',-apple-system,sans-serif;color:#fff;ove
 <button class="genre" onclick="pickGenre(this)">Comedia</button>
 <button class="genre" onclick="pickGenre(this)">Sci-Fi</button>
 </div>
-<div class="cat-pane" id="cat-peliculas"><div class="grid">
-<div onclick="openDetail('Oppenheimer','2023 · Drama','Oppenheimer.','https://image.tmdb.org/t/p/original/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg',false)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg')"></div><div class="grid-title">Oppenheimer</div><div class="grid-meta">2023 · Drama</div></div>
-<div onclick="openDetail('Dune','2021 · Sci-Fi','Paul.','https://image.tmdb.org/t/p/original/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg',false)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg')"></div><div class="grid-title">Dune</div><div class="grid-meta">2021 · Sci-Fi</div></div>
-<div onclick="openDetail('Interstellar','2014 · Sci-Fi','Gusano.','https://image.tmdb.org/t/p/original/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg',false)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg')"></div><div class="grid-title">Interstellar</div><div class="grid-meta">2014 · Sci-Fi</div></div>
-<div onclick="openDetail('Joker','2019 · Drama','Arthur.','https://image.tmdb.org/t/p/original/saHP97rTPS5eLmrLQEcANmKrsFl.jpg',false)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/saHP97rTPS5eLmrLQEcANmKrsFl.jpg')"></div><div class="grid-title">Joker</div><div class="grid-meta">2019 · Drama</div></div>
-</div></div>
-<div class="cat-pane" id="cat-series" style="display:none"><div class="grid">
-<div onclick="openDetail('The Last of Us','2023 · Drama','Joel.','https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',true)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg')"></div><div class="grid-title">The Last of Us</div><div class="grid-meta">2023 · Drama</div></div>
-<div onclick="openDetail('White Lotus','2021 · Comedia','Vacaciones.','https://image.tmdb.org/t/p/original/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg',true)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg')"></div><div class="grid-title">White Lotus</div><div class="grid-meta">2021 · Comedia</div></div>
-<div onclick="openDetail('Wednesday','2022 · Misterio','Miércoles.','https://image.tmdb.org/t/p/original/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg',true)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg')"></div><div class="grid-title">Wednesday</div><div class="grid-meta">2022 · Misterio</div></div>
-<div onclick="openDetail('Better Call Saul','2015 · Drama','Jimmy.','https://image.tmdb.org/t/p/original/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg',true)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg')"></div><div class="grid-title">Better Call Saul</div><div class="grid-meta">2015 · Drama</div></div>
-</div></div>
-<div class="cat-pane" id="cat-animes" style="display:none"><div class="grid">
-<div onclick="openDetail('One Piece','1999 · Animación','Luffy.','https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',true)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg')"></div><div class="grid-title">One Piece</div><div class="grid-meta">1999 · Animación</div></div>
-<div onclick="openDetail('Attack on Titan','2013 · Animación','Titanes.','https://image.tmdb.org/t/p/original/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg',true)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg')"></div><div class="grid-title">Attack on Titan</div><div class="grid-meta">2013 · Animación</div></div>
-</div></div>
-<div class="cat-pane" id="cat-kdramas" style="display:none"><div class="grid">
-<div onclick="openDetail('Squid Game','2021 · Drama','Juegos.','https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',true)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg')"></div><div class="grid-title">Squid Game</div><div class="grid-meta">2021 · Drama</div></div>
-<div onclick="openDetail('Vincenzo','2021 · Crimen','Mafioso.','https://image.tmdb.org/t/p/original/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg',true)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg')"></div><div class="grid-title">Vincenzo</div><div class="grid-meta">2021 · Crimen</div></div>
-</div></div>
-<div class="cat-pane" id="cat-documentales" style="display:none"><div class="grid">
-<div onclick="openDetail('Planet Earth','2006 · Documental','Vida.','https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',false)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg')"></div><div class="grid-title">Planet Earth</div><div class="grid-meta">2006 · Documental</div></div>
-<div onclick="openDetail('Cosmos','2014 · Documental','Universo.','https://image.tmdb.org/t/p/original/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg',false)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg')"></div><div class="grid-title">Cosmos</div><div class="grid-meta">2014 · Documental</div></div>
-</div></div>
-<div class="cat-pane" id="cat-telenovelas" style="display:none"><div class="grid">
-<div onclick="openDetail('La Casa de las Flores','2018 · Comedia','Familia.','https://image.tmdb.org/t/p/original/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg',true)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg')"></div><div class="grid-title">La Casa de las Flores</div><div class="grid-meta">2018 · Comedia</div></div>
-<div onclick="openDetail('Élite','2018 · Drama','Colegio.','https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',true)"><div class="grid-poster" style="background-image:url('https://image.tmdb.org/t/p/w500/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg')"></div><div class="grid-title">Élite</div><div class="grid-meta">2018 · Drama</div></div>
-</div></div>
+<div class="cat-pane" id="cat-peliculas"><div class="grid"></div></div>
+<div class="cat-pane" id="cat-series" style="display:none"><div class="grid"></div></div>
+<div class="cat-pane" id="cat-animes" style="display:none"><div class="grid"></div></div>
+<div class="cat-pane" id="cat-kdramas" style="display:none"><div class="grid"></div></div>
+<div class="cat-pane" id="cat-documentales" style="display:none"><div class="grid"></div></div>
+<div class="cat-pane" id="cat-telenovelas" style="display:none"><div class="grid"></div></div>
 </div>
 </div>
 
@@ -424,26 +484,10 @@ body{background:#000;font-family:'Inter',-apple-system,sans-serif;color:#fff;ove
 <div class="profile-handle" id="profileHandle">@usuario</div>
 <div class="profile-bio" id="profileBio" onclick="editBio()">Aún no tienes descripción. Toca para agregar una.</div>
 <div class="profile-stats-row">
-<div class="profile-stat">
-<svg class="profile-stat-icon" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
-<div class="profile-stat-num">42</div>
-<div class="profile-stat-label">Vistas</div>
-</div>
-<div class="profile-stat">
-<svg class="profile-stat-icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-<div class="profile-stat-num" id="statComments">0</div>
-<div class="profile-stat-label">Comentarios</div>
-</div>
-<div class="profile-stat">
-<svg class="profile-stat-icon" viewBox="0 0 24 24"><path d="M7 22V11M2 13v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7M7 11l4-9a3 3 0 0 1 3 3v3h6a2 2 0 0 1 2 2l-1 7"/></svg>
-<div class="profile-stat-num" id="statLikes">0</div>
-<div class="profile-stat-label">Likes</div>
-</div>
-<div class="profile-stat">
-<svg class="profile-stat-icon" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-<div class="profile-stat-num" id="statListChip">0</div>
-<div class="profile-stat-label">Mi Lista</div>
-</div>
+<div class="profile-stat"><svg class="profile-stat-icon" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg><div class="profile-stat-num">42</div><div class="profile-stat-label">Vistas</div></div>
+<div class="profile-stat"><svg class="profile-stat-icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><div class="profile-stat-num" id="statComments">0</div><div class="profile-stat-label">Comentarios</div></div>
+<div class="profile-stat"><svg class="profile-stat-icon" viewBox="0 0 24 24"><path d="M7 22V11M2 13v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7M7 11l4-9a3 3 0 0 1 3 3v3h6a2 2 0 0 1 2 2l-1 7"/></svg><div class="profile-stat-num" id="statLikes">0</div><div class="profile-stat-label">Likes</div></div>
+<div class="profile-stat"><svg class="profile-stat-icon" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg><div class="profile-stat-num" id="statListChip">0</div><div class="profile-stat-label">Mi Lista</div></div>
 </div>
 <div class="profile-tabs">
 <button class="profile-tab active" onclick="switchProfileTab('fav',this)">Favoritos</button>
@@ -451,28 +495,16 @@ body{background:#000;font-family:'Inter',-apple-system,sans-serif;color:#fff;ove
 <button class="profile-tab" onclick="switchProfileTab('res',this)">Reseñas</button>
 </div>
 <div id="profileTabFav">
-<div class="profile-section-title"><span class="star-icon">★</span> Favoritos<span class="see-all">3</span></div>
-<div class="fav-row" id="favRow">
-<div class="fav-poster" onclick="openDetail('The Last of Us','2023 · Drama','Joel.','https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',true)" style="background-image:url('https://image.tmdb.org/t/p/w300/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg')"></div>
-<div class="fav-poster" onclick="openDetail('The Batman','2022 · Acción','Batman.','https://image.tmdb.org/t/p/original/74xTEgt7R36Fpooo50r9T25onhq.jpg',false)" style="background-image:url('https://image.tmdb.org/t/p/w300/74xTEgt7R36Fpooo50r9T25onhq.jpg')"></div>
-<div class="fav-poster" onclick="openDetail('Wednesday','2022 · Misterio','Miércoles.','https://image.tmdb.org/t/p/original/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg',true)" style="background-image:url('https://image.tmdb.org/t/p/w300/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg')"></div>
-</div>
+<div class="profile-section-title"><span>★</span> Favoritos</div>
+<div class="fav-row" id="favRow"></div>
 </div>
 <div id="profileTabAct" style="display:none">
 <div class="profile-section-title">Actividad reciente</div>
-<div class="rating-card">
-<div class="rating-card-poster" style="background-image:url('https://image.tmdb.org/t/p/w300/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg')"></div>
-<div class="rating-card-info">
-<div class="rating-card-label">Última calificación</div>
-<div class="rating-card-title">The Last of Us</div>
-<div class="rating-card-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z" fill="#FFD700"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z" fill="#FFD700"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z" fill="#FFD700"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z" fill="#FFD700"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z" fill="#FFD700"/></svg></div>
-<div class="rating-card-time">Hace 2 horas</div>
-</div>
-</div>
+<div id="activityList"></div>
 </div>
 <div id="profileTabRes" style="display:none">
 <div class="profile-section-title">Mis reseñas</div>
-<div class="comment"><div class="comment-avatar">?</div><div><div class="comment-user">Tú</div><div class="comment-text">Sin reseñas todavía. Explora el catálogo y comparte tu opinión.</div></div></div>
+<div id="myReviewsList"></div>
 </div>
 </div>
 
@@ -526,8 +558,13 @@ body{background:#000;font-family:'Inter',-apple-system,sans-serif;color:#fff;ove
 <div class="related-grid" id="relatedGrid"></div>
 </div>
 
+<div class="screen" id="s-category">
+<div class="top-header"><h1 style="display:flex;align-items:center;gap:8px"><button class="back-inline" onclick="backFromCategory()">‹</button><span id="catTitle">Películas</span></h1></div>
+<div class="grid" id="catGrid" style="padding:0 22px 20px"></div>
+</div>
+
 <div class="screen" id="s-about">
-<div class="about-hero-big" style="background-image:url('https://i.ibb.co/qFnpmBRt/1791259237644.jpg')"></div>
+<div class="about-hero-big" style="background-image:url('https://i.ibb.co/ynKQMRq6/b78f8ee5dd6fadeb43bf49e02e4af4eb-2.jpg')"></div>
 <div class="about-stats-big">
 <div class="about-stat-big"><div class="about-stat-big-num">200K</div><div class="about-stat-big-label">Usuarios</div></div>
 <div class="about-stat-big"><div class="about-stat-big-num">+3K</div><div class="about-stat-big-label">Películas</div></div>
@@ -548,28 +585,31 @@ body{background:#000;font-family:'Inter',-apple-system,sans-serif;color:#fff;ove
 <button class="admin-tab" onclick="adminTab('users',this)">Usuarios</button>
 </div>
 <div id="adminAdd">
-<div class="form-group"><label class="form-label">Imagen (URL o archivo)</label><div class="img-preview" id="imgPreview">Vista previa</div><input type="text" class="form-input" id="imgUrl" placeholder="https://..." oninput="document.getElementById('imgPreview').style.backgroundImage='url('+this.value+')'"><label class="file-label">📁 Subir desde el celular<input type="file" accept="image/*" style="display:none" onchange="loadLocalImage(event)"></label></div>
-<div class="form-group"><label class="form-label">Nombre</label><input type="text" class="form-input" placeholder="Ej: The Last of Us"></div>
-<div class="form-group"><label class="form-label">Descripción</label><textarea class="form-input form-input-area" placeholder="Sinopsis..."></textarea></div>
+<div class="form-group"><label class="form-label">Orientación del contenido</label>
+<div class="orient-btns">
+<button class="orient-btn active" id="orientVert" onclick="setOrientation('vertical')"><svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/></svg> Vertical</button>
+<button class="orient-btn" id="orientHoriz" onclick="setOrientation('horizontal')"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="2"/></svg> Horizontal</button>
+</div></div>
+<div class="form-group"><label class="form-label">Imagen (URL o archivo)</label><div class="img-preview vertical" id="imgPreview">Vista previa</div><input type="text" class="form-input" id="imgUrl" placeholder="https://..." oninput="document.getElementById('imgPreview').style.backgroundImage='url('+this.value+')'"><label class="file-label">📁 Subir desde el celular<input type="file" accept="image/*" style="display:none" onchange="loadLocalImage(event)"></label></div>
+<div class="form-group"><label class="form-label">Nombre</label><input type="text" class="form-input" id="admName" placeholder="Ej: The Last of Us"></div>
+<div class="form-group"><label class="form-label">Descripción</label><textarea class="form-input form-input-area" id="admDesc" placeholder="Sinopsis..."></textarea></div>
 <div class="form-group"><label class="form-label">Links de video (Telegram)</label>
-<div class="link-group"><span class="link-lang">Latino</span><input type="text" class="link-input" placeholder="https://t.me/tucanal/123"></div>
-<div class="link-group"><span class="link-lang">Inglés</span><input type="text" class="link-input" placeholder="https://t.me/tucanal/123"></div>
-<div class="link-group"><span class="link-lang">Castellano</span><input type="text" class="link-input" placeholder="https://t.me/tucanal/123"></div>
+<div class="link-group"><span class="link-lang">Latino</span><input type="text" class="link-input" id="admLat" placeholder="https://t.me/tucanal/123"></div>
+<div class="link-group"><span class="link-lang">Inglés</span><input type="text" class="link-input" id="admIng" placeholder="https://t.me/tucanal/123"></div>
+<div class="link-group"><span class="link-lang">Castellano</span><input type="text" class="link-input" id="admCas" placeholder="https://t.me/tucanal/123"></div>
 </div>
 <div class="form-group"><label class="form-label">Categoría</label>
 <div class="cat-btns">
-<button class="cat-btn active">Película</button>
-<button class="cat-btn">Serie</button>
-<button class="cat-btn">Anime</button>
-<button class="cat-btn">Kdrama</button>
-<button class="cat-btn">Documental</button>
-<button class="cat-btn">Telenovela</button>
+<button class="cat-btn active" onclick="pickAdminCat(this,'peliculas')">Película</button>
+<button class="cat-btn" onclick="pickAdminCat(this,'series')">Serie</button>
+<button class="cat-btn" onclick="pickAdminCat(this,'animes')">Anime</button>
+<button class="cat-btn" onclick="pickAdminCat(this,'kdramas')">Kdrama</button>
+<button class="cat-btn" onclick="pickAdminCat(this,'documentales')">Documental</button>
+<button class="cat-btn" onclick="pickAdminCat(this,'telenovelas')">Telenovela</button>
 </div>
 </div>
 </div>
-<div id="adminUsers" style="display:none">
-<div id="adminUserList"></div>
-</div>
+<div id="adminUsers" style="display:none"><div id="adminUserList"></div></div>
 <div class="admin-publish"><button class="btn-publish" onclick="publish()">Publicar</button></div>
 </div>
 
@@ -579,6 +619,16 @@ body{background:#000;font-family:'Inter',-apple-system,sans-serif;color:#fff;ove
 <div class="modal-sub" id="modalSub">Elige una opción para guardar</div>
 <div id="modalOptions"></div>
 <button class="modal-cancel" onclick="closeModal()">Cancelar</button>
+</div>
+</div>
+
+<div class="modal-overlay" id="ratingModal">
+<div class="modal-sheet">
+<div class="modal-title" id="ratingModalTitle">⭐ 5 estrellas</div>
+<div class="modal-sub" id="ratingModalQuestion">¿Por qué consideras que merece 5 estrellas?</div>
+<textarea id="ratingModalTextarea" class="form-input form-input-area" placeholder="Cuéntanos tu opinión..." style="margin-bottom:14px"></textarea>
+<button class="btn-publish" style="border-radius:14px;margin-bottom:8px" onclick="submitRating()">Publicar reseña</button>
+<button class="modal-cancel" onclick="document.getElementById('ratingModal').classList.remove('active')">Cancelar</button>
 </div>
 </div>
 
@@ -630,34 +680,45 @@ var OWNER_NAME='Tangamiaudapio';
 var OWNER_CODE='234578';
 var USER_CODE='456050';
 var HERO_ITEMS=[
-{title:'The Last of Us',year:'Ganador 2026',award:'Premios Emmy®',img:'https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',cat:'Drama',dur:'Serie'},
-{title:'The Batman',year:'Nominado 2022',award:'Premios Oscar®',img:'https://image.tmdb.org/t/p/original/74xTEgt7R36Fpooo50r9T25onhq.jpg',cat:'Acción',dur:'2h 56min'},
-{title:'White Lotus',year:'Ganador 2023',award:'Premios Emmy®',img:'https://image.tmdb.org/t/p/original/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg',cat:'Comedia',dur:'Serie'},
-{title:'Oppenheimer',year:'Ganador 2024',award:'Premios Oscar®',img:'https://image.tmdb.org/t/p/original/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg',cat:'Drama',dur:'3h 0min'}
+{title:'The Last of Us',year:'Ganador 2026',award:'Premios Emmy®',img:'https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',cat:'Serie de TV',genre:'Drama',dur:'Serie'},
+{title:'The Batman',year:'Nominado 2022',award:'Premios Oscar®',img:'https://image.tmdb.org/t/p/original/74xTEgt7R36Fpooo50r9T25onhq.jpg',cat:'Película',genre:'Acción',dur:'2h 56min'},
+{title:'White Lotus',year:'Ganador 2023',award:'Premios Emmy®',img:'https://image.tmdb.org/t/p/original/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg',cat:'Serie de TV',genre:'Comedia',dur:'Serie'},
+{title:'Oppenheimer',year:'Ganador 2024',award:'Premios Oscar®',img:'https://image.tmdb.org/t/p/original/8Vt6mWEReuy4Of61Lnj5XJ704m8.jpg',cat:'Película',genre:'Drama',dur:'3h 0min'}
 ];
 var heroIdx=0;
 var ALL_ITEMS=[
-{title:'The Last of Us',meta:'2023 · Drama',img:'https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',syn:'Joel es contratado para sacar a Ellie.',isSerie:true},
-{title:'The Batman',meta:'2022 · Acción',img:'https://image.tmdb.org/t/p/original/74xTEgt7R36Fpooo50r9T25onhq.jpg',syn:'Batman investiga.',isSerie:false},
-{title:'White Lotus',meta:'2021 · Comedia',img:'https://image.tmdb.org/t/p/original/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg',syn:'Vacaciones.',isSerie:true},
-{title:'Wednesday',meta:'2022 · Misterio',img:'https://image.tmdb.org/t/p/original/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg',syn:'Miércoles.',isSerie:true},
-{title:'Better Call Saul',meta:'2015 · Drama',img:'https://image.tmdb.org/t/p/original/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg',syn:'Jimmy McGill.',isSerie:true},
-{title:'Oppenheimer',meta:'2023 · Drama',img:'https://image.tmdb.org/t/p/original/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg',syn:'Oppenheimer.',isSerie:false},
-{title:'Dune',meta:'2021 · Sci-Fi',img:'https://image.tmdb.org/t/p/original/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg',syn:'Paul Atreides.',isSerie:false},
-{title:'Interstellar',meta:'2014 · Sci-Fi',img:'https://image.tmdb.org/t/p/original/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg',syn:'Agujero de gusano.',isSerie:false},
-{title:'Joker',meta:'2019 · Drama',img:'https://image.tmdb.org/t/p/original/saHP97rTPS5eLmrLQEcANmKrsFl.jpg',syn:'Arthur Fleck.',isSerie:false},
-{title:'One Piece',meta:'1999 · Animación',img:'https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',syn:'Luffy.',isSerie:true},
-{title:'Attack on Titan',meta:'2013 · Animación',img:'https://image.tmdb.org/t/p/original/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg',syn:'Titanes.',isSerie:true},
-{title:'Squid Game',meta:'2021 · Drama',img:'https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',syn:'Juegos.',isSerie:true},
-{title:'Vincenzo',meta:'2021 · Crimen',img:'https://image.tmdb.org/t/p/original/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg',syn:'Mafioso.',isSerie:true},
-{title:'Planet Earth',meta:'2006 · Documental',img:'https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',syn:'Vida.',isSerie:false},
-{title:'Cosmos',meta:'2014 · Documental',img:'https://image.tmdb.org/t/p/original/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg',syn:'Universo.',isSerie:false}
+{title:'The Last of Us',meta:'2023 · Drama',img:'https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',syn:'Joel es contratado para sacar a Ellie de una zona de cuarentena, pero lo que comienza como un simple trabajo se transforma en un viaje brutal y emotivo por unos Estados Unidos post-apocalípticos.',isSerie:true,cat:'series'},
+{title:'The Batman',meta:'2022 · Acción',img:'https://image.tmdb.org/t/p/original/74xTEgt7R36Fpooo50r9T25onhq.jpg',syn:'Batman investiga una serie de crímenes cometidos por el Enigma, mientras descubre la corrupción que envuelve Gotham.',isSerie:false,cat:'peliculas'},
+{title:'White Lotus',meta:'2021 · Comedia',img:'https://image.tmdb.org/t/p/original/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg',syn:'Vacaciones de lujo que esconden secretos, tensiones y conflictos entre huéspedes y empleados de un resort.',isSerie:true,cat:'series'},
+{title:'Wednesday',meta:'2022 · Misterio',img:'https://image.tmdb.org/t/p/original/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg',syn:'Miércoles Addams investiga una ola de crímenes sobrenaturales en su nueva academia.',isSerie:true,cat:'series'},
+{title:'Better Call Saul',meta:'2015 · Drama',img:'https://image.tmdb.org/t/p/original/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg',syn:'Jimmy McGill se transforma en el abogado Saul Goodman, un viaje lleno de decisiones morales.',isSerie:true,cat:'series'},
+{title:'Oppenheimer',meta:'2023 · Drama',img:'https://image.tmdb.org/t/p/original/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg',syn:'La historia del científico que creó la bomba atómica y cargó con las consecuencias.',isSerie:false,cat:'peliculas'},
+{title:'Dune',meta:'2021 · Sci-Fi',img:'https://image.tmdb.org/t/p/original/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg',syn:'Paul Atreides debe cumplir su destino en el planeta más peligroso del universo.',isSerie:false,cat:'peliculas'},
+{title:'Interstellar',meta:'2014 · Sci-Fi',img:'https://image.tmdb.org/t/p/original/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg',syn:'Un grupo de astronautas cruza un agujero de gusano para salvar a la humanidad.',isSerie:false,cat:'peliculas'},
+{title:'Joker',meta:'2019 · Drama',img:'https://image.tmdb.org/t/p/original/saHP97rTPS5eLmrLQEcANmKrsFl.jpg',syn:'Arthur Fleck, un comediante fracasado, se transforma en el Joker.',isSerie:false,cat:'peliculas'},
+{title:'One Piece',meta:'1999 · Animación',img:'https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',syn:'Luffy y su tripulación buscan el tesoro legendario One Piece.',isSerie:true,cat:'animes'},
+{title:'Attack on Titan',meta:'2013 · Animación',img:'https://image.tmdb.org/t/p/original/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg',syn:'La humanidad lucha por sobrevivir contra titanes gigantes.',isSerie:true,cat:'animes'},
+{title:'Squid Game',meta:'2021 · Drama',img:'https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',syn:'Juegos mortales donde los participantes arriesgan la vida por dinero.',isSerie:true,cat:'kdramas'},
+{title:'Vincenzo',meta:'2021 · Crimen',img:'https://image.tmdb.org/t/p/original/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg',syn:'Un mafioso italiano regresa a Corea para enfrentar a un conglomerado.',isSerie:true,cat:'kdramas'},
+{title:'Planet Earth',meta:'2006 · Documental',img:'https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',syn:'Un recorrido visual por la vida salvaje más espectacular del planeta.',isSerie:false,cat:'documentales'},
+{title:'Cosmos',meta:'2014 · Documental',img:'https://image.tmdb.org/t/p/original/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg',syn:'Un viaje por el universo, la ciencia y la historia del conocimiento humano.',isSerie:false,cat:'documentales'},
+{title:'La Casa de las Flores',meta:'2018 · Comedia',img:'https://image.tmdb.org/t/p/original/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg',syn:'Una familia adinerada esconde oscuros secretos tras la muerte del patriarca.',isSerie:true,cat:'telenovelas'},
+{title:'Élite',meta:'2018 · Drama',img:'https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',syn:'Jóvenes de clase alta y becados conviven en un colegio con un asesinato de fondo.',isSerie:true,cat:'telenovelas'}
+];
+var NEWS=[
+{tag:'Estreno',title:'"The Last of Us" rompe récord de audiencia global',img:'https://image.tmdb.org/t/p/w500/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg'},
+{tag:'Emmy 2026',title:'Estos son los nominados a los Emmy de este año',img:'https://image.tmdb.org/t/p/w500/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg'},
+{tag:'Tráiler',title:'Nuevo tráiler oficial de "Dune: Parte 3"',img:'https://image.tmdb.org/t/p/w500/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg'},
+{tag:'Cine',title:'Oppenheimer ya está disponible en streaming',img:'https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg'}
 ];
 var myList=[];
 var currentDetail=null;
 var currentFilter='all';
 var commentsByTitle={};
 var usuariosRegistrados={};
+var myRatings={};
+var adminPosterOrientation='vertical';
+var adminCurrentCat='peliculas';
 
 function enterApp(){
 var n=document.getElementById('nameInput').value.trim();
@@ -671,18 +732,17 @@ userName=n;
 userCode=c;
 usuariosRegistrados[n.toLowerCase()]={name:n,owner:isOwner,admin:isAdmin};
 var ini=n.substring(0,2).toUpperCase();
-['userAvatar','userAvatar2','userAvatar3','userAvatar4','userAvatar6','profileAvatar'].forEach(function(id){var el=document.getElementById(id);if(el)el.innerText=ini;});
+['userAvatar','userAvatar2','userAvatar4','userAvatar6','userAvatarD','profileAvatar'].forEach(function(id){var el=document.getElementById(id);if(el)el.innerText=ini;});
 document.getElementById('profileName').innerText=n;
-var handle=document.getElementById('profileHandle');
-if(handle)handle.innerText='@'+n.toLowerCase().replace(/\s+/g,'');
+document.getElementById('profileHandle').innerText='@'+n.toLowerCase().replace(/\s+/g,'');
 document.getElementById('welcomeScreen').style.display='none';
 if(isAdmin){
 document.querySelectorAll('.admin-btn').forEach(function(b){b.style.display='flex';});
 document.querySelectorAll('.avatar').forEach(function(a){a.classList.add('verified');});
-var vb=document.getElementById('verifiedBadge');
-if(vb)vb.style.display='inline-flex';
+document.getElementById('verifiedBadge').style.display='inline-flex';
 }
 initHero();
+buildHomeSections();
 }
 ['nameInput','codeInput'].forEach(function(id){var el=document.getElementById(id);el.addEventListener('keypress',function(e){if(e.key==='Enter')enterApp();});});
 
@@ -700,12 +760,12 @@ setHero(0);
 function setHero(i){
 heroIdx=i;
 var item=HERO_ITEMS[i];
-var bg=document.getElementById('heroBg');
-bg.style.backgroundImage="url('"+item.img+"')";
+document.getElementById('heroBg').style.backgroundImage="url('"+item.img+"')";
 document.getElementById('heroYear').innerText=item.year;
 document.getElementById('heroAward').innerText=item.award;
-var dots=document.querySelectorAll('#heroDots span');
-dots.forEach(function(d,idx){d.classList.toggle('active',idx===i);});
+document.getElementById('heroCat').innerText=item.cat;
+document.getElementById('heroGenre').innerText=item.genre;
+document.querySelectorAll('#heroDots span').forEach(function(d,idx){d.classList.toggle('active',idx===i);});
 updatePlusButtons();
 }
 var heroStartX=0;
@@ -719,6 +779,7 @@ if(dx<-50){setHero((heroIdx+1)%HERO_ITEMS.length);}
 else if(dx>50){setHero((heroIdx-1+HERO_ITEMS.length)%HERO_ITEMS.length);}
 });
 });
+
 function go(id,btn){
 lastScreen=id;
 document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
@@ -726,9 +787,15 @@ var t=document.getElementById('s-'+id);
 if(t)t.classList.add('active');
 document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');});
 if(btn&&btn.classList.contains('nav-item'))btn.classList.add('active');
+document.querySelectorAll('.desktop-nav-link').forEach(function(n){
+n.classList.toggle('active',n.getAttribute('data-nav')===id);
+});
 if(id==='list')renderList();
+if(id==='explore')renderExplore();
+if(id==='profile')renderProfile();
 window.scrollTo(0,0);
 }
+
 function toggleSearch(){
 var box=document.getElementById('searchBox');
 var home=document.getElementById('homeContent');
@@ -742,9 +809,9 @@ q=q.toLowerCase().trim();
 var res=document.getElementById('searchResults');
 if(!q){res.innerHTML='';return;}
 var m=ALL_ITEMS.filter(function(it){return it.title.toLowerCase().includes(q)||it.meta.toLowerCase().includes(q);});
-if(m.length===0){res.innerHTML='<div class="search-empty"><p>🔍</p><p>Sin resultados</p></div>';return;}
-var h='<div style="padding:0 22px"><div class="search-section-title">Resultados ('+m.length+')</div><div class="grid" style="padding:0">';
-m.forEach(function(x){h+='<div onclick="openDetail(\''+x.title+'\',\''+x.meta+'\',\''+x.syn+'\',\''+x.img+'\','+x.isSerie+')"><div class="grid-poster" style="background-image:url(\''+x.img+'\')"></div><div class="grid-title">'+x.title+'</div><div class="grid-meta">'+x.meta+'</div></div>';});
+if(m.length===0){res.innerHTML='<div style="text-align:center;padding:60px 20px;color:#636366">🔍 Sin resultados</div>';return;}
+var h='<div style="padding:0 22px"><div style="font-size:14px;font-weight:700;margin-bottom:14px">Resultados ('+m.length+')</div><div class="grid" style="padding:0">';
+m.forEach(function(x){h+='<div onclick="openDetail(\''+x.title+'\',\''+x.meta+'\',\''+x.syn+'\',\''+x.img+'\','+x.isSerie+')" style="cursor:pointer"><div class="grid-poster" style="background-image:url(\''+x.img+'\')"></div><div class="grid-title">'+x.title+'</div><div class="grid-meta">'+x.meta+'</div></div>';});
 res.innerHTML=h+'</div></div>';
 }
 function doSearchEx(q){
@@ -754,10 +821,71 @@ var cont=document.getElementById('exploreContent');
 if(!q){res.innerHTML='';res.style.display='none';cont.style.display='block';return;}
 cont.style.display='none';res.style.display='block';
 var m=ALL_ITEMS.filter(function(it){return it.title.toLowerCase().includes(q)||it.meta.toLowerCase().includes(q);});
-if(m.length===0){res.innerHTML='<div class="search-empty"><p>🔍</p><p>Sin resultados</p></div>';return;}
-var h='<div style="padding:0 22px"><div class="search-section-title">Resultados ('+m.length+')</div><div class="grid" style="padding:0">';
-m.forEach(function(x){h+='<div onclick="openDetail(\''+x.title+'\',\''+x.meta+'\',\''+x.syn+'\',\''+x.img+'\','+x.isSerie+')"><div class="grid-poster" style="background-image:url(\''+x.img+'\')"></div><div class="grid-title">'+x.title+'</div><div class="grid-meta">'+x.meta+'</div></div>';});
+if(m.length===0){res.innerHTML='<div style="text-align:center;padding:60px 20px;color:#636366">🔍 Sin resultados</div>';return;}
+var h='<div style="padding:0 22px"><div style="font-size:14px;font-weight:700;margin-bottom:14px">Resultados ('+m.length+')</div><div class="grid" style="padding:0">';
+m.forEach(function(x){h+='<div onclick="openDetail(\''+x.title+'\',\''+x.meta+'\',\''+x.syn+'\',\''+x.img+'\','+x.isSerie+')" style="cursor:pointer"><div class="grid-poster" style="background-image:url(\''+x.img+'\')"></div><div class="grid-title">'+x.title+'</div><div class="grid-meta">'+x.meta+'</div></div>';});
 res.innerHTML=h+'</div></div>';
+}
+
+function buildHomeSections(){
+var byCat=function(c){return ALL_ITEMS.filter(function(x){return x.cat===c;});};
+var top5=ALL_ITEMS.slice(0,5);
+var h='';
+top5.forEach(function(x,i){
+h+='<div class="chart-card" onclick="openDetail(\''+x.title+'\',\''+x.meta+'\',\''+x.syn+'\',\''+x.img+'\','+x.isSerie+')"><div class="chart-number">'+(i+1)+'</div><div class="chart-poster" style="background-image:url(\''+x.img.replace('/original/','/w500/')+'\')"></div></div>';
+});
+document.getElementById('carousel-top5').innerHTML=h;
+var nh='';
+NEWS.forEach(function(n){nh+='<div class="news-mini"><div class="news-mini-img" style="background-image:url(\''+n.img+'\')"></div><div class="news-mini-body"><div class="news-mini-tag">'+n.tag+'</div><div class="news-mini-title">'+n.title+'</div></div></div>';});
+document.getElementById('carousel-news').innerHTML=nh;
+var eh='';
+ALL_ITEMS.slice(-4).forEach(function(x){eh+='<div class="poster-wide" onclick="openDetail(\''+x.title+'\',\''+x.meta+'\',\''+x.syn+'\',\''+x.img+'\','+x.isSerie+')" style="background-image:url(\''+x.img.replace('/original/','/w780/')+'\')"></div>';});
+document.getElementById('carousel-estrenos').innerHTML=eh;
+['peliculas','series','animes','kdramas','telenovelas','documentales'].forEach(function(c){
+var arr=byCat(c);
+var el=document.getElementById('carousel-'+c);
+if(!el)return;
+if(arr.length===0){el.innerHTML='<div style="color:#636366;font-size:13px;padding:14px 4px">Nada por aquí todavía.</div>';return;}
+var ch='';
+arr.forEach(function(x){ch+='<div class="poster-wide" onclick="openDetail(\''+x.title+'\',\''+x.meta+'\',\''+x.syn+'\',\''+x.img+'\','+x.isSerie+')" style="background-image:url(\''+x.img.replace('/original/','/w780/')+'\')"></div>';});
+el.innerHTML=ch;
+});
+}
+
+var catLastScreen='home';
+function openCategory(cat){
+catLastScreen=lastScreen;
+document.getElementById('catTitle').innerText={peliculas:'Películas',series:'Series',animes:'Animes',kdramas:'Kdramas',telenovelas:'Telenovelas',documentales:'Documentales',estrenos:'Estrenos',top5:'Top 5 Semanal',news:'Noticias'}[cat]||'Categoría';
+var grid=document.getElementById('catGrid');
+if(cat==='news'){
+grid.style.gridTemplateColumns='1fr';
+var nh='';
+NEWS.forEach(function(n){nh+='<div class="news-mini" style="flex:initial;width:100%"><div class="news-mini-img" style="height:200px;background-image:url(\''+n.img+'\')"></div><div class="news-mini-body"><div class="news-mini-tag">'+n.tag+'</div><div class="news-mini-title" style="font-size:16px">'+n.title+'</div></div></div>';});
+grid.innerHTML=nh;
+} else if(cat==='top5'){
+grid.style.gridTemplateColumns='';
+grid.innerHTML=ALL_ITEMS.slice(0,5).map(function(x){return '<div onclick="openDetail(\''+x.title+'\',\''+x.meta+'\',\''+x.syn+'\',\''+x.img+'\','+x.isSerie+')" style="cursor:pointer"><div class="grid-poster" style="background-image:url(\''+x.img+'\')"></div><div class="grid-title">'+x.title+'</div><div class="grid-meta">'+x.meta+'</div></div>';}).join('');
+} else if(cat==='estrenos'){
+grid.style.gridTemplateColumns='';
+grid.innerHTML=ALL_ITEMS.slice(-4).map(function(x){return '<div onclick="openDetail(\''+x.title+'\',\''+x.meta+'\',\''+x.syn+'\',\''+x.img+'\','+x.isSerie+')" style="cursor:pointer"><div class="grid-poster" style="background-image:url(\''+x.img+'\')"></div><div class="grid-title">'+x.title+'</div><div class="grid-meta">'+x.meta+'</div></div>';}).join('');
+} else {
+grid.style.gridTemplateColumns='';
+var arr=ALL_ITEMS.filter(function(x){return x.cat===cat;});
+grid.innerHTML=arr.length?arr.map(function(x){return '<div onclick="openDetail(\''+x.title+'\',\''+x.meta+'\',\''+x.syn+'\',\''+x.img+'\','+x.isSerie+')" style="cursor:pointer"><div class="grid-poster" style="background-image:url(\''+x.img+'\')"></div><div class="grid-title">'+x.title+'</div><div class="grid-meta">'+x.meta+'</div></div>';}).join(''):'<div style="grid-column:1/-1;text-align:center;color:#636366;padding:60px 20px">Sin contenido en esta categoría aún.</div>';
+}
+document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+document.getElementById('s-category').classList.add('active');
+window.scrollTo(0,0);
+}
+function backFromCategory(){go(catLastScreen,null);}
+
+function renderExplore(){
+['peliculas','series','animes','kdramas','documentales','telenovelas'].forEach(function(c){
+var pane=document.querySelector('#cat-'+c+' .grid');
+if(!pane)return;
+var arr=ALL_ITEMS.filter(function(x){return x.cat===c;});
+pane.innerHTML=arr.map(function(x){return '<div onclick="openDetail(\''+x.title+'\',\''+x.meta+'\',\''+x.syn+'\',\''+x.img+'\','+x.isSerie+')" style="cursor:pointer"><div class="grid-poster" style="background-image:url(\''+x.img+'\')"></div><div class="grid-title">'+x.title+'</div><div class="grid-meta">'+x.meta+'</div></div>';}).join('');
+});
 }
 function switchCat(cat,btn){
 document.querySelectorAll('.cat-pane').forEach(function(p){p.style.display='none';});
@@ -765,7 +893,6 @@ var t=document.getElementById('cat-'+cat);
 if(t)t.style.display='block';
 document.querySelectorAll('.tabs .tab').forEach(function(x){x.classList.remove('active');});
 btn.classList.add('active');
-window.scrollTo(0,0);
 }
 function pickGenre(btn){document.querySelectorAll('.genre').forEach(function(g){g.classList.remove('active');});btn.classList.add('active');}
 function switchSeason(id,btn){
@@ -775,6 +902,7 @@ if(t)t.style.display='block';
 document.querySelectorAll('.season-tab').forEach(function(x){x.classList.remove('active');});
 btn.classList.add('active');
 }
+
 function openDetail(title,meta,syn,img,isSerie){
 currentDetail={title:title,meta:meta,syn:syn,img:img,isSerie:isSerie};
 document.getElementById('d-title').innerText=title;
@@ -784,12 +912,12 @@ var parts=meta.split('·').map(function(s){return s.trim();});
 document.getElementById('d-year').innerText=parts[0]||'2024';
 document.getElementById('d-cat').innerText=parts[1]||'Drama';
 document.getElementById('d-dur').innerText=parts[2]||(isSerie?'Serie':'1h 45min');
-var r=4+(title.length%10)/10;
+var r=myRatings[title]||(4+(title.length%10)/10);
 if(r>5)r=5;
 document.getElementById('d-rating-val').innerText=r.toFixed(1);
 document.getElementById('d-rating-cnt').innerText=Math.floor(50+title.length*17)+' valoraciones';
 var stars='';
-for(var i=1;i<=5;i++){var fill=i<=Math.round(r)?'#FFD700':'#555';stars+='<svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z" fill="'+fill+'"/></svg>';}
+for(var i=1;i<=5;i++){var fill=i<=Math.round(r)?'#FFD700':'#555';stars+='<svg onclick="rateItem('+i+')" style="cursor:pointer" viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z" fill="'+fill+'"/></svg>';}
 document.getElementById('d-stars').innerHTML=stars;
 document.getElementById('episodesSection').style.display=isSerie?'block':'none';
 var others=ALL_ITEMS.filter(function(x){return x.title!==title;}).slice(0,6);
@@ -810,9 +938,7 @@ var arr=commentsByTitle[title]||[
 ];
 if(!commentsByTitle[title])commentsByTitle[title]=arr;
 var h='';
-arr.forEach(function(c){
-h+='<div class="comment"><div class="comment-avatar">'+c.user.substring(0,2).toUpperCase()+'</div><div><div class="comment-user">'+c.user+'</div><div class="comment-text">'+c.text+'</div></div></div>';
-});
+arr.forEach(function(c){h+='<div class="comment"><div class="comment-avatar">'+c.user.substring(0,2).toUpperCase()+'</div><div><div class="comment-user">'+c.user+'</div><div class="comment-text">'+c.text+'</div></div></div>';});
 document.getElementById('commentList').innerHTML=h;
 }
 function addComment(){
@@ -825,9 +951,29 @@ inp.value='';
 renderComments(currentDetail.title);
 updateCounters();
 }
-</script>
 
-<script>
+var _pendingRating=0;
+function rateItem(stars){
+_pendingRating=stars;
+document.getElementById('ratingModalTitle').innerText='⭐ '+stars+' estrella'+(stars>1?'s':'');
+document.getElementById('ratingModalQuestion').innerText='¿Por qué consideras que merece '+stars+' estrella'+(stars>1?'s':'')+'?';
+document.getElementById('ratingModalTextarea').value='';
+document.getElementById('ratingModal').classList.add('active');
+}
+function submitRating(){
+var txt=document.getElementById('ratingModalTextarea').value.trim();
+if(!txt){alert('Escribe por qué diste esa calificación');return;}
+if(currentDetail){
+myRatings[currentDetail.title]=_pendingRating;
+if(!commentsByTitle[currentDetail.title])commentsByTitle[currentDetail.title]=[];
+commentsByTitle[currentDetail.title].unshift({user:userName||'Tú',text:'⭐ '+_pendingRating+'/5 — '+txt});
+renderComments(currentDetail.title);
+updateCounters();
+openDetail(currentDetail.title,currentDetail.meta,currentDetail.syn,currentDetail.img,currentDetail.isSerie);
+}
+document.getElementById('ratingModal').classList.remove('active');
+}
+
 function askSaveOption(){
 if(!currentDetail)return;
 document.getElementById('modalTitle').innerText=currentDetail.title;
@@ -837,9 +983,7 @@ h+='<div class="modal-option" onclick="saveWithStatus(\'later\')"><div class="mo
 h+='<div class="modal-option" onclick="saveWithStatus(\'continue\')"><div class="modal-option-icon"><svg viewBox="0 0 24 24"><polygon points="6 4 20 12 6 20"/></svg></div><div class="modal-option-info"><div class="modal-option-title">Ya lo estoy viendo</div><div class="modal-option-desc">Continuar después</div></div></div>';
 var found=null;
 for(var i=0;i<myList.length;i++){if(myList[i].title===currentDetail.title){found=myList[i];break;}}
-if(found){
-h+='<div class="modal-option" onclick="removeFromList()"><div class="modal-option-icon"><svg viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></div><div class="modal-option-info"><div class="modal-option-title" style="color:#ff453a">Quitar de Mi Lista</div><div class="modal-option-desc">Ya no la quieres guardar</div></div></div>';
-}
+if(found){h+='<div class="modal-option" onclick="removeFromList()"><div class="modal-option-icon"><svg viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></div><div class="modal-option-info"><div class="modal-option-title" style="color:#ff453a">Quitar de Mi Lista</div><div class="modal-option-desc">Ya no la quieres guardar</div></div></div>';}
 document.getElementById('modalOptions').innerHTML=h;
 document.getElementById('modalOverlay').classList.add('active');
 }
@@ -862,6 +1006,11 @@ updatePlusButtons();
 updateCounters();
 }
 function closeModal(){document.getElementById('modalOverlay').classList.remove('active');}
+function toggleSaveHero(){
+var heroTitle=HERO_ITEMS[heroIdx].title;
+var heroItem=ALL_ITEMS.filter(function(x){return x.title===heroTitle;})[0];
+if(heroItem){currentDetail=heroItem;askSaveOption();}
+  }
 
 function changeAvatar(){
 var input=document.createElement('input');
@@ -889,6 +1038,22 @@ btn.classList.add('active');
 document.getElementById('profileTabFav').style.display=tab==='fav'?'block':'none';
 document.getElementById('profileTabAct').style.display=tab==='act'?'block':'none';
 document.getElementById('profileTabRes').style.display=tab==='res'?'block':'none';
+}
+function renderProfile(){
+var favRow=document.getElementById('favRow');
+var favs=ALL_ITEMS.slice(0,6);
+favRow.innerHTML=favs.map(function(x){return '<div class="fav-poster" onclick="openDetail(\''+x.title+'\',\''+x.meta+'\',\''+x.syn+'\',\''+x.img+'\','+x.isSerie+')" style="background-image:url(\''+x.img.replace('/original/','/w300/')+'\')"></div>';}).join('');
+var act=document.getElementById('activityList');
+var first=ALL_ITEMS[0];
+act.innerHTML='<div class="rating-card"><div class="rating-card-poster" style="background-image:url(\''+first.img.replace('/original/','/w300/')+'\')"></div><div class="rating-card-info"><div class="rating-card-label">Última calificación</div><div class="rating-card-title">'+first.title+'</div><div class="rating-card-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z" fill="#FFD700"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z" fill="#FFD700"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z" fill="#FFD700"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z" fill="#FFD700"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z" fill="#555"/></svg></div><div class="rating-card-time">Hace 2 horas</div></div></div>';
+var res=document.getElementById('myReviewsList');
+var h='';
+for(var k in commentsByTitle){
+commentsByTitle[k].forEach(function(c){
+if(c.user===userName||c.user==='Tú'){h+='<div class="comment"><div class="comment-avatar">'+c.user.substring(0,2).toUpperCase()+'</div><div><div class="comment-user">'+k+'</div><div class="comment-text">'+c.text+'</div></div></div>';}
+});
+}
+res.innerHTML=h||'<div class="comment"><div class="comment-avatar">?</div><div><div class="comment-user">Tú</div><div class="comment-text">Sin reseñas todavía. Explora el catálogo y comparte tu opinión.</div></div></div>';
 }
 function updateCounters(){
 var totalComments=0;
@@ -922,21 +1087,10 @@ if(currentFilter!=='all'){filtered=myList.filter(function(x){return x.status===c
 if(filtered.length===0){empty.style.display='block';grid.style.display='none';return;}
 empty.style.display='none';
 grid.style.display='grid';
-var h='';
-filtered.forEach(function(x){
-h+='<div onclick="openDetail(\''+x.title+'\',\''+x.meta+'\',\''+x.syn+'\',\''+x.img+'\','+x.isSerie+')"><div class="grid-poster" style="background-image:url(\''+x.img+'\')"></div><div class="grid-title">'+x.title+'</div><div class="grid-meta">'+x.meta+'</div></div>';
-});
-grid.innerHTML=h;
+grid.innerHTML=filtered.map(function(x){return '<div onclick="openDetail(\''+x.title+'\',\''+x.meta+'\',\''+x.syn+'\',\''+x.img+'\','+x.isSerie+')" style="cursor:pointer"><div class="grid-poster" style="background-image:url(\''+x.img+'\')"></div><div class="grid-title">'+x.title+'</div><div class="grid-meta">'+x.meta+'</div></div>';}).join('');
 }
-function backFromDetail(){
-go(lastScreen,null);
-document.querySelectorAll('.nav-item').forEach(function(n,i){
-if(i===0&&lastScreen==='home')n.classList.add('active');
-if(i===1&&lastScreen==='explore')n.classList.add('active');
-if(i===3&&lastScreen==='list')n.classList.add('active');
-if(i===4&&lastScreen==='profile')n.classList.add('active');
-});
-}
+function backFromDetail(){go(lastScreen,null);}
+
 function openAdmin(){
 if(!isAdmin)return;
 document.getElementById('adminScreen').style.display='block';
@@ -959,7 +1113,7 @@ var u=usuariosRegistrados[key];
 var roleClass=u.owner?'owner':(u.admin?'admin':'');
 var roleText=u.owner?'Propietario':(u.admin?'Administrador':'Usuario');
 var menuBtn=u.owner?'':'<button class="u-menu-btn" onclick="toggleUserMenu(event,\''+key+'\')">⋮</button>';
-var menu=u.owner?'':'<div class="u-menu" id="menu-'+key+'"><div class="u-menu-item" onclick="makeAdmin(\''+key+'\')"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z"/></svg>Hacer Administrador</div><div class="u-menu-item" onclick="removeAdmin(\''+key+'\')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 12h6"/></svg>Quitar Administrador</div><div class="u-menu-item danger" onclick="kickUser(\''+key+'\')"><svg viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>Expulsar</div></div>';
+var menu=u.owner?'':'<div class="u-menu" id="menu-'+key+'"><div class="u-menu-item" onclick="makeAdmin(\''+key+'\')">Hacer Administrador</div><div class="u-menu-item" onclick="removeAdmin(\''+key+'\')">Quitar Administrador</div><div class="u-menu-item danger" onclick="kickUser(\''+key+'\')">Expulsar</div></div>';
 h+='<div class="user-row"><div class="u-info"><div class="u-avatar">'+u.name.substring(0,2).toUpperCase()+'</div><div><div class="u-name">'+u.name+'</div><div class="u-role '+roleClass+'">'+roleText+'</div></div></div>'+menuBtn+menu+'</div>';
 }
 list.innerHTML=h;
@@ -969,32 +1123,55 @@ e.stopPropagation();
 document.querySelectorAll('.u-menu').forEach(function(m){if(m.id!=='menu-'+key)m.classList.remove('active');});
 document.getElementById('menu-'+key).classList.toggle('active');
 }
-function makeAdmin(key){
-usuariosRegistrados[key].admin=true;
-renderAdminUsers();
-}
-function removeAdmin(key){
-usuariosRegistrados[key].admin=false;
-renderAdminUsers();
-}
-function kickUser(key){
-if(confirm('¿Expulsar a '+usuariosRegistrados[key].name+'?')){
-delete usuariosRegistrados[key];
-renderAdminUsers();
-}
-}
+function makeAdmin(key){usuariosRegistrados[key].admin=true;renderAdminUsers();}
+function removeAdmin(key){usuariosRegistrados[key].admin=false;renderAdminUsers();}
+function kickUser(key){if(confirm('¿Expulsar a '+usuariosRegistrados[key].name+'?')){delete usuariosRegistrados[key];renderAdminUsers();}}
 document.addEventListener('click',function(){document.querySelectorAll('.u-menu').forEach(function(m){m.classList.remove('active');});});
-function publish(){alert('Publicado (visual por ahora)');closeAdmin();}
+function publish(){
+var name=document.getElementById('admName').value.trim();
+var desc=document.getElementById('admDesc').value.trim();
+var img=document.getElementById('imgUrl').value.trim();
+if(!name||!img){alert('Nombre e imagen son obligatorios');return;}
+ALL_ITEMS.push({title:name,meta:'2025 · Drama',img:img,syn:desc||'Sin sinopsis.',isSerie:adminCurrentCat!=='peliculas',cat:adminCurrentCat});
+document.getElementById('admName').value='';
+document.getElementById('admDesc').value='';
+document.getElementById('imgUrl').value='';
+document.getElementById('imgPreview').style.backgroundImage='';
+buildHomeSections();
+renderExplore();
+alert('✅ Publicado correctamente');
+closeAdmin();
+}
 function loadLocalImage(e){
 var file=e.target.files[0];if(!file)return;
 var reader=new FileReader();
 reader.onload=function(ev){
 document.getElementById('imgPreview').style.backgroundImage='url('+ev.target.result+')';
-document.getElementById('imgUrl').value='(archivo local)';
+document.getElementById('imgUrl').value=ev.target.result;
 };
 reader.readAsDataURL(file);
 }
-document.querySelectorAll('.cat-btn').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('.cat-btn').forEach(function(x){x.classList.remove('active');});this.classList.add('active');});});
+function setOrientation(o){
+adminPosterOrientation=o;
+document.getElementById('orientVert').classList.toggle('active',o==='vertical');
+document.getElementById('orientHoriz').classList.toggle('active',o==='horizontal');
+var p=document.getElementById('imgPreview');
+p.classList.remove('vertical','horizontal');
+p.classList.add(o);
+}
+function pickAdminCat(btn,cat){
+adminCurrentCat=cat;
+document.querySelectorAll('.cat-btn').forEach(function(x){x.classList.remove('active');});
+btn.classList.add('active');
+}
+
+function toggleBW(){
+var html=document.documentElement;
+html.classList.toggle('bw-mode');
+document.querySelectorAll('.bw-btn').forEach(function(b){
+b.classList.toggle('active',html.classList.contains('bw-mode'));
+});
+}
 
 var playerVideo,controlsTimer,isPlaying=false;
 function playFromHero(){openPlayer(HERO_ITEMS[heroIdx].title,HERO_ITEMS[heroIdx].cat+' · '+HERO_ITEMS[heroIdx].dur);}
@@ -1074,18 +1251,20 @@ document.getElementById('pThumb').style.left=pct+'%';
 document.getElementById('pCurrent').innerText=formatTime(playerVideo.currentTime);
 document.getElementById('pDuration').innerText=formatTime(playerVideo.duration);
 });
+var eyeSVG='<svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>';
+document.querySelectorAll('.header-right').forEach(function(hr){
+if(hr.querySelector('.bw-btn'))return;
+var btn=document.createElement('button');
+btn.className='bw-btn';
+btn.innerHTML=eyeSVG;
+btn.onclick=toggleBW;
+btn.title='Modo Blanco y Negro';
+hr.insertBefore(btn,hr.firstChild);
+});
+renderExplore();
+updateCounters();
 });
 </script>
 </body>
 </html>
 
-
-
-
-
-
-
-
-
-  
-  
