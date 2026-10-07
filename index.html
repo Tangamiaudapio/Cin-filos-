@@ -6,10 +6,18 @@
 <title>CINEFILOS</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
+
+/* ============================================
+   BASE + RESET
+   ============================================ */
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{background:#000;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#fff;overflow-x:hidden;min-height:100vh}
 .screen{display:none;padding-bottom:90px;min-height:100vh}
 .screen.active{display:block}
+
+/* ============================================
+   MODO BLANCO Y NEGRO SUAVE
+   ============================================ */
 html{transition:filter .5s ease}
 html.bw-mode{filter:grayscale(.85) contrast(1.05) brightness(1.02)}
 html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,html.bw-mode .poster-wide,html.bw-mode .poster-vert,html.bw-mode .grid-poster,html.bw-mode .chart-poster,html.bw-mode .episode-img,html.bw-mode .news-mini-img,html.bw-mode .fav-poster,html.bw-mode .rating-card-poster,html.bw-mode .detail-hero,html.bw-mode .about-hero-big,html.bw-mode .welcome-bg-img,html.bw-mode .img-preview{filter:grayscale(.85) contrast(1.02) brightness(1.03)}
@@ -17,6 +25,10 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 .bw-btn svg{width:20px;height:20px;stroke:#fff;stroke-width:1.8;fill:none}
 .bw-btn.active{background:#fff;color:#000}
 .bw-btn.active svg{stroke:#000}
+
+/* ============================================
+   HEADERS
+   ============================================ */
 .top-header{padding:18px 22px 12px;display:flex;justify-content:space-between;align-items:center}
 .top-header h1{font-size:32px;font-weight:800;letter-spacing:-1px;display:flex;align-items:center;gap:12px}
 .top-header h1 svg{width:22px;height:22px;stroke:#fff;stroke-width:2;fill:none;cursor:pointer}
@@ -26,11 +38,18 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 .avatar-verified svg{width:8px;height:8px;stroke:#fff;stroke-width:3;fill:none}
 .avatar.verified .avatar-verified{display:flex}
 .admin-btn{width:40px;height:40px;border-radius:50%;background:#fff;color:#000;border:none;font-size:22px;font-weight:900;cursor:pointer;display:none;align-items:center;justify-content:center;font-family:'Inter',sans-serif}
+
+/* ============================================
+   BUSCADOR
+   ============================================ */
 .search-overlay{display:none;margin:0 22px 14px;background:#1c1c1e;border-radius:12px;padding:12px 16px;align-items:center;gap:10px}
 .search-overlay.active{display:flex}
 .search-overlay svg{width:18px;height:18px;stroke:#8e8e93;stroke-width:2;fill:none;flex-shrink:0}
 .search-overlay input{flex:1;background:transparent;border:none;color:#fff;font-size:15px;outline:none;font-family:'Inter',sans-serif}
 
+/* ============================================
+   HERO
+   ============================================ */
 .hero{position:relative;margin:0 16px;height:540px;border-radius:20px;overflow:hidden;background:#0a0a0a}
 .hero-bg{position:absolute;inset:0;background-size:cover;background-position:center 30%;transition:filter .3s ease}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 0%,rgba(0,0,0,.2) 40%,rgba(0,0,0,.75) 75%,#000 100%)}
@@ -49,6 +68,10 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 .dots{display:flex;gap:7px;align-items:center}
 .dots span{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35);transition:all .3s;cursor:pointer}
 .dots span.active{background:#fff;width:22px;border-radius:3px}
+
+/* ============================================
+   SECCIONES + CAROUSELS
+   ============================================ */
 .section{margin-top:30px;padding:0 22px}
 .section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;position:relative;padding-bottom:10px}
 .section-header::after{content:'';position:absolute;bottom:0;left:0;width:36px;height:2px;background:#fff;border-radius:2px}
@@ -68,10 +91,17 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 .news-mini-tag{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#8e8e93;margin-bottom:6px}
 .news-mini-title{font-size:13px;font-weight:600;line-height:1.3}
 
+/* ============================================
+   GRIDS
+   ============================================ */
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:0 22px}
 .grid-poster{width:100%;aspect-ratio:2/3;border-radius:12px;background-size:cover;background-position:center}
 .grid-title{margin-top:8px;font-size:14px;font-weight:600}
 .grid-meta{font-size:12px;color:#8e8e93;margin-top:2px}
+
+/* ============================================
+   TABS + GÉNEROS
+   ============================================ */
 .tabs{display:flex;gap:8px;padding:0 22px 12px;overflow-x:auto;scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
 .tab{flex:0 0 auto;padding:10px 18px;border-radius:20px;background:#1c1c1e;color:#8e8e93;font-size:13px;font-weight:600;border:none;font-family:'Inter',sans-serif;white-space:nowrap;cursor:pointer}
@@ -81,6 +111,9 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 .genre{flex:0 0 auto;padding:8px 14px;border-radius:16px;background:transparent;border:1px solid #2c2c2e;color:#8e8e93;font-size:12px;font-weight:500;font-family:'Inter',sans-serif;white-space:nowrap;cursor:pointer}
 .genre.active{background:#fff;color:#000;border-color:#fff}
 
+/* ============================================
+   DETALLE
+   ============================================ */
 .detail-back{position:absolute;top:20px;left:20px;z-index:10;width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.6);backdrop-filter:blur(20px);border:none;color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center;cursor:pointer}
 .detail-hero{position:relative;height:480px;background-size:cover;background-position:center 20%}
 .detail-hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.2) 0%,transparent 30%,rgba(0,0,0,.85) 85%,#000 100%)}
@@ -97,6 +130,10 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 .detail-rating-info{flex:1}
 .detail-rating-value{font-size:18px;font-weight:800;line-height:1}
 .detail-rating-count{font-size:11px;color:#8e8e93;margin-top:4px}
+
+/* ============================================
+   EPISODIOS
+   ============================================ */
 .episode-title{font-size:16px;font-weight:700;padding:0 22px;margin-bottom:12px}
 .season-tabs{display:flex;gap:8px;padding:0 22px;margin-bottom:14px;overflow-x:auto;scrollbar-width:none}
 .season-tabs::-webkit-scrollbar{display:none}
@@ -115,15 +152,22 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 .related-item{cursor:pointer}
 .related-poster{width:100%;aspect-ratio:2/3;border-radius:10px;background-size:cover;background-position:center;margin-bottom:6px}
 .related-name{font-size:11px;font-weight:600;line-height:1.3}
+
+/* ============================================
+   COMENTARIOS / RESEÑAS (CENTRADAS)
+   ============================================ */
 .comments-title{font-size:15px;font-weight:700;padding:0 22px;margin-bottom:12px;text-align:center}
-.comment{margin:0 auto 10px;padding:14px;background:#0d0d0d;border:1px solid #1c1c1e;border-radius:14px;display:flex;gap:12px;max-width:800px;width:calc(100% - 44px)}
+.comment{margin:0 auto 10px;padding:14px;background:#0d0d0d;border:1px solid #1c1c1e;border-radius:14px;display:flex;gap:12px;max-width:600px;width:calc(100% - 44px)}
 .comment-avatar{width:36px;height:36px;border-radius:50%;background:#1c1c1e;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0}
 .comment-user{font-size:13px;font-weight:600;margin-bottom:4px}
 .comment-text{font-size:13px;color:#bbb;line-height:1.5}
-.comment-form{margin:0 auto 16px;display:flex;gap:10px;max-width:800px;width:calc(100% - 44px)}
+.comment-form{margin:0 auto 16px;display:flex;gap:10px;max-width:600px;width:calc(100% - 44px)}
 .comment-form input{flex:1;background:#1c1c1e;border:none;border-radius:20px;padding:12px 16px;color:#fff;font-size:14px;outline:none;font-family:'Inter',sans-serif}
 .comment-form button{background:#fff;color:#000;border:none;padding:0 20px;border-radius:20px;font-size:13px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer}
 
+/* ============================================
+   PERFIL
+   ============================================ */
 .profile-avatar-wrap{position:relative;width:110px;height:110px;margin:30px auto 14px;cursor:pointer}
 .profile-avatar-wrap::after{content:'+';position:absolute;bottom:2px;right:2px;background:#fff;color:#000;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;line-height:1}
 .profile-avatar-lg{width:110px;height:110px;border-radius:50%;background:#1c1c1e;display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:800;border:3px solid #2c2c2e;overflow:hidden;background-size:cover;background-position:center}
@@ -142,13 +186,13 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 .profile-tab{padding:8px 4px;background:transparent;border:none;color:#636366;font-size:14px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;position:relative}
 .profile-tab.active{color:#fff}
 .profile-tab.active::after{content:'';position:absolute;bottom:-14px;left:0;right:0;height:2px;background:#fff}
-.profile-section-title{font-size:16px;font-weight:800;padding:0 22px 12px;display:flex;align-items:center;justify-content:center;gap:8px}
+.profile-section-title{font-size:16px;font-weight:800;padding:0 22px 12px;display:flex;align-items:center;gap:8px;justify-content:center}
 .profile-section-title .star-icon{color:#FFD700;font-size:14px}
 .profile-section-title .see-all{margin-left:6px;font-size:12px;color:#8e8e93;font-weight:600;background:#1c1c1e;padding:2px 8px;border-radius:10px}
 .fav-row{display:flex;gap:8px;overflow-x:auto;padding:0 22px 20px;scrollbar-width:none;justify-content:center}
 .fav-row::-webkit-scrollbar{display:none}
 .fav-poster{flex:0 0 90px;height:130px;border-radius:8px;background-size:cover;background-position:center;cursor:pointer}
-.rating-card{margin:0 auto 12px;background:#0d0d0d;border:1px solid #1c1c1e;border-radius:14px;padding:14px;display:flex;gap:12px;align-items:center;max-width:800px;width:calc(100% - 44px)}
+.rating-card{margin:0 auto 12px;background:#0d0d0d;border:1px solid #1c1c1e;border-radius:14px;padding:14px;display:flex;gap:12px;align-items:center;max-width:600px;width:calc(100% - 44px)}
 .rating-card-poster{width:60px;height:90px;border-radius:8px;background-size:cover;background-position:center;flex-shrink:0}
 .rating-card-info{flex:1}
 .rating-card-label{font-size:10px;color:#8e8e93;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}
@@ -156,12 +200,20 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 .rating-card-stars{display:flex;gap:2px;margin-bottom:4px}
 .rating-card-stars svg{width:14px;height:14px}
 .rating-card-time{font-size:11px;color:#8e8e93}
+
+/* ============================================
+   BOTTOM NAV
+   ============================================ */
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(10,10,10,.95);backdrop-filter:blur(20px);border-top:1px solid #1c1c1e;display:flex;justify-content:space-around;align-items:center;padding:10px 4px 16px;z-index:999}
 .nav-item{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10px;font-weight:500;color:#636366;flex:1;padding:6px 4px;border:none;background:transparent;font-family:'Inter',sans-serif;cursor:pointer}
 .nav-item.active{color:#fff}
 .nav-item svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .nav-tg{width:46px;height:46px;border-radius:50%;background:#fff;border:none;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer}
 .nav-tg svg{width:24px;height:24px;fill:#000}
+
+/* ============================================
+   WELCOME
+   ============================================ */
 .welcome{position:fixed;inset:0;background:#000;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:40px 30px;z-index:9999;overflow:hidden}
 .welcome-content{position:relative;z-index:999;display:flex;flex-direction:column;justify-content:center;align-items:center;width:100%;max-width:400px}
 .welcome-brand{font-size:38px;font-weight:900;letter-spacing:14px;margin-bottom:36px;text-align:center;padding-left:14px}
@@ -170,6 +222,10 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 .welcome .err{color:#ff453a;font-size:12px;margin-bottom:8px;height:16px}
 .welcome button{width:100%;max-width:340px;background:#fff;color:#000;border:none;padding:16px;border-radius:14px;font-size:16px;font-weight:700;font-family:'Inter',sans-serif;margin-bottom:20px;cursor:pointer}
 .welcome .welcome-hint{font-size:13px;color:#8e8e93;text-align:center;line-height:1.6;max-width:340px}
+
+/* ============================================
+   NOSOTROS
+   ============================================ */
 .about-stats-big{display:flex;justify-content:space-around;padding:40px 22px 36px}
 .about-stat-big{text-align:center}
 .about-stat-big-num{font-size:38px;font-weight:900;letter-spacing:-1px}
@@ -183,6 +239,9 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 .social-icon-only svg{width:38px;height:38px;fill:#fff}
 .about-footer-text{padding:0 40px 80px;text-align:center;font-size:15px;color:#8e8e93;line-height:1.7;font-style:italic}
 
+/* ============================================
+   ADMIN
+   ============================================ */
 .admin-screen{position:fixed;inset:0;background:#000;z-index:9998;overflow-y:auto;padding:20px 22px 100px;display:none}
 .admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
 .admin-header h1{font-size:26px;font-weight:800}
@@ -218,6 +277,10 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 .u-menu.active{display:block}
 .u-menu-item{padding:12px 14px;font-size:13px;color:#fff;cursor:pointer;border-radius:10px;display:flex;align-items:center;gap:10px;font-family:'Inter',sans-serif}
 .u-menu-item.danger{color:#ff453a}
+
+/* ============================================
+   MODALES
+   ============================================ */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;display:none;align-items:flex-end;justify-content:center}
 .modal-overlay.active{display:flex}
 .modal-sheet{background:#0d0d0d;border-radius:24px 24px 0 0;padding:24px 22px 34px;width:100%;max-width:500px;border-top:1px solid #1c1c1e}
@@ -231,6 +294,9 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 .modal-option-desc{font-size:11px;color:#8e8e93}
 .modal-cancel{width:100%;padding:16px;background:transparent;border:none;color:#8e8e93;font-size:14px;font-weight:600;font-family:'Inter',sans-serif;margin-top:6px;cursor:pointer}
 
+/* ============================================
+   PLAYER
+   ============================================ */
 .player-screen{position:fixed;inset:0;background:#000;z-index:99999;display:none;overflow:hidden}
 .player-screen.active{display:block}
 .player-rotate-msg{position:absolute;inset:0;background:#000;z-index:20;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px}
@@ -258,15 +324,22 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 .player-bar{flex:1;height:4px;background:rgba(255,255,255,.25);border-radius:3px;position:relative;cursor:pointer}
 .player-bar-fill{position:absolute;left:0;top:0;bottom:0;background:#fff;border-radius:3px;width:0%}
 .player-bar-thumb{position:absolute;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;background:#fff;border-radius:50%;left:0%;box-shadow:0 2px 6px rgba(0,0,0,.6)}
+
+/* ============================================
+   EMPTY STATE + FILTROS
+   ============================================ */
 .empty-state{text-align:center;padding:80px 30px;color:#636366}
 .empty-state svg{width:60px;height:60px;stroke:#333;stroke-width:1.5;fill:none;margin-bottom:20px}
 .empty-state h3{font-size:18px;font-weight:700;color:#fff;margin-bottom:8px}
 .empty-state p{font-size:13px;line-height:1.5}
-.filter-row{display:flex;gap:8px;padding:0 22px 20px;overflow-x:auto;scrollbar-width:none;justify-content:center}
+.filter-row{display:flex;gap:8px;padding:0 22px 20px;overflow-x:auto;scrollbar-width:none}
 .filter-row::-webkit-scrollbar{display:none}
 .filter-btn{flex:0 0 auto;padding:10px 18px;border-radius:20px;background:#1c1c1e;color:#8e8e93;font-size:12px;font-weight:600;border:1px solid #2c2c2e;font-family:'Inter',sans-serif;white-space:nowrap;cursor:pointer}
 .filter-btn.active{background:#fff;color:#000;border-color:#fff}
 
+/* ============================================
+   MODO PC / APPLE TV
+   ============================================ */
 @media (min-width:900px){
   body{background:#000}
   .screen{padding-bottom:60px;padding-top:0}
@@ -384,10 +457,14 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
   #pcNav{display:none !important}
   .bottom-nav{display:flex !important}
 }
+
 </style>
 </head>
 <body>
 
+<!-- ============================================
+     WELCOME
+     ============================================ -->
 <div class="welcome" id="welcomeScreen">
 <div class="welcome-content">
 <div class="welcome-brand">CINEFILOS</div>
@@ -399,6 +476,9 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 </div>
 </div>
 
+<!-- ============================================
+     NAV PC (solo se ve en pantallas grandes)
+     ============================================ -->
 <div class="pc-nav" id="pcNav" style="display:none">
   <div class="logo">CINEFILOS</div>
   <div class="links">
@@ -418,9 +498,16 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
   </div>
 </div>
 
+<!-- ============================================
+     PANTALLA: INICIO
+     ============================================ -->
 <div class="screen active" id="s-home">
 <div class="top-header"><h1>Inicio <svg onclick="toggleSearch()" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></h1>
-<div class="header-right"><button class="bw-btn" onclick="toggleBW()"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="admin-btn" id="adminBtn" onclick="openAdmin()">+</button><div class="avatar" id="userAvatarWrap"><span id="userAvatar">?</span><span class="avatar-verified" id="avatarVerified"><svg viewBox="0 0 24 24"><polyline points="5 12 10 17 19 7"/></svg></span></div></div>
+<div class="header-right">
+<button class="bw-btn" onclick="toggleBW()"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button>
+<button class="admin-btn" id="adminBtn" onclick="openAdmin()">+</button>
+<div class="avatar" id="userAvatarWrap"><span id="userAvatar">?</span><span class="avatar-verified" id="avatarVerified"><svg viewBox="0 0 24 24"><polyline points="5 12 10 17 19 7"/></svg></span></div>
+</div>
 </div>
 <div class="search-overlay" id="searchBox"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input type="text" id="searchInput" placeholder="Buscar" oninput="doSearch(this.value)"></div>
 <div id="searchResults" style="display:none"></div>
@@ -446,8 +533,17 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 </div>
 </div>
 
+<!-- ============================================
+     PANTALLA: EXPLORAR
+     ============================================ -->
 <div class="screen" id="s-explore">
-<div class="top-header"><h1>Explorar</h1><div class="header-right"><button class="bw-btn" onclick="toggleBW()"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="admin-btn" onclick="openAdmin()">+</button><div class="avatar" id="userAvatarWrap2"><span id="userAvatar2">?</span><span class="avatar-verified"><svg viewBox="0 0 24 24"><polyline points="5 12 10 17 19 7"/></svg></span></div></div></div>
+<div class="top-header"><h1>Explorar</h1>
+<div class="header-right">
+<button class="bw-btn" onclick="toggleBW()"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button>
+<button class="admin-btn" onclick="openAdmin()">+</button>
+<div class="avatar" id="userAvatarWrap2"><span id="userAvatar2">?</span><span class="avatar-verified"><svg viewBox="0 0 24 24"><polyline points="5 12 10 17 19 7"/></svg></span></div>
+</div>
+</div>
 <div class="search-overlay active"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input type="text" id="searchInputEx" placeholder="Buscar" oninput="doSearchEx(this.value)"></div>
 <div id="searchResultsEx" style="display:none"></div>
 <div id="exploreContent">
@@ -476,38 +572,17 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 </div>
 </div>
 
-<div class="screen" id="s-explore">
-<div class="top-header"><h1>Explorar</h1><div class="header-right"><button class="bw-btn" onclick="toggleBW()"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="admin-btn" onclick="openAdmin()">+</button><div class="avatar" id="userAvatarWrap2"><span id="userAvatar2">?</span><span class="avatar-verified"><svg viewBox="0 0 24 24"><polyline points="5 12 10 17 19 7"/></svg></span></div></div></div>
-<div class="search-overlay active"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input type="text" id="searchInputEx" placeholder="Buscar" oninput="doSearchEx(this.value)"></div>
-<div id="searchResultsEx" style="display:none"></div>
-<div id="exploreContent">
-<div class="tabs">
-<button class="tab active" onclick="switchCat('peliculas',this)">Películas</button>
-<button class="tab" onclick="switchCat('series',this)">Series</button>
-<button class="tab" onclick="switchCat('animes',this)">Animes</button>
-<button class="tab" onclick="switchCat('kdramas',this)">Kdramas</button>
-<button class="tab" onclick="switchCat('documentales',this)">Documentales</button>
-<button class="tab" onclick="switchCat('telenovelas',this)">Telenovelas</button>
-</div>
-<div class="genres">
-<button class="genre active" onclick="pickGenre(this)">Todos</button>
-<button class="genre" onclick="pickGenre(this)">Terror</button>
-<button class="genre" onclick="pickGenre(this)">Acción</button>
-<button class="genre" onclick="pickGenre(this)">Drama</button>
-<button class="genre" onclick="pickGenre(this)">Comedia</button>
-<button class="genre" onclick="pickGenre(this)">Sci-Fi</button>
-</div>
-<div class="cat-pane" id="cat-peliculas"><div class="grid"></div></div>
-<div class="cat-pane" id="cat-series" style="display:none"><div class="grid"></div></div>
-<div class="cat-pane" id="cat-animes" style="display:none"><div class="grid"></div></div>
-<div class="cat-pane" id="cat-kdramas" style="display:none"><div class="grid"></div></div>
-<div class="cat-pane" id="cat-documentales" style="display:none"><div class="grid"></div></div>
-<div class="cat-pane" id="cat-telenovelas" style="display:none"><div class="grid"></div></div>
-</div>
-</div>
-
+<!-- ============================================
+     PANTALLA: MI LISTA
+     ============================================ -->
 <div class="screen" id="s-list">
-<div class="top-header"><h1>Mi Lista</h1><div class="header-right"><button class="bw-btn" onclick="toggleBW()"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="admin-btn" onclick="openAdmin()">+</button><div class="avatar" id="userAvatarWrap6"><span id="userAvatar6">?</span><span class="avatar-verified"><svg viewBox="0 0 24 24"><polyline points="5 12 10 17 19 7"/></svg></span></div></div></div>
+<div class="top-header"><h1>Mi Lista</h1>
+<div class="header-right">
+<button class="bw-btn" onclick="toggleBW()"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button>
+<button class="admin-btn" onclick="openAdmin()">+</button>
+<div class="avatar" id="userAvatarWrap6"><span id="userAvatar6">?</span><span class="avatar-verified"><svg viewBox="0 0 24 24"><polyline points="5 12 10 17 19 7"/></svg></span></div>
+</div>
+</div>
 <div class="filter-row">
 <button class="filter-btn active" onclick="filterList(this,'all')">Todos</button>
 <button class="filter-btn" onclick="filterList(this,'later')">Ver más tarde</button>
@@ -523,8 +598,17 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 </div>
 </div>
 
+<!-- ============================================
+     PANTALLA: PERFIL
+     ============================================ -->
 <div class="screen" id="s-profile">
-<div class="top-header"><h1>Perfil</h1><div class="header-right"><button class="bw-btn" onclick="toggleBW()"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="admin-btn" onclick="openAdmin()">+</button><div class="avatar" id="userAvatarWrap4"><span id="userAvatar4">?</span><span class="avatar-verified"><svg viewBox="0 0 24 24"><polyline points="5 12 10 17 19 7"/></svg></span></div></div></div>
+<div class="top-header"><h1>Perfil</h1>
+<div class="header-right">
+<button class="bw-btn" onclick="toggleBW()"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button>
+<button class="admin-btn" onclick="openAdmin()">+</button>
+<div class="avatar" id="userAvatarWrap4"><span id="userAvatar4">?</span><span class="avatar-verified"><svg viewBox="0 0 24 24"><polyline points="5 12 10 17 19 7"/></svg></span></div>
+</div>
+</div>
 <div class="profile-avatar-wrap" onclick="changeAvatar()"><div class="profile-avatar-lg" id="profileAvatar">?</div></div>
 <div class="profile-display-name"><span id="profileName">Usuario</span><span class="verified-badge" id="verifiedBadge" style="display:none"><svg viewBox="0 0 24 24"><polyline points="9 12 11 14 15 10"/></svg></span></div>
 <div class="profile-handle" id="profileHandle">@usuario</div>
@@ -566,6 +650,9 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 </div>
 </div>
 
+<!-- ============================================
+     PANTALLA: DETALLE
+     ============================================ -->
 <div class="screen" id="s-detail">
 <button class="detail-back" onclick="backFromDetail()">‹</button>
 <div class="detail-hero" id="d-hero"><div class="detail-hero-overlay"></div></div>
@@ -616,11 +703,17 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 <div class="related-grid" id="relatedGrid"></div>
 </div>
 
+<!-- ============================================
+     PANTALLA: CATEGORÍA
+     ============================================ -->
 <div class="screen" id="s-category">
 <div class="top-header"><h1 style="display:flex;align-items:center;gap:8px"><button class="back-inline" onclick="backFromCategory()" style="background:transparent;border:none;color:#fff;font-size:32px;cursor:pointer;padding:0 6px 4px 0;line-height:1;font-family:'Inter',sans-serif">‹</button><span id="catTitle">Películas</span></h1></div>
 <div class="grid" id="catGrid" style="padding:0 22px 20px"></div>
 </div>
 
+<!-- ============================================
+     PANTALLA: NOSOTROS
+     ============================================ -->
 <div class="screen" id="s-about">
 <div class="about-stats-big">
 <div class="about-stat-big"><div class="about-stat-big-num">200K</div><div class="about-stat-big-label">Usuarios</div></div>
@@ -635,6 +728,9 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 <div class="about-footer-text">Esta comunidad está creada con mucho amor por parte de sus administradores.</div>
 </div>
 
+<!-- ============================================
+     PANEL ADMIN
+     ============================================ -->
 <div class="admin-screen" id="adminScreen">
 <div class="admin-header"><h1>Panel Admin</h1><button class="admin-close" onclick="closeAdmin()">✕</button></div>
 <div class="admin-tabs">
@@ -684,6 +780,9 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 <div class="admin-publish"><button class="btn-publish" onclick="publish()">Publicar</button></div>
 </div>
 
+<!-- ============================================
+     MODAL: GUARDAR EN LISTA
+     ============================================ -->
 <div class="modal-overlay" id="modalOverlay">
 <div class="modal-sheet">
 <div class="modal-title" id="modalTitle">¿Qué quieres hacer?</div>
@@ -693,6 +792,9 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 </div>
 </div>
 
+<!-- ============================================
+     MODAL: RATING CON COMENTARIO
+     ============================================ -->
 <div class="modal-overlay" id="ratingModal">
 <div class="modal-sheet">
 <div class="modal-title" id="ratingModalTitle">⭐ 5 estrellas</div>
@@ -703,6 +805,9 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 </div>
 </div>
 
+<!-- ============================================
+     REPRODUCTOR
+     ============================================ -->
 <div class="player-screen" id="playerScreen" onclick="screenTap(event)">
 <div class="player-rotate-msg" id="rotateMsg">
 <svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M12 18h.01"/></svg>
@@ -733,6 +838,9 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 </div>
 </div>
 
+<!-- ============================================
+     BOTTOM NAV (MÓVIL)
+     ============================================ -->
 <div class="bottom-nav" id="bottomNav">
 <button class="nav-item active" onclick="go('home',this)"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg><span>Inicio</span></button>
 <button class="nav-item" onclick="go('explore',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15 9l-2 5-5 2 2-5z"/></svg><span>Explorar</span></button>
@@ -740,7 +848,11 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 <button class="nav-item" onclick="go('list',this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg><span>Mi Lista</span></button>
 <button class="nav-item" onclick="go('profile',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg><span>Perfil</span></button>
 </div>
+
 <script>
+/* ============================================
+   VARIABLES GLOBALES
+   ============================================ */
 var lastScreen='home';
 var userName='';
 var userCode='';
@@ -748,6 +860,7 @@ var isAdmin=false;
 var isOwner=false;
 var OWNER_CODE='234578';
 var USER_CODE='456050';
+
 var HERO_ITEMS=[
 {title:'The Last of Us',year:'Ganador 2026',award:'Premios Emmy®',img:'https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',cat:'Drama',dur:'Serie'},
 {title:'The Batman',year:'Nominado 2022',award:'Premios Oscar®',img:'https://image.tmdb.org/t/p/original/74xTEgt7R36Fpooo50r9T25onhq.jpg',cat:'Acción',dur:'2h 56min'},
@@ -755,6 +868,7 @@ var HERO_ITEMS=[
 {title:'Oppenheimer',year:'Ganador 2024',award:'Premios Oscar®',img:'https://image.tmdb.org/t/p/original/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg',cat:'Drama',dur:'3h 0min'}
 ];
 var heroIdx=0;
+
 var ALL_ITEMS=[
 {title:'The Last of Us',meta:'2023 · Drama',img:'https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',imgH:'https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',syn:'Joel es contratado para sacar a Ellie.',isSerie:true,cat:'series',genre:'Drama'},
 {title:'The Batman',meta:'2022 · Acción',img:'https://image.tmdb.org/t/p/original/74xTEgt7R36Fpooo50r9T25onhq.jpg',imgH:'https://image.tmdb.org/t/p/original/74xTEgt7R36Fpooo50r9T25onhq.jpg',syn:'Batman investiga.',isSerie:false,cat:'peliculas',genre:'Acción'},
@@ -772,6 +886,7 @@ var ALL_ITEMS=[
 {title:'Planet Earth',meta:'2006 · Documental',img:'https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',imgH:'https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',syn:'Vida.',isSerie:false,cat:'documentales',genre:'Naturaleza'},
 {title:'Cosmos',meta:'2014 · Documental',img:'https://image.tmdb.org/t/p/original/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg',imgH:'https://image.tmdb.org/t/p/original/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg',syn:'Universo.',isSerie:false,cat:'documentales',genre:'Ciencia'}
 ];
+
 var myList=[];
 var currentDetail=null;
 var currentFilter='all';
@@ -779,6 +894,8 @@ var commentsByTitle={};
 var usuariosRegistrados={};
 var _adminCat='peliculas';
 var _adminGenre='Drama';
+var _pendingRating=0;
+
 var NEWS=[
 {tag:'Estreno',title:'"The Last of Us" rompe récord de audiencia',img:'https://image.tmdb.org/t/p/w500/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg'},
 {tag:'Emmy 2026',title:'Los nominados a los Emmy de este año',img:'https://image.tmdb.org/t/p/w500/kwGIFgH2D2S8T41BnvT9L5NhFXE.jpg'},
@@ -786,6 +903,9 @@ var NEWS=[
 {tag:'Cine',title:'Oppenheimer llega al streaming',img:'https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg'}
 ];
 
+/* ============================================
+   LOGIN / ENTRAR
+   ============================================ */
 function enterApp(){
 var n=document.getElementById('nameInput').value.trim();
 var c=document.getElementById('codeInput').value.trim();
@@ -808,6 +928,9 @@ checkPC();initHero();buildHomeSections();buildExplore();
 }
 ['nameInput','codeInput'].forEach(function(id){document.getElementById(id).addEventListener('keypress',function(e){if(e.key==='Enter')enterApp();});});
 
+/* ============================================
+   HERO
+   ============================================ */
 function initHero(){
 var dots=document.getElementById('heroDots');dots.innerHTML='';
 HERO_ITEMS.forEach(function(item,i){var s=document.createElement('span');if(i===0)s.classList.add('active');s.onclick=function(){setHero(i);};dots.appendChild(s);});
@@ -831,6 +954,9 @@ box.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-h
 window.addEventListener('scroll',function(){var y=window.scrollY;var blur=Math.min(y/30,8);var bg=document.getElementById('heroBg');if(bg)bg.style.filter='blur('+blur+'px) brightness('+(1-blur/20)+')';});
 });
 
+/* ============================================
+   NAVEGACIÓN
+   ============================================ */
 function go(id,btn){
 lastScreen=id;
 document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
@@ -841,6 +967,10 @@ document.querySelectorAll('.pc-link').forEach(function(b){b.classList.toggle('ac
 if(id==='list')renderList();
 window.scrollTo(0,0);
 }
+
+/* ============================================
+   BUSCADOR
+   ============================================ */
 function toggleSearch(){
 var box=document.getElementById('searchBox');var home=document.getElementById('homeContent');var res=document.getElementById('searchResults');
 box.classList.toggle('active');
@@ -880,6 +1010,10 @@ document.getElementById('s-home').classList.add('active');
 document.getElementById('homeContent').style.display='none';
 res.style.display='block';
 }
+
+/* ============================================
+   CATEGORÍAS EXPLORAR
+   ============================================ */
 function switchCat(cat,btn){
 document.querySelectorAll('.cat-pane').forEach(function(p){p.style.display='none';});
 var t=document.getElementById('cat-'+cat);if(t)t.style.display='block';
@@ -892,6 +1026,10 @@ document.querySelectorAll('.season-pane').forEach(function(p){p.style.display='n
 document.getElementById('season-'+id).style.display='block';
 document.querySelectorAll('.season-tab').forEach(function(x){x.classList.remove('active');});btn.classList.add('active');
 }
+
+/* ============================================
+   DETALLE
+   ============================================ */
 function openDetail(title,meta,syn,img,isSerie){
 currentDetail={title:title,meta:meta,syn:syn,img:img,isSerie:isSerie};
 var item=ALL_ITEMS.filter(function(x){return x.title===title;})[0]||{};
@@ -933,7 +1071,10 @@ if(!commentsByTitle[currentDetail.title])commentsByTitle[currentDetail.title]=[]
 commentsByTitle[currentDetail.title].push({user:userName||'Tú',text:txt});
 inp.value='';renderComments(currentDetail.title);updateCounters();
 }
-var _pendingRating=0;
+
+/* ============================================
+   RATING CON COMENTARIO
+   ============================================ */
 function rateItem(stars){
 _pendingRating=stars;
 document.getElementById('ratingModalTitle').innerText='⭐ '+stars+' estrella'+(stars>1?'s':'');
@@ -951,6 +1092,10 @@ renderComments(currentDetail.title);updateCounters();
 }
 document.getElementById('ratingModal').classList.remove('active');
 }
+
+/* ============================================
+   GUARDAR EN MI LISTA
+   ============================================ */
 function askSaveOption(){
 if(!currentDetail)return;
 document.getElementById('modalTitle').innerText=currentDetail.title;
@@ -988,6 +1133,10 @@ if(found)myList=myList.filter(function(x){return x.title!==t;});
 else myList.push({title:t,meta:HERO_ITEMS[heroIdx].cat,img:HERO_ITEMS[heroIdx].img,isSerie:true,status:'later'});
 updatePlusButtons();updateCounters();
 }
+
+/* ============================================
+   PERFIL
+   ============================================ */
 function changeAvatar(){
 var input=document.createElement('input');input.type='file';input.accept='image/*';
 input.onchange=function(e){var file=e.target.files[0];if(!file)return;var reader=new FileReader();reader.onload=function(ev){var av=document.getElementById('profileAvatar');av.style.backgroundImage="url('"+ev.target.result+"')";av.innerText='';};reader.readAsDataURL(file);};
@@ -1020,6 +1169,10 @@ for(var j=0;j<myList.length;j++){if(myList[j].title===HERO_ITEMS[heroIdx].title)
 var b2=document.getElementById('heroPlusBtn');if(b2)b2.classList.toggle('saved',heroSaved);
 }
 }
+
+/* ============================================
+   MI LISTA
+   ============================================ */
 function filterList(btn,filter){
 currentFilter=filter;
 document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');
@@ -1036,6 +1189,10 @@ filtered.forEach(function(x){h+='<div onclick="openDetail(\''+x.title+'\',\''+x.
 grid.innerHTML=h;
 }
 function backFromDetail(){go(lastScreen,null);}
+
+/* ============================================
+   ADMIN
+   ============================================ */
 function openAdmin(){
 if(!isAdmin)return;
 document.getElementById('adminScreen').style.display='block';renderAdminUsers();
@@ -1102,6 +1259,10 @@ else{document.getElementById('imgPreviewH').style.backgroundImage='url('+ev.targ
 };
 reader.readAsDataURL(file);
 }
+
+/* ============================================
+   CONSTRUIR HOME + EXPLORE
+   ============================================ */
 function itemCardHTML(x){
 return '<div onclick="openDetail(\''+x.title+'\',\''+x.meta+'\',\''+x.syn+'\',\''+x.img+'\','+x.isSerie+')" style="cursor:pointer"><div class="grid-poster" style="background-image:url(\''+x.img+'\')"></div><div class="grid-title">'+x.title+'</div><div class="grid-meta">'+x.meta+'</div></div>';
 }
@@ -1131,6 +1292,10 @@ var arr=ALL_ITEMS.filter(function(x){return x.cat===c;});
 el.innerHTML=arr.length?arr.map(itemCardHTML).join(''):'<div style="grid-column:1/-1;text-align:center;color:#636366;padding:60px 20px">Sin contenido aún.</div>';
 });
 }
+
+/* ============================================
+   CATEGORÍA (VER MÁS)
+   ============================================ */
 var catLastScreen='home';
 function openCategory(cat){
 catLastScreen=lastScreen;
@@ -1152,6 +1317,10 @@ document.getElementById('s-category').classList.add('active');
 window.scrollTo(0,0);
 }
 function backFromCategory(){go(catLastScreen,null);}
+
+/* ============================================
+   REPRODUCTOR
+   ============================================ */
 var playerVideo,controlsTimer,isPlaying=false;
 function playFromHero(){openPlayer(HERO_ITEMS[heroIdx].title,HERO_ITEMS[heroIdx].cat+' · '+HERO_ITEMS[heroIdx].dur);}
 function playFromDetail(){openPlayer(document.getElementById('d-title').innerText,document.getElementById('d-cat').innerText+' · '+document.getElementById('d-year').innerText);}
@@ -1222,11 +1391,19 @@ document.getElementById('pCurrent').innerText=formatTime(playerVideo.currentTime
 document.getElementById('pDuration').innerText=formatTime(playerVideo.duration);
 });
 });
+
+/* ============================================
+   MODO BLANCO Y NEGRO
+   ============================================ */
 function toggleBW(){
 var html=document.documentElement;
 html.classList.toggle('bw-mode');
 document.querySelectorAll('.bw-btn').forEach(function(b){b.classList.toggle('active',html.classList.contains('bw-mode'));});
 }
+
+/* ============================================
+   MODO PC: mostrar/ocultar nav
+   ============================================ */
 function checkPC(){
 var pcNav=document.getElementById('pcNav');
 var bottomNav=document.getElementById('bottomNav');
@@ -1248,4 +1425,3 @@ document.addEventListener('DOMContentLoaded',checkPC);
 </script>
 </body>
 </html>
-
