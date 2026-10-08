@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>CINEFILOS</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 
 /* ============================================
@@ -846,6 +847,15 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 /* ============================================
    VARIABLES GLOBALES
    ============================================ */
+// ============================================
+// CONEXIÓN A SUPABASE
+// ============================================
+const SUPABASE_URL = "https://plthfwhodkymgmjnyghf.supabase.co";
+const SUPABASE_KEY = "sb_publishable_u7uukKyWIaXysLG67j49fQ_OdwSi32r";
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+console.log('✅ Supabase conectado:', supabaseClient);
+// ============================================
+
 var lastScreen='home';
 var userName='';
 var userCode='';
