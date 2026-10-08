@@ -909,13 +909,35 @@ var NEWS=[
 /* ============================================
    LOGIN
    ============================================ */
-function enterApp(){
+async function enterApp(){
 var n=document.getElementById('nameInput').value.trim();
 var c=document.getElementById('codeInput').value.trim();
 if(!n){document.getElementById('nameError').innerText='Debes escribir un nombre';return;}
 if(!c){document.getElementById('nameError').innerText='Debes escribir un código';return;}
 if(c!==OWNER_CODE&&c!==USER_CODE){document.getElementById('nameError').innerText='Código incorrecto';return;}
+
 isOwner=(c===OWNER_CODE);isAdmin=isOwner;userName=n;userCode=c;
+
+// --- GUARDAR USUARIO EN SUPABASE ---
+try {
+  const { data, error } = await supabaseClient
+    .from('usuarios')
+    .upsert({ 
+      nombre: n.toLowerCase(),
+      codigo: c,
+      rol: isOwner ? 'owner' : 'usuario'
+    }, { onConflict: 'nombre' });
+  
+  if (error) {
+    console.error('Error guardando usuario:', error);
+  } else {
+    console.log('✅ Usuario guardado en Supabase:', n);
+  }
+} catch(e) {
+  console.error('Error de conexión:', e);
+}
+// --- FIN GUARDAR USUARIO ---
+
 usuariosRegistrados[n.toLowerCase()]={name:n,owner:isOwner,admin:isAdmin};
 var ini=n.substring(0,2).toUpperCase();
 ['userAvatar','userAvatar2','userAvatar4','userAvatar6','userAvatarPC','profileAvatar'].forEach(function(id){var el=document.getElementById(id);if(el)el.innerText=ini;});
@@ -929,7 +951,6 @@ document.getElementById('verifiedBadge').style.display='inline-flex';
 }
 checkPC();initHero();buildHomeSections();buildExplore();
 }
-['nameInput','codeInput'].forEach(function(id){document.getElementById(id).addEventListener('keypress',function(e){if(e.key==='Enter')enterApp();});});
 
 /* ============================================
    HERO
