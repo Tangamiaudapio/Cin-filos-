@@ -1207,23 +1207,81 @@ function makeAdmin(key){usuariosRegistrados[key].admin=true;renderAdminUsers();}
 function removeAdmin(key){usuariosRegistrados[key].admin=false;renderAdminUsers();}
 function kickUser(key){if(confirm('¿Expulsar a '+usuariosRegistrados[key].name+'?')){delete usuariosRegistrados[key];renderAdminUsers();}}
 document.addEventListener('click',function(){document.querySelectorAll('.u-menu').forEach(function(m){m.classList.remove('active');});});
-function publish(){
+async function publish(){
 var name=document.getElementById('adminName').value.trim();
 var syn=document.getElementById('adminSyn').value.trim();
 var imgV=document.getElementById('imgUrlV').value.trim();
 var imgH=document.getElementById('imgUrlH').value.trim();
+var linkLat=document.getElementById('linkLat')?.value.trim()||'';
+var linkIng=document.getElementById('linkIng')?.value.trim()||'';
+var linkOtr=document.getElementById('linkOtr')?.value.trim()||'';
 if(!name||!imgV){alert('Nombre y póster vertical son obligatorios');return;}
+
 var meta=(new Date().getFullYear())+' · '+_adminGenre;
 var isSerie=(_adminCat==='series'||_adminCat==='animes'||_adminCat==='kdramas'||_adminCat==='telenovelas');
-ALL_ITEMS.push({title:name,meta:meta,img:imgV,imgH:imgH||imgV,syn:syn||'Sin sinopsis.',isSerie:isSerie,cat:_adminCat,genre:_adminGenre});
-alert('Publicado ✅');
+
+try {
+  const { data, error } = await supabaseClient
+    .from('contenido')
+    .insert({
+      titulo: name,
+      meta: meta,
+      sinopsis: syn || 'Sin sinopsis.',
+      img_vertical: imgV,
+      img_horizontal: imgH || imgV,
+      categoria: _adminCat,
+      genero: _adminGenre,
+      es_serie: isSerie,
+      link_latino: linkLat,
+      link_ingles: linkIng,
+      link_otros: linkOtr
+    })
+    .select()
+    .single();
+  
+  if (error) {
+    console.error('Error publicando:', error);
+    alert('❌ Error: ' + error.message);
+    return;
+  }
+  
+  console.log('✅ Publicado en Supabase:', data);
+  alert('✅ Publicado correctamente');
+  
+  ALL_ITEMS.push({
+    id: data.id,
+    title: name,
+    meta: meta,
+    img: imgV,
+    imgH: imgH || imgV,
+    syn: syn || 'Sin sinopsis.',
+    isSerie: isSerie,
+    cat: _adminCat,
+    genre: _adminGenre,
+    linkLat: linkLat,
+    linkIng: linkIng,
+    linkOtr: linkOtr
+  });
+  
+} catch(e) {
+  console.error('Error de conexión:', e);
+  alert('❌ Error de conexión');
+  return;
+}
+
 document.getElementById('adminName').value='';
 document.getElementById('adminSyn').value='';
 document.getElementById('imgUrlV').value='';
 document.getElementById('imgUrlH').value='';
 document.getElementById('imgPreviewV').style.backgroundImage='';
 document.getElementById('imgPreviewH').style.backgroundImage='';
-buildHomeSections();buildExplore();closeAdmin();
+if(document.getElementById('linkLat'))document.getElementById('linkLat').value='';
+if(document.getElementById('linkIng'))document.getElementById('linkIng').value='';
+if(document.getElementById('linkOtr'))document.getElementById('linkOtr').value='';
+
+buildHomeSections();
+buildExplore();
+closeAdmin();
 }
 function loadLocalImage(e,type){
 var file=e.target.files[0];if(!file)return;
