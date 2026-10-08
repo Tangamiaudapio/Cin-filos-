@@ -1088,9 +1088,31 @@ var h='';
 arr.forEach(function(c){h+='<div class="comment"><div class="comment-avatar">'+c.user.substring(0,2).toUpperCase()+'</div><div><div class="comment-user">'+c.user+'</div><div class="comment-text">'+c.text+'</div></div></div>';});
 document.getElementById('commentList').innerHTML=h;
 }
-function addComment(){
+async function addComment(){
 var inp=document.getElementById('commentInput');var txt=inp.value.trim();
 if(!txt||!currentDetail)return;
+
+// --- GUARDAR EN SUPABASE ---
+try {
+  const { error } = await supabaseClient
+    .from('comentarios')
+    .insert({ 
+      contenido_id: currentDetail.id || null,
+      usuario_nombre: userName || 'Tú',
+      texto: txt,
+      estrellas: null
+    });
+  
+  if (error) {
+    console.error('Error guardando comentario:', error);
+  } else {
+    console.log('✅ Comentario guardado en Supabase');
+  }
+} catch(e) {
+  console.error('Error de conexión:', e);
+}
+// --- FIN GUARDAR ---
+
 if(!commentsByTitle[currentDetail.title])commentsByTitle[currentDetail.title]=[];
 commentsByTitle[currentDetail.title].push({user:userName||'Tú',text:txt});
 inp.value='';renderComments(currentDetail.title);updateCounters();
