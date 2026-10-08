@@ -360,7 +360,7 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
   .admin-screen{padding:30px 60px 180px}
   .admin-header{max-width:1000px;margin:0 auto 28px}
   .admin-tabs{max-width:1000px;margin:0 auto 28px}
-  #adminAdd,#adminUsers{max-width:1000px;margin:0 auto}
+  #adminAdd,#adminUsers,#adminContent{max-width:1000px;margin:0 auto}
   .admin-publish{padding:20px 60px 30px}
   .admin-publish .btn-publish{max-width:1000px;margin:0 auto;display:block}
   .link-group{padding:16px 20px}
@@ -382,9 +382,6 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 </head>
 <body>
 
-<!-- ============================================
-     WELCOME
-     ============================================ -->
 <div class="welcome" id="welcomeScreen">
 <div class="welcome-content">
 <div class="welcome-brand">CINEFILOS</div>
@@ -396,9 +393,6 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 </div>
 </div>
 
-<!-- ============================================
-     NAV PC
-     ============================================ -->
 <div class="pc-nav" id="pcNav" style="display:none">
   <div class="logo">CINEFILOS</div>
   <div class="links">
@@ -418,9 +412,6 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
   </div>
 </div>
 
-<!-- ============================================
-     PANTALLA: INICIO
-     ============================================ -->
 <div class="screen active" id="s-home">
 <div class="top-header"><h1>Inicio <svg onclick="toggleSearch()" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></h1>
 <div class="header-right">
@@ -453,9 +444,6 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 </div>
 </div>
 
-<!-- ============================================
-     PANTALLA: EXPLORAR
-     ============================================ -->
 <div class="screen" id="s-explore">
 <div class="top-header"><h1>Explorar</h1>
 <div class="header-right">
@@ -492,9 +480,6 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 </div>
 </div>
 
-<!-- ============================================
-     PANTALLA: MI LISTA
-     ============================================ -->
 <div class="screen" id="s-list">
 <div class="top-header"><h1>Mi Lista</h1>
 <div class="header-right">
@@ -518,9 +503,6 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 </div>
 </div>
 
-<!-- ============================================
-     PANTALLA: PERFIL
-     ============================================ -->
 <div class="screen" id="s-profile">
 <div class="top-header"><h1>Perfil</h1>
 <div class="header-right">
@@ -565,9 +547,6 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 </div>
 </div>
 
-<!-- ============================================
-     PANTALLA: DETALLE
-     ============================================ -->
 <div class="screen" id="s-detail">
 <button class="detail-back" onclick="backFromDetail()">‹</button>
 <div class="detail-hero" id="d-hero"><div class="detail-hero-overlay"></div></div>
@@ -618,17 +597,11 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 <div class="related-grid" id="relatedGrid"></div>
 </div>
 
-<!-- ============================================
-     PANTALLA: CATEGORÍA
-     ============================================ -->
 <div class="screen" id="s-category">
 <div class="top-header"><h1 style="display:flex;align-items:center;gap:8px"><button class="back-inline" onclick="backFromCategory()" style="background:transparent;border:none;color:#fff;font-size:32px;cursor:pointer;padding:0 6px 4px 0;line-height:1;font-family:'Inter',sans-serif">‹</button><span id="catTitle">Películas</span></h1></div>
 <div class="grid" id="catGrid" style="padding:0 22px 20px"></div>
 </div>
 
-<!-- ============================================
-     PANTALLA: NOSOTROS
-     ============================================ -->
 <div class="screen" id="s-about">
 <div class="about-stats-big">
 <div class="about-stat-big"><div class="about-stat-big-num">200K</div><div class="about-stat-big-label">Usuarios</div></div>
@@ -643,14 +616,12 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 <div class="about-footer-text">Esta comunidad está creada con mucho amor por parte de sus administradores.</div>
 </div>
 
-<!-- ============================================
-     PANEL ADMIN
-     ============================================ -->
 <div class="admin-screen" id="adminScreen">
 <div class="admin-header"><h1>Panel Admin</h1><button class="admin-close" onclick="closeAdmin()">✕</button></div>
 <div class="admin-tabs">
 <button class="admin-tab active" onclick="adminTab('add',this)">Agregar</button>
 <button class="admin-tab" onclick="adminTab('users',this)">Usuarios</button>
+<button class="admin-tab" onclick="adminTab('content',this)">Contenido</button>
 </div>
 <div id="adminAdd">
 <div class="form-group"><label class="form-label">Categoría</label>
@@ -692,12 +663,10 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 </div>
 </div>
 <div id="adminUsers" style="display:none"><div id="adminUserList"></div></div>
+<div id="adminContent" style="display:none"><div id="adminContentList"></div></div>
 <div class="admin-publish"><button class="btn-publish" onclick="publish()">Publicar</button></div>
 </div>
 
-<!-- ============================================
-     MODAL: GUARDAR EN LISTA
-     ============================================ -->
 <div class="modal-overlay" id="modalOverlay">
 <div class="modal-sheet">
 <div class="modal-title" id="modalTitle">¿Qué quieres hacer?</div>
@@ -707,9 +676,6 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 </div>
 </div>
 
-<!-- ============================================
-     MODAL: RATING CON COMENTARIO
-     ============================================ -->
 <div class="modal-overlay" id="ratingModal">
 <div class="modal-sheet">
 <div class="modal-title" id="ratingModalTitle">⭐ 5 estrellas</div>
@@ -720,9 +686,6 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 </div>
 </div>
 
-<!-- ============================================
-     REPRODUCTOR
-     ============================================ -->
 <div class="player-screen" id="playerScreen" onclick="screenTap(event)">
 <div class="player-rotate-msg" id="rotateMsg">
 <svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M12 18h.01"/></svg>
@@ -753,9 +716,6 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 </div>
 </div>
 
-<!-- ============================================
-     BOTTOM NAV
-     ============================================ -->
 <div class="bottom-nav" id="bottomNav">
 <button class="nav-item active" onclick="go('home',this)"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg><span>Inicio</span></button>
 <button class="nav-item" onclick="go('explore',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15 9l-2 5-5 2 2-5z"/></svg><span>Explorar</span></button>
@@ -765,17 +725,11 @@ html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,ht
 </div>
 
 <script>
-/* ============================================
-   CONEXIÓN A SUPABASE
-   ============================================ */
 const SUPABASE_URL = "https://plthfwhodkymgmjnyghf.supabase.co";
 const SUPABASE_KEY = "sb_publishable_u7uukKyWIaXysLG67j49fQ_OdwSi32r";
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 console.log('✅ Supabase conectado:', supabaseClient);
 
-/* ============================================
-   VARIABLES GLOBALES
-   ============================================ */
 var lastScreen='home';
 var userName='';
 var userCode='';
@@ -826,35 +780,20 @@ var NEWS=[
 {tag:'Cine',title:'Oppenheimer llega al streaming',img:'https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg'}
 ];
 
-/* ============================================
-   LOGIN
-   ============================================ */
 async function enterApp(){
 var n=document.getElementById('nameInput').value.trim();
 var c=document.getElementById('codeInput').value.trim();
 if(!n){document.getElementById('nameError').innerText='Debes escribir un nombre';return;}
 if(!c){document.getElementById('nameError').innerText='Debes escribir un código';return;}
 if(c!==OWNER_CODE&&c!==USER_CODE){document.getElementById('nameError').innerText='Código incorrecto';return;}
-
 isOwner=(c===OWNER_CODE);isAdmin=isOwner;userName=n;userCode=c;
-
 try {
   const { data, error } = await supabaseClient
     .from('usuarios')
-    .upsert({ 
-      nombre: n.toLowerCase(),
-      codigo: c,
-      rol: isOwner ? 'owner' : 'usuario'
-    }, { onConflict: 'nombre' });
-  if (error) {
-    console.error('Error guardando usuario:', error);
-  } else {
-    console.log('✅ Usuario guardado en Supabase:', n);
-  }
-} catch(e) {
-  console.error('Error de conexión:', e);
-}
-
+    .upsert({ nombre: n.toLowerCase(), codigo: c, rol: isOwner ? 'owner' : 'usuario' }, { onConflict: 'nombre' });
+  if (error) console.error('Error guardando usuario:', error);
+  else console.log('✅ Usuario guardado en Supabase:', n);
+} catch(e) { console.error('Error de conexión:', e); }
 usuariosRegistrados[n.toLowerCase()]={name:n,owner:isOwner,admin:isAdmin};
 var ini=n.substring(0,2).toUpperCase();
 ['userAvatar','userAvatar2','userAvatar4','userAvatar6','userAvatarPC','profileAvatar'].forEach(function(id){var el=document.getElementById(id);if(el)el.innerText=ini;});
@@ -869,9 +808,6 @@ document.getElementById('verifiedBadge').style.display='inline-flex';
 checkPC();initHero();buildHomeSections();buildExplore();
 }
 
-/* ============================================
-   HERO
-   ============================================ */
 function initHero(){
 var dots=document.getElementById('heroDots');dots.innerHTML='';
 HERO_ITEMS.forEach(function(item,i){var s=document.createElement('span');if(i===0)s.classList.add('active');s.onclick=function(){setHero(i);};dots.appendChild(s);});
@@ -895,9 +831,6 @@ box.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-h
 window.addEventListener('scroll',function(){var y=window.scrollY;var blur=Math.min(y/30,8);var bg=document.getElementById('heroBg');if(bg)bg.style.filter='blur('+blur+'px) brightness('+(1-blur/20)+')';});
 });
 
-/* ============================================
-   NAVEGACIÓN
-   ============================================ */
 function go(id,btn){
 lastScreen=id;
 document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
@@ -909,9 +842,6 @@ if(id==='list')renderList();
 window.scrollTo(0,0);
 }
 
-/* ============================================
-   BUSCADOR
-   ============================================ */
 function toggleSearch(){
 var box=document.getElementById('searchBox');var home=document.getElementById('homeContent');var res=document.getElementById('searchResults');
 box.classList.toggle('active');
@@ -952,9 +882,6 @@ document.getElementById('homeContent').style.display='none';
 res.style.display='block';
 }
 
-/* ============================================
-   CATEGORÍAS
-   ============================================ */
 function switchCat(cat,btn){
 document.querySelectorAll('.cat-pane').forEach(function(p){p.style.display='none';});
 var t=document.getElementById('cat-'+cat);if(t)t.style.display='block';
@@ -968,9 +895,6 @@ document.getElementById('season-'+id).style.display='block';
 document.querySelectorAll('.season-tab').forEach(function(x){x.classList.remove('active');});btn.classList.add('active');
 }
 
-/* ============================================
-   DETALLE
-   ============================================ */
 function openDetail(title,meta,syn,img,isSerie){
 currentDetail={title:title,meta:meta,syn:syn,img:img,isSerie:isSerie};
 var item=ALL_ITEMS.filter(function(x){return x.title===title;})[0]||{};
@@ -1008,33 +932,16 @@ document.getElementById('commentList').innerHTML=h;
 async function addComment(){
 var inp=document.getElementById('commentInput');var txt=inp.value.trim();
 if(!txt||!currentDetail)return;
-
 try {
-  const { error } = await supabaseClient
-    .from('comentarios')
-    .insert({ 
-      contenido_id: currentDetail.id || null,
-      usuario_nombre: userName || 'Tú',
-      texto: txt,
-      estrellas: null
-    });
-  if (error) {
-    console.error('Error guardando comentario:', error);
-  } else {
-    console.log('✅ Comentario guardado en Supabase');
-  }
-} catch(e) {
-  console.error('Error de conexión:', e);
-}
-
+  const { error } = await supabaseClient.from('comentarios').insert({ contenido_id: currentDetail.id || null, usuario_nombre: userName || 'Tú', texto: txt, estrellas: null });
+  if (error) console.error('Error guardando comentario:', error);
+  else console.log('✅ Comentario guardado en Supabase');
+} catch(e) { console.error('Error de conexión:', e); }
 if(!commentsByTitle[currentDetail.title])commentsByTitle[currentDetail.title]=[];
 commentsByTitle[currentDetail.title].push({user:userName||'Tú',text:txt});
 inp.value='';renderComments(currentDetail.title);updateCounters();
 }
 
-/* ============================================
-   RATING
-   ============================================ */
 function rateItem(stars){
 _pendingRating=stars;
 document.getElementById('ratingModalTitle').innerText='⭐ '+stars+' estrella'+(stars>1?'s':'');
@@ -1053,9 +960,6 @@ renderComments(currentDetail.title);updateCounters();
 document.getElementById('ratingModal').classList.remove('active');
 }
 
-/* ============================================
-   GUARDAR EN LISTA
-   ============================================ */
 function askSaveOption(){
 if(!currentDetail)return;
 document.getElementById('modalTitle').innerText=currentDetail.title;
@@ -1072,21 +976,10 @@ document.getElementById('modalOverlay').classList.add('active');
 async function saveWithStatus(status){
 if(!currentDetail)return;
 try {
-  const { error } = await supabaseClient
-    .from('mi_lista')
-    .upsert({ 
-      usuario_nombre: userName || 'Tú',
-      contenido_id: currentDetail.id || 1,
-      estado: status
-    }, { onConflict: 'usuario_nombre,contenido_id' });
-  if (error) {
-    console.error('Error guardando en lista:', error);
-  } else {
-    console.log('✅ Guardado en Mi Lista:', currentDetail.title);
-  }
-} catch(e) {
-  console.error('Error de conexión:', e);
-}
+  const { error } = await supabaseClient.from('mi_lista').upsert({ usuario_nombre: userName || 'Tú', contenido_id: currentDetail.id || 1, estado: status }, { onConflict: 'usuario_nombre,contenido_id' });
+  if (error) console.error('Error guardando en lista:', error);
+  else console.log('✅ Guardado en Mi Lista:', currentDetail.title);
+} catch(e) { console.error('Error de conexión:', e); }
 var idx=-1;
 for(var i=0;i<myList.length;i++){if(myList[i].title===currentDetail.title){idx=i;break;}}
 if(idx>=0)myList[idx].status=status;
@@ -1110,9 +1003,6 @@ else myList.push({title:t,meta:HERO_ITEMS[heroIdx].cat,img:HERO_ITEMS[heroIdx].i
 updatePlusButtons();updateCounters();
 }
 
-/* ============================================
-   PERFIL
-   ============================================ */
 function changeAvatar(){
 var input=document.createElement('input');input.type='file';input.accept='image/*';
 input.onchange=function(e){var file=e.target.files[0];if(!file)return;var reader=new FileReader();reader.onload=function(ev){var av=document.getElementById('profileAvatar');av.style.backgroundImage="url('"+ev.target.result+"')";av.innerText='';};reader.readAsDataURL(file);};
@@ -1145,9 +1035,6 @@ var b2=document.getElementById('heroPlusBtn');if(b2)b2.classList.toggle('saved',
 }
 }
 
-/* ============================================
-   MI LISTA
-   ============================================ */
 function filterList(btn,filter){
 currentFilter=filter;
 document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');
@@ -1165,9 +1052,6 @@ grid.innerHTML=h;
 }
 function backFromDetail(){go(lastScreen,null);}
 
-/* ============================================
-   ADMIN
-   ============================================ */
 function openAdmin(){
 if(!isAdmin)return;
 document.getElementById('adminScreen').style.display='block';renderAdminUsers();
@@ -1177,7 +1061,9 @@ function adminTab(tab,btn){
 document.querySelectorAll('.admin-tab').forEach(function(t){t.classList.remove('active');});btn.classList.add('active');
 document.getElementById('adminAdd').style.display=tab==='add'?'block':'none';
 document.getElementById('adminUsers').style.display=tab==='users'?'block':'none';
+document.getElementById('adminContent').style.display=tab==='content'?'block':'none';
 if(tab==='users')renderAdminUsers();
+if(tab==='content')renderAdminContent();
 }
 document.querySelectorAll('#catBtns .cat-btn').forEach(function(b){
 b.addEventListener('click',function(){document.querySelectorAll('#catBtns .cat-btn').forEach(function(x){x.classList.remove('active');});this.classList.add('active');_adminCat=this.dataset.cat;});
@@ -1207,6 +1093,7 @@ function makeAdmin(key){usuariosRegistrados[key].admin=true;renderAdminUsers();}
 function removeAdmin(key){usuariosRegistrados[key].admin=false;renderAdminUsers();}
 function kickUser(key){if(confirm('¿Expulsar a '+usuariosRegistrados[key].name+'?')){delete usuariosRegistrados[key];renderAdminUsers();}}
 document.addEventListener('click',function(){document.querySelectorAll('.u-menu').forEach(function(m){m.classList.remove('active');});});
+
 async function publish(){
 var name=document.getElementById('adminName').value.trim();
 var syn=document.getElementById('adminSyn').value.trim();
@@ -1216,59 +1103,27 @@ var linkLat=document.getElementById('linkLat')?.value.trim()||'';
 var linkIng=document.getElementById('linkIng')?.value.trim()||'';
 var linkOtr=document.getElementById('linkOtr')?.value.trim()||'';
 if(!name||!imgV){alert('Nombre y póster vertical son obligatorios');return;}
-
 var meta=(new Date().getFullYear())+' · '+_adminGenre;
 var isSerie=(_adminCat==='series'||_adminCat==='animes'||_adminCat==='kdramas'||_adminCat==='telenovelas');
-
+var payload={titulo: name, meta: meta, sinopsis: syn || 'Sin sinopsis.', img_vertical: imgV, img_horizontal: imgH || imgV, categoria: _adminCat, genero: _adminGenre, es_serie: isSerie, link_latino: linkLat, link_ingles: linkIng, link_otros: linkOtr};
 try {
-  const { data, error } = await supabaseClient
-    .from('contenido')
-    .insert({
-      titulo: name,
-      meta: meta,
-      sinopsis: syn || 'Sin sinopsis.',
-      img_vertical: imgV,
-      img_horizontal: imgH || imgV,
-      categoria: _adminCat,
-      genero: _adminGenre,
-      es_serie: isSerie,
-      link_latino: linkLat,
-      link_ingles: linkIng,
-      link_otros: linkOtr
-    })
-    .select()
-    .single();
-  
-  if (error) {
-    console.error('Error publicando:', error);
-    alert('❌ Error: ' + error.message);
-    return;
+  var result;
+  if(window._editingContentId){
+    result = await supabaseClient.from('contenido').update(payload).eq('id', window._editingContentId).select().single();
+  } else {
+    result = await supabaseClient.from('contenido').insert(payload).select().single();
   }
-  
-  console.log('✅ Publicado en Supabase:', data);
-  alert('✅ Publicado correctamente');
-  
-  ALL_ITEMS.push({
-    id: data.id,
-    title: name,
-    meta: meta,
-    img: imgV,
-    imgH: imgH || imgV,
-    syn: syn || 'Sin sinopsis.',
-    isSerie: isSerie,
-    cat: _adminCat,
-    genre: _adminGenre,
-    linkLat: linkLat,
-    linkIng: linkIng,
-    linkOtr: linkOtr
-  });
-  
-} catch(e) {
-  console.error('Error de conexión:', e);
-  alert('❌ Error de conexión');
-  return;
-}
-
+  if (result.error) { console.error('Error:', result.error); alert('❌ Error: ' + result.error.message); return; }
+  console.log('✅ Guardado en Supabase:', result.data);
+  alert(window._editingContentId ? '✅ Actualizado correctamente' : '✅ Publicado correctamente');
+  if(window._editingContentId){
+    var idx=ALL_ITEMS.findIndex(function(x){return x.id===window._editingContentId;});
+    if(idx>=0){ALL_ITEMS[idx]={id: result.data.id,title:name,meta:meta,img:imgV,imgH:imgH||imgV,syn:syn||'Sin sinopsis.',isSerie:isSerie,cat:_adminCat,genre:_adminGenre};}
+  } else {
+    ALL_ITEMS.push({id:result.data.id,title:name,meta:meta,img:imgV,imgH:imgH||imgV,syn:syn||'Sin sinopsis.',isSerie:isSerie,cat:_adminCat,genre:_adminGenre});
+  }
+} catch(e) { console.error('Error de conexión:', e); alert('❌ Error de conexión'); return; }
+window._editingContentId = null;
 document.getElementById('adminName').value='';
 document.getElementById('adminSyn').value='';
 document.getElementById('imgUrlV').value='';
@@ -1278,11 +1133,62 @@ document.getElementById('imgPreviewH').style.backgroundImage='';
 if(document.getElementById('linkLat'))document.getElementById('linkLat').value='';
 if(document.getElementById('linkIng'))document.getElementById('linkIng').value='';
 if(document.getElementById('linkOtr'))document.getElementById('linkOtr').value='';
-
 buildHomeSections();
 buildExplore();
 closeAdmin();
 }
+
+async function renderAdminContent(){
+var list=document.getElementById('adminContentList');
+list.innerHTML='<div style="text-align:center;padding:40px;color:#8e8e93">Cargando...</div>';
+try {
+  const { data, error } = await supabaseClient.from('contenido').select('*').order('id', { ascending: false });
+  if (error) { list.innerHTML='<div style="text-align:center;padding:40px;color:#ff453a">Error: '+error.message+'</div>'; return; }
+  if (!data || !data.length) { list.innerHTML='<div style="text-align:center;padding:40px;color:#8e8e93">No hay contenido aún. Publica algo desde "Agregar".</div>'; return; }
+  var h='';
+  data.forEach(function(item){
+    h+='<div class="user-row" style="margin-bottom:12px"><div class="u-info"><div class="u-avatar" style="background-image:url(\''+item.img_vertical+'\');background-size:cover;background-position:center"></div><div><div class="u-name">'+item.titulo+'</div><div class="u-role">'+item.categoria+' · '+item.genero+' · ID: '+item.id+'</div></div></div><div style="display:flex;gap:8px"><button class="u-menu-btn" onclick="editContent('+item.id+')" title="Editar" style="background:transparent;border:1px solid #3a3a3c"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:#fff;stroke-width:2;fill:none"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button><button class="u-menu-btn" onclick="deleteContent('+item.id+',\''+item.titulo.replace(/\'/g,"\\'")+'\')" title="Eliminar" style="background:transparent;border:1px solid #3a3a3c"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:#fff;stroke-width:2;fill:none"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></button></div></div>';
+  });
+  list.innerHTML=h;
+} catch(e) { list.innerHTML='<div style="text-align:center;padding:40px;color:#ff453a">Error de conexión</div>'; }
+}
+
+async function editContent(id){
+try {
+  const { data, error } = await supabaseClient.from('contenido').select('*').eq('id', id).single();
+  if (error || !data) { alert('Error cargando'); return; }
+  document.querySelectorAll('.admin-tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelector('.admin-tab').classList.add('active');
+  document.getElementById('adminAdd').style.display='block';
+  document.getElementById('adminUsers').style.display='none';
+  document.getElementById('adminContent').style.display='none';
+  document.getElementById('adminName').value=data.titulo||'';
+  document.getElementById('adminSyn').value=data.sinopsis||'';
+  document.getElementById('imgUrlV').value=data.img_vertical||'';
+  document.getElementById('imgUrlH').value=data.img_horizontal||'';
+  document.getElementById('imgPreviewV').style.backgroundImage="url('"+data.img_vertical+"')";
+  document.getElementById('imgPreviewH').style.backgroundImage="url('"+data.img_horizontal+"')";
+  if(document.getElementById('linkLat'))document.getElementById('linkLat').value=data.link_latino||'';
+  if(document.getElementById('linkIng'))document.getElementById('linkIng').value=data.link_ingles||'';
+  if(document.getElementById('linkOtr'))document.getElementById('linkOtr').value=data.link_otros||'';
+  window._editingContentId = id;
+  alert('✅ Editando: ' + data.titulo + '\n\nModifica los campos y toca "Publicar" para guardar los cambios.');
+} catch(e) { console.error(e); alert('Error de conexión'); }
+}
+
+async function deleteContent(id, titulo){
+if(!confirm('¿Eliminar "'+titulo+'"?\n\nEsta acción no se puede deshacer.'))return;
+try {
+  const { error } = await supabaseClient.from('contenido').delete().eq('id', id);
+  if (error) { alert('❌ Error: '+error.message); return; }
+  alert('✅ Eliminado correctamente');
+  renderAdminContent();
+  ALL_ITEMS = ALL_ITEMS.filter(function(x){return x.id !== id;});
+  buildHomeSections();
+  buildExplore();
+} catch(e) { alert('Error de conexión'); }
+}
+
 function loadLocalImage(e,type){
 var file=e.target.files[0];if(!file)return;
 var reader=new FileReader();
@@ -1293,9 +1199,6 @@ else{document.getElementById('imgPreviewH').style.backgroundImage='url('+ev.targ
 reader.readAsDataURL(file);
 }
 
-/* ============================================
-   CONSTRUIR HOME + EXPLORE
-   ============================================ */
 function itemCardHTML(x){
 return '<div onclick="openDetail(\''+x.title+'\',\''+x.meta+'\',\''+x.syn+'\',\''+x.img+'\','+x.isSerie+')" style="cursor:pointer"><div class="grid-poster" style="background-image:url(\''+x.img+'\')"></div><div class="grid-title">'+x.title+'</div><div class="grid-meta">'+x.meta+'</div></div>';
 }
@@ -1326,9 +1229,6 @@ el.innerHTML=arr.length?arr.map(itemCardHTML).join(''):'<div style="grid-column:
 });
 }
 
-/* ============================================
-   CATEGORÍA (VER MÁS)
-   ============================================ */
 var catLastScreen='home';
 function openCategory(cat){
 catLastScreen=lastScreen;
@@ -1351,9 +1251,6 @@ window.scrollTo(0,0);
 }
 function backFromCategory(){go(catLastScreen,null);}
 
-/* ============================================
-   REPRODUCTOR
-   ============================================ */
 var playerVideo,controlsTimer,isPlaying=false;
 function playFromHero(){openPlayer(HERO_ITEMS[heroIdx].title,HERO_ITEMS[heroIdx].cat+' · '+HERO_ITEMS[heroIdx].dur);}
 function playFromDetail(){openPlayer(document.getElementById('d-title').innerText,document.getElementById('d-cat').innerText+' · '+document.getElementById('d-year').innerText);}
@@ -1425,18 +1322,12 @@ document.getElementById('pDuration').innerText=formatTime(playerVideo.duration);
 });
 });
 
-/* ============================================
-   MODO B/N
-   ============================================ */
 function toggleBW(){
 var html=document.documentElement;
 html.classList.toggle('bw-mode');
 document.querySelectorAll('.bw-btn').forEach(function(b){b.classList.toggle('active',html.classList.contains('bw-mode'));});
 }
 
-/* ============================================
-   MODO PC
-   ============================================ */
 function checkPC(){
 var pcNav=document.getElementById('pcNav');
 var bottomNav=document.getElementById('bottomNav');
