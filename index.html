@@ -222,8 +222,6 @@ body.edit-mode .edit-overlay{display:flex !important}
 .modal-option-title{font-size:15px;font-weight:600;color:#fff;margin-bottom:2px}
 .modal-option-desc{font-size:11px;color:#8e8e93}
 .modal-cancel{width:100%;padding:16px;background:transparent;border:none;color:#8e8e93;font-size:14px;font-weight:600;font-family:'Inter',sans-serif;margin-top:6px;cursor:pointer}
-
-/* PLAYER */
 .player-screen{position:fixed;inset:0;background:#000;z-index:99999;display:none;overflow:hidden}
 .player-screen.active{display:block}
 .player-rotate-msg{position:absolute;inset:0;background:#000;z-index:20;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px}
@@ -270,8 +268,6 @@ body.edit-mode .edit-overlay{display:flex !important}
 .spinner{width:60px;height:60px;border:4px solid rgba(255,255,255,.15);border-top-color:#fff;border-radius:50%;animation:spin 1s linear infinite;margin-bottom:20px}
 @keyframes spin{to{transform:rotate(360deg)}}
 .player-loading p{font-size:14px;color:#8e8e93;font-weight:500}
-
-/* ========== PAUSA OVERLAY ESTILO NETFLIX ========== */
 .pause-overlay{position:absolute;inset:0;z-index:7;display:none;flex-direction:column;overflow:hidden}
 .pause-overlay.active{display:flex}
 .pause-bg{position:absolute;inset:-60px;background-size:cover;background-position:center 30%;filter:blur(50px) brightness(.45);transform:scale(1.15);transition:opacity .6s ease}
@@ -307,7 +303,6 @@ body.edit-mode .edit-overlay{display:flex !important}
   .pause-thumb-name{font-size:10px}
   .pause-close{top:12px;left:12px}
 }
-
 .empty-state{text-align:center;padding:80px 30px;color:#636366}
 .empty-state svg{width:60px;height:60px;stroke:#333;stroke-width:1.5;fill:none;margin-bottom:20px}
 .empty-state h3{font-size:18px;font-weight:700;color:#fff;margin-bottom:8px}
@@ -316,7 +311,6 @@ body.edit-mode .edit-overlay{display:flex !important}
 .filter-row::-webkit-scrollbar{display:none}
 .filter-btn{flex:0 0 auto;padding:10px 18px;border-radius:20px;background:#1c1c1e;color:#8e8e93;font-size:12px;font-weight:600;border:1px solid #2c2c2e;font-family:'Inter',sans-serif;white-space:nowrap;cursor:pointer}
 .filter-btn.active{background:#fff;color:#000;border-color:#fff}
-
 @media (min-width:900px){
   .bottom-nav{display:none !important}
   .pc-nav{position:fixed;top:0;left:0;right:0;padding:18px 60px;display:flex;justify-content:space-between;align-items:center;background:rgba(20,20,22,.5);backdrop-filter:blur(28px);border-bottom:1px solid rgba(255,255,255,.05);z-index:1000}
@@ -1439,8 +1433,8 @@ function playFromDetail(){
 
 async function openPlayer(title,subtitle,links,contentId){
   document.getElementById('playerScreen').classList.add('active');
-  document.getElementById('pTitle').innerText = subtitle || 'CINEFILOS';
-  document.getElementById('pSubtitle').innerText = title || 'Reproduciendo';
+  document.getElementById('pTitle').innerText='CINEFILOS';
+  document.getElementById('pSubtitle').innerText=title||'Reproduciendo';
   playerVideo=document.getElementById('playerVideo');
   currentVideoLinks=links||{};
   currentContentId=contentId;
@@ -1647,7 +1641,6 @@ function toggleFullscreen(){
   else{if(document.exitFullscreen)document.exitFullscreen();}
 }
 
-/* OVERLAY PAUSA ESTILO NETFLIX */
 var pauseInterval=null;
 var pauseIndex=0;
 var pauseList=[];
@@ -1820,4 +1813,3 @@ document.addEventListener('DOMContentLoaded',checkPC);
 </script>
 </body>
 </html>
-
