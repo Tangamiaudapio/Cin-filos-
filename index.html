@@ -103,6 +103,15 @@ body.edit-mode .edit-overlay{display:flex !important}
 .detail-rating-info{flex:1}
 .detail-rating-value{font-size:18px;font-weight:800;line-height:1}
 .detail-rating-count{font-size:11px;color:#8e8e93;margin-top:4px}
+
+/* ========== RELACIONADOS ========== */
+.related-title{font-size:18px;font-weight:800;padding:24px 22px 14px;letter-spacing:-.3px}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 22px 40px}
+.related-item{cursor:pointer;position:relative}
+.related-item > div{width:100%}
+.related-poster{width:100%;height:180px;border-radius:10px;background-color:#1c1c1e;background-size:cover;background-position:center;margin-bottom:6px;display:block}
+.related-name{font-size:11px;font-weight:600;line-height:1.3;text-align:center}
+
 .comments-title{font-size:15px;font-weight:700;padding:0 22px;margin-bottom:12px;text-align:left}
 .comment{margin:0 22px 10px;padding:14px;background:#0d0d0d;border:1px solid #1c1c1e;border-radius:14px;display:flex;gap:12px}
 .comment-avatar{width:36px;height:36px;border-radius:50%;background:#1c1c1e;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0}
@@ -264,18 +273,42 @@ body.edit-mode .edit-overlay{display:flex !important}
 @keyframes spin{to{transform:rotate(360deg)}}
 .player-loading p{font-size:14px;color:#8e8e93;font-weight:500}
 
-/* ========== PAUSA OVERLAY ========== */
-.pause-overlay{position:absolute;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(20px);z-index:7;display:none;flex-direction:column;justify-content:center;padding:30px 24px;overflow-y:auto}
+/* ========== PAUSA OVERLAY ESTILO NETFLIX ========== */
+.pause-overlay{position:absolute;inset:0;z-index:7;display:none;flex-direction:column;overflow:hidden}
 .pause-overlay.active{display:flex}
-.pause-overlay-title{font-size:18px;font-weight:800;margin-bottom:4px;letter-spacing:-.3px}
-.pause-overlay-sub{font-size:12px;color:#8e8e93;margin-bottom:22px}
-.pause-suggestions{display:flex;gap:12px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none}
-.pause-suggestions::-webkit-scrollbar{display:none}
-.pause-suggestion{flex:0 0 130px;cursor:pointer}
-.pause-suggestion-poster{width:130px;height:195px;border-radius:10px;background-size:cover;background-position:center;margin-bottom:8px;border:1px solid rgba(255,255,255,.1)}
-.pause-suggestion-name{font-size:12px;font-weight:600;line-height:1.3;text-align:center}
-.pause-continue-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;color:#000;border:none;padding:14px 30px;border-radius:50px;font-size:14px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;margin:24px auto 0;width:fit-content;box-shadow:0 10px 40px rgba(255,255,255,.2)}
-.pause-continue-btn svg{width:16px;height:16px;fill:#000}
+.pause-bg{position:absolute;inset:-60px;background-size:cover;background-position:center 30%;filter:blur(50px) brightness(.45);transform:scale(1.15);transition:opacity .6s ease}
+.pause-bg-sharp{position:absolute;inset:0;background-size:cover;background-position:center 25%;opacity:.35;transition:opacity .6s ease}
+.pause-bg-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.7) 0%,rgba(0,0,0,.85) 60%,rgba(0,0,0,.95) 100%)}
+.pause-content{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;justify-content:center;padding:80px 40px 120px;pointer-events:none}
+.pause-label{font-size:12px;color:#e5e5e5;letter-spacing:4px;text-transform:uppercase;font-weight:700;margin-bottom:20px;opacity:.9}
+.pause-title-big{font-size:72px;font-weight:900;letter-spacing:-3px;line-height:.95;margin-bottom:14px;text-shadow:0 6px 60px rgba(0,0,0,.9);animation:fadeInUp .5s ease}
+.pause-meta-big{font-size:15px;color:#e5e5e5;margin-bottom:26px;font-weight:500;animation:fadeInUp .5s ease .1s backwards}
+.pause-desc-big{font-size:14px;color:#bbb;max-width:520px;line-height:1.6;margin-bottom:30px;animation:fadeInUp .5s ease .15s backwards}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.pause-watch-btn{display:inline-flex;align-items:center;gap:10px;background:#fff;color:#000;border:none;padding:14px 32px;border-radius:50px;font-size:15px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;width:fit-content;pointer-events:auto;box-shadow:0 10px 40px rgba(255,255,255,.15);transition:transform .2s;animation:fadeInUp .5s ease .2s backwards}
+.pause-watch-btn:hover{transform:scale(1.05)}
+.pause-watch-btn svg{width:18px;height:18px;fill:#000}
+.pause-thumbnails{position:absolute;bottom:0;left:0;right:0;padding:20px 40px 30px;display:flex;gap:14px;overflow-x:auto;scrollbar-width:none;z-index:3;background:linear-gradient(0deg,rgba(0,0,0,.9) 0%,transparent 100%)}
+.pause-thumbnails::-webkit-scrollbar{display:none}
+.pause-thumb{flex:0 0 130px;cursor:pointer;transition:all .3s;opacity:.5;pointer-events:auto}
+.pause-thumb.active{opacity:1;transform:scale(1.08)}
+.pause-thumb:hover{opacity:1}
+.pause-thumb-poster{width:130px;height:80px;border-radius:6px;background-size:cover;background-position:center;border:2px solid transparent;margin-bottom:6px;background-color:#1c1c1e}
+.pause-thumb.active .pause-thumb-poster{border-color:#fff;box-shadow:0 0 20px rgba(255,255,255,.4)}
+.pause-thumb-name{font-size:11px;font-weight:600;text-align:center;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pause-close{position:absolute;top:20px;left:20px;z-index:10;width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,.5);backdrop-filter:blur(20px);border:none;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;pointer-events:auto}
+.pause-close svg{width:22px;height:22px;stroke:#fff;stroke-width:2;fill:none}
+
+@media (max-width:899px){
+  .pause-content{padding:60px 22px 140px}
+  .pause-title-big{font-size:42px;letter-spacing:-1.5px}
+  .pause-meta-big{font-size:13px}
+  .pause-desc-big{font-size:13px;margin-bottom:20px}
+  .pause-thumbnails{padding:16px 22px 20px;gap:10px}
+  .pause-thumb{flex:0 0 100px}
+  .pause-thumb-poster{width:100px;height:62px}
+  .pause-thumb-name{font-size:10px}
+}
 
 .empty-state{text-align:center;padding:80px 30px;color:#636366}
 .empty-state svg{width:60px;height:60px;stroke:#333;stroke-width:1.5;fill:none;margin-bottom:20px}
@@ -312,7 +345,9 @@ body.edit-mode .edit-overlay{display:flex !important}
   #s-list,#s-profile,#s-about{padding-top:110px}
   .detail-content{padding:36px 60px;max-width:1200px}
   .detail-title{font-size:58px;margin-top:-140px}
-  .related-grid{grid-template-columns:repeat(6,1fr);padding:20px 60px 60px}
+  .related-title{font-size:22px;padding:30px 60px 16px}
+  .related-grid{grid-template-columns:repeat(6,1fr);padding:0 60px 60px;gap:14px}
+  .related-poster{height:260px}
   .profile-stats-row,.profile-bio,.profile-tabs{max-width:720px;margin-left:auto;margin-right:auto}
   .fav-row,.rating-card,.profile-section-title{max-width:1100px;margin-left:auto;margin-right:auto}
   .admin-screen{padding:30px 60px 180px}
@@ -626,13 +661,23 @@ body.edit-mode .edit-overlay{display:flex !important}
 <p>Cargando video...</p>
 </div>
 <div class="pause-overlay" id="pauseOverlay">
-<div class="pause-overlay-title">¿Qué te gustaría ver?</div>
-<div class="pause-overlay-sub">Otras recomendaciones para ti</div>
-<div class="pause-suggestions" id="pauseSuggestions"></div>
-<button class="pause-continue-btn" onclick="event.stopPropagation();resumeVideo()">
-<svg viewBox="0 0 24 24"><path d="M8 5 L19 12 L8 19 Z"/></svg>
-Continuar viendo
-</button>
+  <div class="pause-bg" id="pauseBg"></div>
+  <div class="pause-bg-sharp" id="pauseBgSharp"></div>
+  <div class="pause-bg-overlay"></div>
+  <button class="pause-close" onclick="event.stopPropagation();resumeVideo()">
+    <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6l-12 12"/></svg>
+  </button>
+  <div class="pause-content">
+    <div class="pause-label">¿Qué te gustaría ver?</div>
+    <div class="pause-title-big" id="pauseTitleBig">Título</div>
+    <div class="pause-meta-big" id="pauseMetaBig">2026 · Drama</div>
+    <div class="pause-desc-big" id="pauseDescBig">Sinopsis...</div>
+    <button class="pause-watch-btn" id="pauseWatchBtn" onclick="event.stopPropagation();playCurrentPauseSuggestion()">
+      <svg viewBox="0 0 24 24"><path d="M8 5 L19 12 L8 19 Z"/></svg>
+      Ver ahora
+    </button>
+  </div>
+  <div class="pause-thumbnails" id="pauseThumbnails"></div>
 </div>
 <div class="lang-menu" id="langMenu">
 <div class="lang-menu-title">Idioma del audio</div>
@@ -1513,8 +1558,9 @@ function playFromDetail(){
 
 async function openPlayer(title,subtitle,links,contentId){
   document.getElementById('playerScreen').classList.add('active');
-  document.getElementById('pTitle').innerText='CINEFILOS';
-  document.getElementById('pSubtitle').innerText=title||'Reproduciendo';
+  // ✅ FIX: ahora se usa el parámetro subtitle (metadata) en el título superior
+  document.getElementById('pTitle').innerText = subtitle || 'CINEFILOS';
+  document.getElementById('pSubtitle').innerText = title || 'Reproduciendo';
   playerVideo=document.getElementById('playerVideo');
   currentVideoLinks=links||{};
   currentContentId=contentId;
@@ -1729,30 +1775,96 @@ function toggleFullscreen(){
   else{if(document.exitFullscreen)document.exitFullscreen();}
 }
 
-/* OVERLAY PAUSA */
+/* ============================================
+   OVERLAY PAUSA ESTILO NETFLIX
+   ============================================ */
+var pauseInterval=null;
+var pauseIndex=0;
+var pauseList=[];
+
 function showPauseOverlay(){
   var overlay=document.getElementById('pauseOverlay');
-  var container=document.getElementById('pauseSuggestions');
-  if(!overlay || !container)return;
+  if(!overlay)return;
   
   var pool = ALL_ITEMS.filter(function(x){
     return !currentContentId || x.id !== currentContentId;
   });
   pool.sort(function(){return Math.random()-.5;});
-  var suggestions = pool.slice(0,8);
+  pauseList = pool.slice(0,10);
+  pauseIndex = 0;
   
-  var h='';
-  suggestions.forEach(function(x){
-    h+='<div class="pause-suggestion" onclick="event.stopPropagation();playSuggestion('+x.id+')"><div class="pause-suggestion-poster" style="background-image:url(\''+x.img+'\')"></div><div class="pause-suggestion-name">'+x.title+'</div></div>';
-  });
-  container.innerHTML=h || '<div style="color:#636366;padding:20px">Sin sugerencias</div>';
+  if(!pauseList.length){
+    overlay.classList.add('active');
+    return;
+  }
   
+  updatePauseDisplay();
   overlay.classList.add('active');
+  
   var pc=document.getElementById('playerControls');
   if(pc)pc.classList.add('hidden');
+  
+  clearInterval(pauseInterval);
+  pauseInterval = setInterval(function(){
+    pauseIndex = (pauseIndex + 1) % pauseList.length;
+    updatePauseDisplay();
+  }, 5000);
+}
+
+function updatePauseDisplay(){
+  var item = pauseList[pauseIndex];
+  if(!item)return;
+  
+  var bg = document.getElementById('pauseBg');
+  var bgSharp = document.getElementById('pauseBgSharp');
+  
+  bg.style.opacity = '0';
+  bgSharp.style.opacity = '0';
+  
+  setTimeout(function(){
+    bg.style.backgroundImage = "url('"+item.img+"')";
+    bgSharp.style.backgroundImage = "url('"+item.img+"')";
+    bg.style.opacity = '1';
+    bgSharp.style.opacity = '.35';
+  }, 200);
+  
+  document.getElementById('pauseTitleBig').innerText = item.title;
+  document.getElementById('pauseMetaBig').innerText = item.meta || '';
+  document.getElementById('pauseDescBig').innerText = item.syn || '';
+  
+  var container = document.getElementById('pauseThumbnails');
+  var h = '';
+  pauseList.forEach(function(x, i){
+    h += '<div class="pause-thumb'+(i===pauseIndex?' active':'')+'" onclick="event.stopPropagation();jumpToPause('+i+')"><div class="pause-thumb-poster" style="background-image:url(\''+x.img+'\')"></div><div class="pause-thumb-name">'+x.title+'</div></div>';
+  });
+  container.innerHTML = h;
+  
+  setTimeout(function(){
+    var activeThumb = container.querySelector('.pause-thumb.active');
+    if(activeThumb){
+      activeThumb.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+    }
+  }, 100);
+}
+
+function jumpToPause(index){
+  pauseIndex = index;
+  updatePauseDisplay();
+  clearInterval(pauseInterval);
+  pauseInterval = setInterval(function(){
+    pauseIndex = (pauseIndex + 1) % pauseList.length;
+    updatePauseDisplay();
+  }, 5000);
+}
+
+function playCurrentPauseSuggestion(){
+  var item = pauseList[pauseIndex];
+  if(!item)return;
+  playSuggestion(item.id);
 }
 
 function hidePauseOverlay(){
+  clearInterval(pauseInterval);
   var overlay=document.getElementById('pauseOverlay');
   if(overlay)overlay.classList.remove('active');
 }
@@ -1845,4 +1957,3 @@ document.addEventListener('DOMContentLoaded',checkPC);
 </script>
 </body>
 </html>
-
