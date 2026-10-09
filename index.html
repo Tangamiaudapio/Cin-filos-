@@ -13,7 +13,7 @@ body{background:#000;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe
 .screen.active{display:block}
 html{transition:filter .5s ease}
 html.bw-mode{filter:grayscale(.85) contrast(1.05) brightness(1.02)}
-html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,html.bw-mode .poster-wide,html.bw-mode .poster-vert,html.bw-mode .grid-poster,html.bw-mode .chart-poster,html.bw-mode .episode-img,html.bw-mode .news-mini-img,html.bw-mode .fav-poster,html.bw-mode .rating-card-poster,html.bw-mode .detail-hero,html.bw-mode .about-hero-big,html.bw-mode .welcome-bg-img,html.bw-mode .img-preview{filter:grayscale(.85) contrast(1.02) brightness(1.03)}
+html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,html.bw-mode .poster-wide,html.bw-mode .poster-vert,html.bw-mode .grid-poster,html.bw-mode .chart-poster,html.bw-mode .episode-img,html.bw-mode .news-mini-img,html.bw-mode .fav-poster,html.bw-mode .rating-card-poster,html.bw-mode .detail-hero,html.bw-mode .about-hero-big,html.bw-mode .welcome-bg-img,html.bw-mode .img-preview,html.bw-mode .related-poster{filter:grayscale(.85) contrast(1.02) brightness(1.03)}
 .bw-btn{width:40px;height:40px;border-radius:50%;background:#1c1c1e;border:1px solid #2c2c2e;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;flex-shrink:0}
 .bw-btn svg{width:20px;height:20px;stroke:#fff;stroke-width:1.8;fill:none}
 .bw-btn.active{background:#fff;color:#000}
@@ -76,7 +76,7 @@ body.edit-mode .edit-overlay{display:flex !important}
 .news-mini-title{font-size:13px;font-weight:600;line-height:1.3}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:0 22px}
 .grid-item{position:relative}
-.grid-poster{width:100%;aspect-ratio:2/3;border-radius:12px;background-size:cover;background-position:center}
+.grid-poster{width:100%;aspect-ratio:2/3;border-radius:12px;background-size:cover;background-position:center;background-color:#1c1c1e}
 .grid-title{margin-top:8px;font-size:14px;font-weight:600}
 .grid-meta{font-size:12px;color:#8e8e93;margin-top:2px}
 .tabs{display:flex;gap:8px;padding:0 22px 12px;overflow-x:auto;scrollbar-width:none}
@@ -103,15 +103,13 @@ body.edit-mode .edit-overlay{display:flex !important}
 .detail-rating-info{flex:1}
 .detail-rating-value{font-size:18px;font-weight:800;line-height:1}
 .detail-rating-count{font-size:11px;color:#8e8e93;margin-top:4px}
-
-/* ========== RELACIONADOS ========== */
-.related-title{font-size:18px;font-weight:800;padding:24px 22px 14px;letter-spacing:-.3px}
-.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 22px 40px}
+.related-title{font-size:16px;font-weight:700;padding:0 22px;margin:26px 0 14px;position:relative;padding-bottom:10px}
+.related-title::after{content:'';position:absolute;bottom:0;left:22px;width:36px;height:2px;background:#fff;border-radius:2px}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:20px 22px 40px}
 .related-item{cursor:pointer;position:relative}
 .related-item > div{width:100%}
-.related-poster{width:100%;height:180px;border-radius:10px;background-color:#1c1c1e;background-size:cover;background-position:center;margin-bottom:6px;display:block}
+.related-poster{width:100%;height:170px;border-radius:10px;background-color:#1c1c1e;background-size:cover;background-position:center;margin-bottom:6px;display:block}
 .related-name{font-size:11px;font-weight:600;line-height:1.3;text-align:center}
-
 .comments-title{font-size:15px;font-weight:700;padding:0 22px;margin-bottom:12px;text-align:left}
 .comment{margin:0 22px 10px;padding:14px;background:#0d0d0d;border:1px solid #1c1c1e;border-radius:14px;display:flex;gap:12px}
 .comment-avatar{width:36px;height:36px;border-radius:50%;background:#1c1c1e;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0}
@@ -225,7 +223,7 @@ body.edit-mode .edit-overlay{display:flex !important}
 .modal-option-desc{font-size:11px;color:#8e8e93}
 .modal-cancel{width:100%;padding:16px;background:transparent;border:none;color:#8e8e93;font-size:14px;font-weight:600;font-family:'Inter',sans-serif;margin-top:6px;cursor:pointer}
 
-/* ========== REPRODUCTOR ========== */
+/* PLAYER */
 .player-screen{position:fixed;inset:0;background:#000;z-index:99999;display:none;overflow:hidden}
 .player-screen.active{display:block}
 .player-rotate-msg{position:absolute;inset:0;background:#000;z-index:20;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px}
@@ -298,16 +296,16 @@ body.edit-mode .edit-overlay{display:flex !important}
 .pause-thumb-name{font-size:11px;font-weight:600;text-align:center;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pause-close{position:absolute;top:20px;left:20px;z-index:10;width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,.5);backdrop-filter:blur(20px);border:none;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;pointer-events:auto}
 .pause-close svg{width:22px;height:22px;stroke:#fff;stroke-width:2;fill:none}
-
 @media (max-width:899px){
   .pause-content{padding:60px 22px 140px}
   .pause-title-big{font-size:42px;letter-spacing:-1.5px}
   .pause-meta-big{font-size:13px}
-  .pause-desc-big{font-size:13px;margin-bottom:20px}
+  .pause-desc-big{font-size:13px;margin-bottom:20px;max-width:100%}
   .pause-thumbnails{padding:16px 22px 20px;gap:10px}
   .pause-thumb{flex:0 0 100px}
   .pause-thumb-poster{width:100px;height:62px}
   .pause-thumb-name{font-size:10px}
+  .pause-close{top:12px;left:12px}
 }
 
 .empty-state{text-align:center;padding:80px 30px;color:#636366}
@@ -345,8 +343,7 @@ body.edit-mode .edit-overlay{display:flex !important}
   #s-list,#s-profile,#s-about{padding-top:110px}
   .detail-content{padding:36px 60px;max-width:1200px}
   .detail-title{font-size:58px;margin-top:-140px}
-  .related-title{font-size:22px;padding:30px 60px 16px}
-  .related-grid{grid-template-columns:repeat(6,1fr);padding:0 60px 60px;gap:14px}
+  .related-grid{grid-template-columns:repeat(6,1fr);padding:20px 60px 60px}
   .related-poster{height:260px}
   .profile-stats-row,.profile-bio,.profile-tabs{max-width:720px;margin-left:auto;margin-right:auto}
   .fav-row,.rating-card,.profile-section-title{max-width:1100px;margin-left:auto;margin-right:auto}
@@ -768,9 +765,6 @@ var NEWS=[
 {tag:'Cine',title:'Oppenheimer llega al streaming',img:'https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg'}
 ];
 
-/* ============================================
-   MODO EDICIÓN
-   ============================================ */
 function toggleEditMode(){
 isEditMode=!isEditMode;
 document.body.classList.toggle('edit-mode',isEditMode);
@@ -778,19 +772,11 @@ document.querySelectorAll('.edit-mode-btn').forEach(function(b){b.classList.togg
 console.log(isEditMode?'✏️ Edición ON':'✅ Edición OFF');
 }
 
-/* ============================================
-   CARGA DESDE SUPABASE
-   ============================================ */
 async function loadContentFromSupabase(){
 try {
-  const { data, error } = await supabaseClient
-    .from('contenido')
-    .select('*')
-    .order('id', { ascending: false });
-  
+  const { data, error } = await supabaseClient.from('contenido').select('*').order('id', { ascending: false });
   if(error){ console.error(error); return; }
   if(!data || !data.length){ console.log('Sin contenido'); return; }
-  
   ALL_ITEMS = data.map(function(item){
     return {
       id: item.id,
@@ -807,43 +793,26 @@ try {
       linkOtr: item.link_otros || ''
     };
   });
-  
   console.log('✅ Cargadas ' + ALL_ITEMS.length + ' pelis');
-} catch(e) {
-  console.error(e);
-}
+} catch(e) { console.error(e); }
 }
 
 async function loadTop5FromVotes(){
 try {
-  const { data, error } = await supabaseClient
-    .from('comentarios')
-    .select('contenido_id');
-  
+  const { data, error } = await supabaseClient.from('comentarios').select('contenido_id');
   if(error || !data) return;
-  
   var votos = {};
   data.forEach(function(c){
-    if(c.contenido_id){
-      votos[c.contenido_id] = (votos[c.contenido_id] || 0) + 1;
-    }
+    if(c.contenido_id){ votos[c.contenido_id] = (votos[c.contenido_id] || 0) + 1; }
   });
-  
-  TOP_5_IDS = Object.entries(votos)
-    .sort(function(a,b){return b[1]-a[1];})
-    .slice(0,5)
-    .map(function(x){return parseInt(x[0]);});
-  
+  TOP_5_IDS = Object.entries(votos).sort(function(a,b){return b[1]-a[1];}).slice(0,5).map(function(x){return parseInt(x[0]);});
   console.log('✅ Top 5:', TOP_5_IDS);
 } catch(e) { console.error(e); }
 }
 
 async function loadMyListFromSupabase(){
 try {
-  const { data, error } = await supabaseClient
-    .from('mi_lista')
-    .select('*')
-    .eq('usuario_nombre', userName.toLowerCase());
+  const { data, error } = await supabaseClient.from('mi_lista').select('*').eq('usuario_nombre', userName.toLowerCase());
   if(error || !data) return;
   myList = [];
   data.forEach(function(item){
@@ -860,9 +829,6 @@ try {
 } catch(e) { console.error(e); }
 }
 
-/* ============================================
-   LOGIN
-   ============================================ */
 async function enterApp(){
 var n=document.getElementById('nameInput').value.trim();
 var c=document.getElementById('codeInput').value.trim();
@@ -872,9 +838,7 @@ if(c!==OWNER_CODE&&c!==USER_CODE){document.getElementById('nameError').innerText
 isOwner=(c===OWNER_CODE);isAdmin=isOwner;userName=n;userCode=c;
 
 try {
-  await supabaseClient.from('usuarios').upsert({
-    nombre: n.toLowerCase(), codigo: c, rol: isOwner ? 'owner' : 'usuario'
-  }, { onConflict: 'nombre' });
+  await supabaseClient.from('usuarios').upsert({ nombre: n.toLowerCase(), codigo: c, rol: isOwner ? 'owner' : 'usuario' }, { onConflict: 'nombre' });
   console.log('✅ Usuario guardado');
 } catch(e) { console.error(e); }
 
@@ -904,9 +868,6 @@ buildExplore();
 updateCounters();
 }
 
-/* ============================================
-   HERO
-   ============================================ */
 function initHero(){
 var dots=document.getElementById('heroDots');dots.innerHTML='';
 HERO_ITEMS.forEach(function(item,i){
@@ -938,9 +899,6 @@ if(box){
 }
 });
 
-/* ============================================
-   NAVEGACIÓN
-   ============================================ */
 function go(id,btn){
 lastScreen=id;
 document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
@@ -953,9 +911,6 @@ if(id==='profile'){buildFavRow();updateCounters();}
 window.scrollTo(0,0);
 }
 
-/* ============================================
-   BUSCADOR
-   ============================================ */
 function toggleSearch(){
 var box=document.getElementById('searchBox');var home=document.getElementById('homeContent');var res=document.getElementById('searchResults');
 box.classList.toggle('active');
@@ -1004,9 +959,6 @@ document.getElementById('homeContent').style.display='none';
 res.style.display='block';
 }
 
-/* ============================================
-   CATEGORÍAS
-   ============================================ */
 function switchCat(cat,btn){
 document.querySelectorAll('.cat-pane').forEach(function(p){p.style.display='none';});
 var t=document.getElementById('cat-'+cat);if(t)t.style.display='block';
@@ -1015,9 +967,6 @@ window.scrollTo(0,0);
 }
 function pickGenre(btn){document.querySelectorAll('.genre').forEach(function(g){g.classList.remove('active');});btn.classList.add('active');}
 
-/* ============================================
-   DETALLE
-   ============================================ */
 function openDetail(title,meta,syn,img,isSerie){
 if(isEditMode&&isAdmin)return;
 currentDetail={title:title,meta:meta,syn:syn,img:img,isSerie:isSerie};
@@ -1056,25 +1005,16 @@ window.scrollTo(0,0);
 async function loadCommentsForDetail(itemId){
 var title=currentDetail.title;
 try {
-  const { data, error } = await supabaseClient
-    .from('comentarios')
-    .select('*')
-    .eq('contenido_id', itemId)
-    .order('creado_en', { ascending: false });
-  
+  const { data, error } = await supabaseClient.from('comentarios').select('*').eq('contenido_id', itemId).order('creado_en', { ascending: false });
   if(error || !data || !data.length){
     commentsByTitle[title]=[];
     renderComments(title);
     return;
   }
-  commentsByTitle[title] = data.map(function(c){
-    return {user: c.usuario_nombre, text: c.texto};
-  });
+  commentsByTitle[title] = data.map(function(c){ return {user: c.usuario_nombre, text: c.texto}; });
   document.getElementById('d-rating-cnt').innerText = data.length + ' valoraciones';
   renderComments(title);
-} catch(e) {
-  console.error(e);
-}
+} catch(e) { console.error(e); }
 }
 
 function renderComments(title){
@@ -1094,12 +1034,7 @@ var inp=document.getElementById('commentInput');var txt=inp.value.trim();
 if(!txt||!currentDetail)return;
 var item=ALL_ITEMS.filter(function(x){return x.title===currentDetail.title;})[0]||{};
 try {
-  await supabaseClient.from('comentarios').insert({
-    contenido_id: item.id || null,
-    usuario_nombre: userName || 'Tú',
-    texto: txt,
-    estrellas: null
-  });
+  await supabaseClient.from('comentarios').insert({ contenido_id: item.id || null, usuario_nombre: userName || 'Tú', texto: txt, estrellas: null });
   console.log('✅ Comentario guardado');
 } catch(e) { console.error(e); }
 inp.value='';
@@ -1121,12 +1056,7 @@ if(!txt){alert('Escribe por qué diste esa calificación');return;}
 if(currentDetail){
   var item=ALL_ITEMS.filter(function(x){return x.title===currentDetail.title;})[0]||{};
   try {
-    await supabaseClient.from('comentarios').insert({
-      contenido_id: item.id || null,
-      usuario_nombre: userName || 'Tú',
-      texto: '⭐ '+_pendingRating+'/5 — '+txt,
-      estrellas: _pendingRating
-    });
+    await supabaseClient.from('comentarios').insert({ contenido_id: item.id || null, usuario_nombre: userName || 'Tú', texto: '⭐ '+_pendingRating+'/5 — '+txt, estrellas: _pendingRating });
     console.log('✅ Rating guardado');
     await loadCommentsForDetail(item.id);
     await loadTop5FromVotes();
@@ -1136,9 +1066,6 @@ if(currentDetail){
 document.getElementById('ratingModal').classList.remove('active');
 }
 
-/* ============================================
-   GUARDAR EN LISTA
-   ============================================ */
 function askSaveOption(){
 if(!currentDetail)return;
 document.getElementById('modalTitle').innerText=currentDetail.title;
@@ -1156,13 +1083,7 @@ async function saveWithStatus(status){
 if(!currentDetail)return;
 var item=ALL_ITEMS.filter(function(x){return x.title===currentDetail.title;})[0]||{};
 try {
-  await supabaseClient.from('mi_lista').upsert({
-    usuario_nombre: userName.toLowerCase() || 'tú',
-    contenido_id: item.id || 1,
-    estado: status,
-    posicion: 0,
-    idioma: 'latino'
-  }, { onConflict: 'usuario_nombre,contenido_id' });
+  await supabaseClient.from('mi_lista').upsert({ usuario_nombre: userName.toLowerCase() || 'tú', contenido_id: item.id || 1, estado: status, posicion: 0, idioma: 'latino' }, { onConflict: 'usuario_nombre,contenido_id' });
   console.log('✅ Guardado en Mi Lista');
   await loadMyListFromSupabase();
 } catch(e) { console.error(e); }
@@ -1189,9 +1110,6 @@ else myList.push({title:t,meta:HERO_ITEMS[heroIdx].cat,img:HERO_ITEMS[heroIdx].i
 updatePlusButtons();updateCounters();
 }
 
-/* ============================================
-   PERFIL
-   ============================================ */
 function buildFavRow(){
 var row=document.getElementById('favRow');if(!row)return;
 var h='';
@@ -1241,9 +1159,6 @@ if(HERO_ITEMS[heroIdx]){
 }
 }
 
-/* ============================================
-   MI LISTA
-   ============================================ */
 function filterList(btn,filter){
 currentFilter=filter;
 document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');
@@ -1263,9 +1178,6 @@ grid.innerHTML=h;
 }
 function backFromDetail(){go(lastScreen,null);}
 
-/* ============================================
-   ADMIN
-   ============================================ */
 function openAdmin(){
 if(!isAdmin)return;
 document.getElementById('adminScreen').style.display='block';
@@ -1336,14 +1248,12 @@ async function editContent(id){
 try {
   const { data, error } = await supabaseClient.from('contenido').select('*').eq('id', id).single();
   if(error || !data){ alert('Error'); return; }
-  
   document.getElementById('adminScreen').style.display='block';
   document.querySelectorAll('.admin-tab').forEach(function(t){t.classList.remove('active');});
   document.querySelectorAll('.admin-tab')[0].classList.add('active');
   document.getElementById('adminAdd').style.display='block';
   document.getElementById('adminUsers').style.display='none';
   document.getElementById('adminContent').style.display='none';
-  
   document.getElementById('adminName').value=data.titulo||'';
   document.getElementById('adminSyn').value=data.sinopsis||'';
   document.getElementById('imgUrlV').value=data.img_vertical||'';
@@ -1353,16 +1263,10 @@ try {
   if(document.getElementById('linkLat'))document.getElementById('linkLat').value=data.link_latino||'';
   if(document.getElementById('linkIng'))document.getElementById('linkIng').value=data.link_ingles||'';
   if(document.getElementById('linkOtr'))document.getElementById('linkOtr').value=data.link_otros||'';
-  
   _adminCat = data.categoria || 'peliculas';
   _adminGenre = data.genero || 'Drama';
-  document.querySelectorAll('#catBtns .cat-btn').forEach(function(b){
-    b.classList.toggle('active', b.dataset.cat === _adminCat);
-  });
-  document.querySelectorAll('#genreBtns .cat-btn').forEach(function(b){
-    b.classList.toggle('active', b.dataset.genre === _adminGenre);
-  });
-  
+  document.querySelectorAll('#catBtns .cat-btn').forEach(function(b){ b.classList.toggle('active', b.dataset.cat === _adminCat); });
+  document.querySelectorAll('#genreBtns .cat-btn').forEach(function(b){ b.classList.toggle('active', b.dataset.genre === _adminGenre); });
   window._editingContentId = id;
 } catch(e) { console.error(e); alert('Error'); }
 }
@@ -1391,12 +1295,7 @@ var linkOtr=document.getElementById('linkOtr')?.value.trim()||'';
 if(!name||!imgV){alert('Nombre y póster son obligatorios');return;}
 var meta=(new Date().getFullYear())+' · '+_adminGenre;
 var isSerie=(_adminCat==='series'||_adminCat==='animes'||_adminCat==='kdramas'||_adminCat==='telenovelas');
-var payload={
-  titulo: name, meta: meta, sinopsis: syn || 'Sin sinopsis.',
-  img_vertical: imgV, img_horizontal: imgH || imgV,
-  categoria: _adminCat, genero: _adminGenre, es_serie: isSerie,
-  link_latino: linkLat, link_ingles: linkIng, link_otros: linkOtr
-};
+var payload={ titulo: name, meta: meta, sinopsis: syn || 'Sin sinopsis.', img_vertical: imgV, img_horizontal: imgH || imgV, categoria: _adminCat, genero: _adminGenre, es_serie: isSerie, link_latino: linkLat, link_ingles: linkIng, link_otros: linkOtr };
 try {
   var result;
   if(window._editingContentId){
@@ -1416,7 +1315,6 @@ window._editingContentId = null;
 });
 document.getElementById('imgPreviewV').style.backgroundImage='';
 document.getElementById('imgPreviewH').style.backgroundImage='';
-
 buildHomeSections();
 buildExplore();
 closeAdmin();
@@ -1432,15 +1330,11 @@ reader.onload=function(ev){
 reader.readAsDataURL(file);
 }
 
-/* ============================================
-   CONSTRUIR HOME + EXPLORE
-   ============================================ */
 function itemCardHTML(x){
 return '<div class="grid-item"><div onclick="openDetail(\''+x.title+'\',\''+x.meta+'\',\''+x.syn+'\',\''+x.img+'\','+x.isSerie+')" style="cursor:pointer"><div class="grid-poster" style="background-image:url(\''+x.img+'\')"></div><div class="grid-title">'+x.title+'</div><div class="grid-meta">'+x.meta+'</div></div>'+editOverlayHTML(x)+'</div>';
 }
 
 function buildHomeSections(){
-// Top 5
 var top5 = [];
 if(TOP_5_IDS.length > 0){
   TOP_5_IDS.forEach(function(id){
@@ -1457,14 +1351,12 @@ top5.forEach(function(x,i){
 var c5=document.getElementById('carousel-top5');
 if(c5)c5.innerHTML=h || '<div style="color:#636366;padding:14px">Sin contenido</div>';
 
-// Noticias
 var nh='';
 NEWS.forEach(function(n){
   nh+='<div class="news-mini"><div class="news-mini-img" style="background-image:url(\''+n.img+'\')"></div><div class="news-mini-body"><div class="news-mini-tag">'+n.tag+'</div><div class="news-mini-title">'+n.title+'</div></div></div>';
 });
 var cn=document.getElementById('carousel-news');if(cn)cn.innerHTML=nh;
 
-// Estrenos
 var eh='';
 ALL_ITEMS.slice(0,4).forEach(function(x){
   eh+='<div class="poster-wide" onclick="openDetail(\''+x.title+'\',\''+x.meta+'\',\''+x.syn+'\',\''+x.img+'\','+x.isSerie+')" style="background-image:url(\''+x.imgH+'\')">'+editOverlayHTML(x)+'</div>';
@@ -1472,7 +1364,6 @@ ALL_ITEMS.slice(0,4).forEach(function(x){
 var ce=document.getElementById('carousel-estrenos');
 if(ce)ce.innerHTML=eh || '<div style="color:#636366;padding:14px">Sin contenido</div>';
 
-// Categorías
 ['peliculas','series','animes','kdramas','telenovelas','documentales'].forEach(function(c){
   var arr=ALL_ITEMS.filter(function(x){return x.cat===c;});
   var el=document.getElementById('carousel-'+c);
@@ -1495,9 +1386,6 @@ function buildExplore(){
 });
 }
 
-/* ============================================
-   CATEGORÍA
-   ============================================ */
 var catLastScreen='home';
 function openCategory(cat){
 catLastScreen=lastScreen;
@@ -1536,9 +1424,6 @@ window.scrollTo(0,0);
 }
 function backFromCategory(){go(catLastScreen,null);}
 
-/* ============================================
-   REPRODUCTOR
-   ============================================ */
 var playerVideo,controlsTimer,isPlaying=false;
 var currentVideoLinks={};
 var currentLang='latino';
@@ -1548,17 +1433,12 @@ var currentContentId=null;
 function playFromHero(){openPlayer(HERO_ITEMS[heroIdx].title,HERO_ITEMS[heroIdx].cat+' · '+HERO_ITEMS[heroIdx].dur,{},null);}
 function playFromDetail(){
   var item=ALL_ITEMS.filter(function(x){return x.title===currentDetail.title;})[0]||{};
-  var links={
-    latino: item.linkLat || '',
-    ingles: item.linkIng || '',
-    otros: item.linkOtr || ''
-  };
+  var links={ latino: item.linkLat || '', ingles: item.linkIng || '', otros: item.linkOtr || '' };
   openPlayer(document.getElementById('d-title').innerText,document.getElementById('d-cat').innerText+' · '+document.getElementById('d-year').innerText,links,item.id);
 }
 
 async function openPlayer(title,subtitle,links,contentId){
   document.getElementById('playerScreen').classList.add('active');
-  // ✅ FIX: ahora se usa el parámetro subtitle (metadata) en el título superior
   document.getElementById('pTitle').innerText = subtitle || 'CINEFILOS';
   document.getElementById('pSubtitle').innerText = title || 'Reproduciendo';
   playerVideo=document.getElementById('playerVideo');
@@ -1567,17 +1447,11 @@ async function openPlayer(title,subtitle,links,contentId){
   currentVideoKey = (title||'default').replace(/\s+/g,'_').toLowerCase();
   currentLang='latino';
   
-  // Buscar posición guardada en Supabase
   var startTime = 0;
   var savedLang = 'latino';
   if(contentId && userName){
     try {
-      const { data } = await supabaseClient
-        .from('mi_lista')
-        .select('posicion,idioma')
-        .eq('usuario_nombre', userName.toLowerCase())
-        .eq('contenido_id', contentId)
-        .single();
+      const { data } = await supabaseClient.from('mi_lista').select('posicion,idioma').eq('usuario_nombre', userName.toLowerCase()).eq('contenido_id', contentId).single();
       if(data && data.posicion > 5){
         startTime = data.posicion;
         savedLang = data.idioma || 'latino';
@@ -1588,7 +1462,6 @@ async function openPlayer(title,subtitle,links,contentId){
   window._startTime = startTime;
   if(links && links[savedLang]) currentLang = savedLang;
   
-  // Si hay múltiples idiomas → mostrar menú
   var idiomasDisponibles=[];
   if(currentVideoLinks.latino) idiomasDisponibles.push({key:'latino',label:'Latino'});
   if(currentVideoLinks.ingles) idiomasDisponibles.push({key:'ingles',label:'Inglés'});
@@ -1631,7 +1504,6 @@ async function cargarVideo(idioma){
   var loading=document.getElementById('playerLoading');
   var audioBtn=document.getElementById('audioBtn');
   
-  // Si no hay link → reproducir demo
   if(!link){
     loading.classList.remove('active');
     playerVideo.src='https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
@@ -1775,9 +1647,7 @@ function toggleFullscreen(){
   else{if(document.exitFullscreen)document.exitFullscreen();}
 }
 
-/* ============================================
-   OVERLAY PAUSA ESTILO NETFLIX
-   ============================================ */
+/* OVERLAY PAUSA ESTILO NETFLIX */
 var pauseInterval=null;
 var pauseIndex=0;
 var pauseList=[];
@@ -1904,7 +1774,6 @@ document.addEventListener('DOMContentLoaded',function(){
     document.getElementById('pCurrent').innerText=formatTime(playerVideo.currentTime);
     document.getElementById('pDuration').innerText=formatTime(playerVideo.duration);
     
-    // Guardar posición cada 10 segundos
     if(!playerVideo._lastSave || Date.now()-playerVideo._lastSave > 10000){
       if(playerVideo.currentTime > 5 && !playerVideo.paused){
         savePosition();
@@ -1923,18 +1792,12 @@ document.addEventListener('DOMContentLoaded',function(){
   });
 });
 
-/* ============================================
-   MODO B/N
-   ============================================ */
 function toggleBW(){
 var html=document.documentElement;
 html.classList.toggle('bw-mode');
 document.querySelectorAll('.bw-btn').forEach(function(b){b.classList.toggle('active',html.classList.contains('bw-mode'));});
 }
 
-/* ============================================
-   MODO PC
-   ============================================ */
 function checkPC(){
 var pcNav=document.getElementById('pcNav');
 var bottomNav=document.getElementById('bottomNav');
@@ -1957,3 +1820,4 @@ document.addEventListener('DOMContentLoaded',checkPC);
 </script>
 </body>
 </html>
+
