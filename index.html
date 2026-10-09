@@ -273,19 +273,20 @@ body.edit-mode .edit-overlay{display:flex !important}
 .player-loading p{font-size:14px;color:#8e8e93;font-weight:500}
 .pause-overlay{position:absolute;inset:0;z-index:7;display:none;flex-direction:column;overflow:hidden;background:#000}
 .pause-overlay.active{display:flex}
-.pause-bg{position:absolute;inset:0;background-size:cover;background-position:center 30%;filter:blur(50px) brightness(.45);transform:scale(1.4);transition:opacity .6s ease;will-change:transform,opacity}
+.pause-bg{position:absolute;left:-150px;right:-150px;top:-150px;bottom:-150px;background-size:cover;background-position:center 30%;filter:blur(60px) brightness(.4);transition:opacity .6s ease;background-repeat:no-repeat}
 .pause-bg-sharp{display:none}
-.pause-bg-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.85) 0%,rgba(0,0,0,.75) 40%,rgba(0,0,0,.95) 100%)}
-.pause-content{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;justify-content:center;padding:80px 40px 120px;pointer-events:none}
-.pause-label{font-size:12px;color:#e5e5e5;letter-spacing:4px;text-transform:uppercase;font-weight:700;margin-bottom:20px;opacity:.9}
-.pause-title-big{font-size:72px;font-weight:900;letter-spacing:-3px;line-height:.95;margin-bottom:14px;text-shadow:0 6px 60px rgba(0,0,0,.9);animation:fadeInUp .5s ease}
-.pause-meta-big{font-size:15px;color:#e5e5e5;margin-bottom:26px;font-weight:500;animation:fadeInUp .5s ease .1s backwards}
-.pause-desc-big{font-size:14px;color:#bbb;max-width:520px;line-height:1.6;margin-bottom:30px;animation:fadeInUp .5s ease .15s backwards}
+.pause-bg-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.85) 0%,rgba(0,0,0,.7) 40%,rgba(0,0,0,.98) 100%)}
+.pause-content{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;justify-content:center;padding:80px 40px 120px;pointer-events:none;max-width:900px}
+.pause-brand{font-size:96px;font-weight:900;letter-spacing:12px;line-height:1;margin-bottom:38px;text-transform:uppercase;background:linear-gradient(180deg,#fff 0%,#999 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding-left:8px;animation:fadeInUp .5s ease}
+.pause-label{font-size:11px;color:#888;letter-spacing:5px;text-transform:uppercase;font-weight:700;margin-bottom:14px;opacity:.9}
+.pause-title-big{font-size:38px;font-weight:800;letter-spacing:-1.2px;line-height:1.1;margin-bottom:10px;color:#fff;text-shadow:0 4px 30px rgba(0,0,0,.9);animation:fadeInUp .5s ease .1s backwards}
+.pause-meta-big{font-size:13px;color:#aaa;margin-bottom:18px;font-weight:600;letter-spacing:2px;text-transform:uppercase;animation:fadeInUp .5s ease .15s backwards}
+.pause-desc-big{font-size:13px;color:#888;max-width:520px;line-height:1.6;margin-bottom:28px;animation:fadeInUp .5s ease .2s backwards}
 @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.pause-watch-btn{display:inline-flex;align-items:center;gap:10px;background:#fff;color:#000;border:none;padding:14px 32px;border-radius:50px;font-size:15px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;width:fit-content;pointer-events:auto;box-shadow:0 10px 40px rgba(255,255,255,.15);transition:transform .2s;animation:fadeInUp .5s ease .2s backwards}
+.pause-watch-btn{display:inline-flex;align-items:center;gap:10px;background:#fff;color:#000;border:none;padding:14px 32px;border-radius:50px;font-size:15px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;width:fit-content;pointer-events:auto;box-shadow:0 10px 40px rgba(255,255,255,.15);transition:transform .2s;animation:fadeInUp .5s ease .25s backwards}
 .pause-watch-btn:hover{transform:scale(1.05)}
 .pause-watch-btn svg{width:18px;height:18px;fill:#000}
-.pause-thumbnails{position:absolute;bottom:0;left:0;right:0;padding:20px 40px 30px;display:flex;gap:14px;overflow-x:auto;scrollbar-width:none;z-index:3;background:linear-gradient(0deg,rgba(0,0,0,.9) 0%,transparent 100%)}
+.pause-thumbnails{position:absolute;bottom:0;left:0;right:0;padding:20px 40px 30px;display:flex;gap:14px;overflow-x:auto;scrollbar-width:none;z-index:3;background:linear-gradient(0deg,rgba(0,0,0,.95) 0%,transparent 100%)}
 .pause-thumbnails::-webkit-scrollbar{display:none}
 .pause-thumb{flex:0 0 130px;cursor:pointer;transition:all .3s;opacity:.5;pointer-events:auto}
 .pause-thumb.active{opacity:1;transform:scale(1.08)}
@@ -297,9 +298,10 @@ body.edit-mode .edit-overlay{display:flex !important}
 .pause-close svg{width:22px;height:22px;stroke:#fff;stroke-width:2;fill:none}
 @media (max-width:899px){
   .pause-content{padding:60px 22px 140px}
-  .pause-title-big{font-size:42px;letter-spacing:-1.5px}
-  .pause-meta-big{font-size:13px}
-  .pause-desc-big{font-size:13px;margin-bottom:20px;max-width:100%}
+  .pause-brand{font-size:52px;letter-spacing:6px;margin-bottom:24px}
+  .pause-title-big{font-size:26px;letter-spacing:-.8px}
+  .pause-meta-big{font-size:11px}
+  .pause-desc-big{font-size:12px;margin-bottom:20px;max-width:100%}
   .pause-thumbnails{padding:16px 22px 20px;gap:10px}
   .pause-thumb{flex:0 0 100px}
   .pause-thumb-poster{width:100px;height:62px}
@@ -657,12 +659,12 @@ body.edit-mode .edit-overlay{display:flex !important}
 </div>
 <div class="pause-overlay" id="pauseOverlay">
   <div class="pause-bg" id="pauseBg"></div>
-  <div class="pause-bg-sharp" id="pauseBgSharp"></div>
   <div class="pause-bg-overlay"></div>
   <button class="pause-close" onclick="event.stopPropagation();resumeVideo()">
     <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6l-12 12"/></svg>
   </button>
   <div class="pause-content">
+    <div class="pause-brand">CINEFILOS</div>
     <div class="pause-label">¿Qué te gustaría ver?</div>
     <div class="pause-title-big" id="pauseTitleBig">Título</div>
     <div class="pause-meta-big" id="pauseMetaBig">2026 · Drama</div>
@@ -1816,3 +1818,4 @@ document.addEventListener('DOMContentLoaded',checkPC);
 </script>
 </body>
 </html>
+
