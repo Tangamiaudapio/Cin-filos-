@@ -13,7 +13,7 @@ body{background:#000;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe
 .screen.active{display:block}
 html{transition:filter .5s ease}
 html.bw-mode{filter:grayscale(.85) contrast(1.05) brightness(1.02)}
-html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,html.bw-mode .poster-wide,html.bw-mode .poster-vert,html.bw-mode .grid-poster,html.bw-mode .chart-poster,html.bw-mode .episode-img,html.bw-mode .news-mini-img,html.bw-mode .fav-poster,html.bw-mode .rating-card-poster,html.bw-mode .detail-hero,html.bw-mode .about-hero-big,html.bw-mode .welcome-bg-img,html.bw-mode .img-preview,html.bw-mode .related-poster{filter:grayscale(.85) contrast(1.02) brightness(1.03)}
+html.bw-mode img,html.bw-mode video,html.bw-mode iframe,html.bw-mode .hero-bg,html.bw-mode .poster-wide,html.bw-mode .poster-vert,html.bw-mode .grid-poster,html.bw-mode .chart-poster,html.bw-mode .news-mini-img,html.bw-mode .fav-poster,html.bw-mode .rating-card-poster,html.bw-mode .detail-hero,html.bw-mode .img-preview,html.bw-mode .related-poster{filter:grayscale(.85) contrast(1.02) brightness(1.03)}
 .bw-btn{width:40px;height:40px;border-radius:50%;background:#1c1c1e;border:1px solid #2c2c2e;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;flex-shrink:0}
 .bw-btn svg{width:20px;height:20px;stroke:#fff;stroke-width:1.8;fill:none}
 .bw-btn.active{background:#fff;color:#000}
@@ -103,13 +103,15 @@ body.edit-mode .edit-overlay{display:flex !important}
 .detail-rating-info{flex:1}
 .detail-rating-value{font-size:18px;font-weight:800;line-height:1}
 .detail-rating-count{font-size:11px;color:#8e8e93;margin-top:4px}
-.related-title{font-size:16px;font-weight:700;padding:0 22px;margin:26px 0 14px;position:relative;padding-bottom:10px}
+.related-title{font-size:18px;font-weight:800;padding:0 22px;margin:26px 0 14px;position:relative;padding-bottom:10px;letter-spacing:-.3px}
 .related-title::after{content:'';position:absolute;bottom:0;left:22px;width:36px;height:2px;background:#fff;border-radius:2px}
-.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:20px 22px 40px}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:20px 22px 40px}
 .related-item{cursor:pointer;position:relative}
 .related-item > div{width:100%}
-.related-poster{width:100%;height:170px;border-radius:10px;background-color:#1c1c1e;background-size:cover;background-position:center;margin-bottom:6px;display:block}
-.related-name{font-size:11px;font-weight:600;line-height:1.3;text-align:center}
+.related-poster{position:relative;width:100%;padding-top:150%;border-radius:10px;overflow:hidden;background-color:#1c1c1e;margin-bottom:8px}
+.related-poster-img{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .3s}
+.related-item:hover .related-poster-img{transform:scale(1.05)}
+.related-name{font-size:12px;font-weight:600;line-height:1.3;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .comments-title{font-size:15px;font-weight:700;padding:0 22px;margin-bottom:12px;text-align:left}
 .comment{margin:0 22px 10px;padding:14px;background:#0d0d0d;border:1px solid #1c1c1e;border-radius:14px;display:flex;gap:12px}
 .comment-avatar{width:36px;height:36px;border-radius:50%;background:#1c1c1e;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0}
@@ -337,8 +339,9 @@ body.edit-mode .edit-overlay{display:flex !important}
   #s-list,#s-profile,#s-about{padding-top:110px}
   .detail-content{padding:36px 60px;max-width:1200px}
   .detail-title{font-size:58px;margin-top:-140px}
-  .related-grid{grid-template-columns:repeat(6,1fr);padding:20px 60px 60px}
-  .related-poster{height:260px}
+  .related-title{font-size:24px;padding:30px 60px 16px}
+  .related-title::after{left:60px;width:44px}
+  .related-grid{grid-template-columns:repeat(6,1fr);padding:20px 60px 60px;gap:16px}
   .profile-stats-row,.profile-bio,.profile-tabs{max-width:720px;margin-left:auto;margin-right:auto}
   .fav-row,.rating-card,.profile-section-title{max-width:1100px;margin-left:auto;margin-right:auto}
   .admin-screen{padding:30px 60px 180px}
@@ -676,7 +679,7 @@ body.edit-mode .edit-overlay{display:flex !important}
 <div class="lang-sub">Selecciona cómo quieres escuchar</div>
 <div id="langOptionsContainer"></div>
 </div>
-<video class="player-video" id="playerVideo" playsinline></video>
+<video class="player-video" id="playerVideo" playsinline webkit-playsinline></video>
 <div class="player-controls" id="playerControls">
 <div class="player-top">
 <button class="player-icon" onclick="closePlayer();event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6l-12 12"/></svg></button>
@@ -729,7 +732,6 @@ var isOwner=false;
 var isEditMode=false;
 var OWNER_CODE='234578';
 var USER_CODE='456050';
-
 var EDGE_FUNCTION_URL="https://plthfwhodkymgmjnyghf.supabase.co/functions/v1/get-video";
 var TELEGRAM_CHANNEL_ID="-1003938412098";
 
@@ -740,7 +742,6 @@ var HERO_ITEMS=[
 {title:'Oppenheimer',year:'Ganador 2024',award:'Premios Oscar®',img:'https://image.tmdb.org/t/p/original/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg',cat:'Drama',dur:'3h 0min'}
 ];
 var heroIdx=0;
-
 var ALL_ITEMS=[];
 var TOP_5_IDS=[];
 var myList=[];
@@ -763,7 +764,6 @@ function toggleEditMode(){
 isEditMode=!isEditMode;
 document.body.classList.toggle('edit-mode',isEditMode);
 document.querySelectorAll('.edit-mode-btn').forEach(function(b){b.classList.toggle('active',isEditMode);});
-console.log(isEditMode?'✏️ Edición ON':'✅ Edición OFF');
 }
 
 async function loadContentFromSupabase(){
@@ -773,18 +773,11 @@ try {
   if(!data || !data.length){ console.log('Sin contenido'); return; }
   ALL_ITEMS = data.map(function(item){
     return {
-      id: item.id,
-      title: item.titulo,
-      meta: item.meta || '2026 · Drama',
-      img: item.img_vertical || '',
-      imgH: item.img_horizontal || item.img_vertical || '',
-      syn: item.sinopsis || 'Sin sinopsis.',
-      isSerie: item.es_serie || false,
-      cat: item.categoria || 'peliculas',
-      genre: item.genero || 'Drama',
-      linkLat: item.link_latino || '',
-      linkIng: item.link_ingles || '',
-      linkOtr: item.link_otros || ''
+      id: item.id, title: item.titulo, meta: item.meta || '2026 · Drama',
+      img: item.img_vertical || '', imgH: item.img_horizontal || item.img_vertical || '',
+      syn: item.sinopsis || 'Sin sinopsis.', isSerie: item.es_serie || false,
+      cat: item.categoria || 'peliculas', genre: item.genero || 'Drama',
+      linkLat: item.link_latino || '', linkIng: item.link_ingles || '', linkOtr: item.link_otros || ''
     };
   });
   console.log('✅ Cargadas ' + ALL_ITEMS.length + ' pelis');
@@ -796,11 +789,8 @@ try {
   const { data, error } = await supabaseClient.from('comentarios').select('contenido_id');
   if(error || !data) return;
   var votos = {};
-  data.forEach(function(c){
-    if(c.contenido_id){ votos[c.contenido_id] = (votos[c.contenido_id] || 0) + 1; }
-  });
+  data.forEach(function(c){ if(c.contenido_id){ votos[c.contenido_id] = (votos[c.contenido_id] || 0) + 1; } });
   TOP_5_IDS = Object.entries(votos).sort(function(a,b){return b[1]-a[1];}).slice(0,5).map(function(x){return parseInt(x[0]);});
-  console.log('✅ Top 5:', TOP_5_IDS);
 } catch(e) { console.error(e); }
 }
 
@@ -813,13 +803,10 @@ try {
     var found = ALL_ITEMS.filter(function(x){return x.id === item.contenido_id;})[0];
     if(found){
       var copy = JSON.parse(JSON.stringify(found));
-      copy.status = item.estado;
-      copy.posicion = item.posicion || 0;
-      copy.idioma = item.idioma || 'latino';
+      copy.status = item.estado; copy.posicion = item.posicion || 0; copy.idioma = item.idioma || 'latino';
       myList.push(copy);
     }
   });
-  console.log('✅ Mi Lista: ' + myList.length + ' items');
 } catch(e) { console.error(e); }
 }
 
@@ -830,17 +817,13 @@ if(!n){document.getElementById('nameError').innerText='Debes escribir un nombre'
 if(!c){document.getElementById('nameError').innerText='Debes escribir un código';return;}
 if(c!==OWNER_CODE&&c!==USER_CODE){document.getElementById('nameError').innerText='Código incorrecto';return;}
 isOwner=(c===OWNER_CODE);isAdmin=isOwner;userName=n;userCode=c;
-
 try {
   await supabaseClient.from('usuarios').upsert({ nombre: n.toLowerCase(), codigo: c, rol: isOwner ? 'owner' : 'usuario' }, { onConflict: 'nombre' });
-  console.log('✅ Usuario guardado');
 } catch(e) { console.error(e); }
-
 usuariosRegistrados[n.toLowerCase()]={name:n,owner:isOwner,admin:isAdmin};
 var ini=n.substring(0,2).toUpperCase();
 ['userAvatar','userAvatar2','userAvatar4','userAvatar6','userAvatarPC','profileAvatar'].forEach(function(id){
-  var el=document.getElementById(id);
-  if(el)el.innerText=ini;
+  var el=document.getElementById(id); if(el)el.innerText=ini;
 });
 document.getElementById('profileName').innerText=n;
 document.getElementById('profileHandle').innerText='@'+n.toLowerCase().replace(/\s+/g,'');
@@ -851,7 +834,6 @@ if(isAdmin){
   document.querySelectorAll('.avatar').forEach(function(a){a.classList.add('verified');});
   document.getElementById('verifiedBadge').style.display='inline-flex';
 }
-
 checkPC();
 await loadContentFromSupabase();
 await loadTop5FromVotes();
@@ -986,7 +968,7 @@ document.getElementById('d-stars').innerHTML=stars;
 var others=ALL_ITEMS.filter(function(x){return x.title!==title;}).slice(0,6);
 var h='';
 others.forEach(function(x){
-  h+='<div class="related-item"><div onclick="openDetail(\''+x.title+'\',\''+x.meta+'\',\''+x.syn+'\',\''+x.img+'\','+x.isSerie+')"><div class="related-poster" style="background-image:url(\''+x.img+'\')"></div><div class="related-name">'+x.title+'</div></div>'+editOverlayHTML(x)+'</div>';
+  h+='<div class="related-item"><div onclick="openDetail(\''+x.title+'\',\''+x.meta+'\',\''+x.syn+'\',\''+x.img+'\','+x.isSerie+')"><div class="related-poster"><div class="related-poster-img" style="background-image:url(\''+x.img+'\')"></div></div><div class="related-name">'+x.title+'</div></div>'+editOverlayHTML(x)+'</div>';
 });
 document.getElementById('relatedGrid').innerHTML=h;
 loadCommentsForDetail(item.id);
@@ -1029,7 +1011,6 @@ if(!txt||!currentDetail)return;
 var item=ALL_ITEMS.filter(function(x){return x.title===currentDetail.title;})[0]||{};
 try {
   await supabaseClient.from('comentarios').insert({ contenido_id: item.id || null, usuario_nombre: userName || 'Tú', texto: txt, estrellas: null });
-  console.log('✅ Comentario guardado');
 } catch(e) { console.error(e); }
 inp.value='';
 await loadCommentsForDetail(item.id);
@@ -1051,7 +1032,6 @@ if(currentDetail){
   var item=ALL_ITEMS.filter(function(x){return x.title===currentDetail.title;})[0]||{};
   try {
     await supabaseClient.from('comentarios').insert({ contenido_id: item.id || null, usuario_nombre: userName || 'Tú', texto: '⭐ '+_pendingRating+'/5 — '+txt, estrellas: _pendingRating });
-    console.log('✅ Rating guardado');
     await loadCommentsForDetail(item.id);
     await loadTop5FromVotes();
   } catch(e) { console.error(e); }
@@ -1078,7 +1058,6 @@ if(!currentDetail)return;
 var item=ALL_ITEMS.filter(function(x){return x.title===currentDetail.title;})[0]||{};
 try {
   await supabaseClient.from('mi_lista').upsert({ usuario_nombre: userName.toLowerCase() || 'tú', contenido_id: item.id || 1, estado: status, posicion: 0, idioma: 'latino' }, { onConflict: 'usuario_nombre,contenido_id' });
-  console.log('✅ Guardado en Mi Lista');
   await loadMyListFromSupabase();
 } catch(e) { console.error(e); }
 closeModal();updatePlusButtons();updateCounters();
@@ -1418,49 +1397,63 @@ window.scrollTo(0,0);
 }
 function backFromCategory(){go(catLastScreen,null);}
 
+/* ============================================
+   REPRODUCTOR (con fix de autoplay)
+   ============================================ */
 var playerVideo,controlsTimer,isPlaying=false;
 var currentVideoLinks={};
 var currentLang='latino';
 var currentVideoKey='';
 var currentContentId=null;
 
-function playFromHero(){openPlayer(HERO_ITEMS[heroIdx].title,HERO_ITEMS[heroIdx].cat+' · '+HERO_ITEMS[heroIdx].dur,{},null);}
+function playFromHero(){
+  var item=ALL_ITEMS.filter(function(x){return x.title===HERO_ITEMS[heroIdx].title;})[0];
+  if(item){
+    openPlayer(item.title,item.meta,{latino:item.linkLat||'',ingles:item.linkIng||'',otros:item.linkOtr||''},item.id);
+  }else{
+    openPlayer(HERO_ITEMS[heroIdx].title,HERO_ITEMS[heroIdx].cat+' · '+HERO_ITEMS[heroIdx].dur,{},null);
+  }
+}
 function playFromDetail(){
   var item=ALL_ITEMS.filter(function(x){return x.title===currentDetail.title;})[0]||{};
   var links={ latino: item.linkLat || '', ingles: item.linkIng || '', otros: item.linkOtr || '' };
-  openPlayer(document.getElementById('d-title').innerText,document.getElementById('d-cat').innerText+' · '+document.getElementById('d-year').innerText,links,item.id);
+  openPlayer(currentDetail.title,item.meta||currentDetail.meta,links,item.id||null);
 }
 
-async function openPlayer(title,subtitle,links,contentId){
+function openPlayer(title,subtitle,links,contentId){
   document.getElementById('playerScreen').classList.add('active');
   document.getElementById('pTitle').innerText='CINEFILOS';
   document.getElementById('pSubtitle').innerText=title||'Reproduciendo';
   playerVideo=document.getElementById('playerVideo');
   currentVideoLinks=links||{};
-  currentContentId=contentId;
-  currentVideoKey = (title||'default').replace(/\s+/g,'_').toLowerCase();
+  currentContentId=contentId||null;
   currentLang='latino';
-  
-  var startTime = 0;
-  var savedLang = 'latino';
-  if(contentId && userName){
-    try {
-      const { data } = await supabaseClient.from('mi_lista').select('posicion,idioma').eq('usuario_nombre', userName.toLowerCase()).eq('contenido_id', contentId).single();
-      if(data && data.posicion > 5){
-        startTime = data.posicion;
-        savedLang = data.idioma || 'latino';
-        console.log('▶️ Reanudando en:', formatTime(startTime));
-      }
-    } catch(e) {}
+  window._startTime = 0;
+
+  // Cargar posición guardada SIN bloquear (sin await)
+  if(currentContentId && userName){
+    supabaseClient.from('mi_lista')
+      .select('posicion,idioma')
+      .eq('usuario_nombre', userName.toLowerCase())
+      .eq('contenido_id', currentContentId)
+      .single()
+      .then(function(res){
+        if(res && res.data && res.data.posicion > 5){
+          window._startTime = res.data.posicion;
+          if(res.data.idioma && links && links[res.data.idioma]) currentLang = res.data.idioma;
+          if(playerVideo && playerVideo.readyState >= 1){
+            try { playerVideo.currentTime = res.data.posicion; } catch(e){}
+          }
+        }
+      })
+      .catch(function(){});
   }
-  window._startTime = startTime;
-  if(links && links[savedLang]) currentLang = savedLang;
-  
+
   var idiomasDisponibles=[];
   if(currentVideoLinks.latino) idiomasDisponibles.push({key:'latino',label:'Latino'});
   if(currentVideoLinks.ingles) idiomasDisponibles.push({key:'ingles',label:'Inglés'});
   if(currentVideoLinks.otros) idiomasDisponibles.push({key:'otros',label:'Otros'});
-  
+
   if(idiomasDisponibles.length>1){ mostrarMenuIdiomas(idiomasDisponibles); return; }
   if(idiomasDisponibles.length===1){ currentLang=idiomasDisponibles[0].key; }
   cargarVideo(currentLang);
@@ -1493,63 +1486,67 @@ function openLangMenu(){
   if(idiomasDisponibles.length>1){ mostrarMenuIdiomas(idiomasDisponibles); }
 }
 
-async function cargarVideo(idioma){
+function intentarPlay(){
+  if(!playerVideo) return;
+  var p = playerVideo.play();
+  if(p && p.catch){
+    p.catch(function(err){
+      console.log('⚠️ Autoplay bloqueado por el navegador:', err && err.name);
+      isPlaying = false;
+      updatePlayIcon();
+      showControls();
+    });
+  }
+}
+
+function cargarVideo(idioma){
   var link=currentVideoLinks[idioma];
   var loading=document.getElementById('playerLoading');
   var audioBtn=document.getElementById('audioBtn');
-  
-  if(!link){
+
+  function alCargar(){
     loading.classList.remove('active');
-    playerVideo.src='https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
-    playerVideo.currentTime = window._startTime || 0;
-    playerVideo.play().catch(function(){});
-    isPlaying=true;
-    updatePlayIcon();
+    if(window._startTime && window._startTime > 0){
+      try { playerVideo.currentTime = window._startTime; } catch(e){}
+    }
+    intentarPlay();
     showControls();
     checkOrientation();
     var p=document.getElementById('playerScreen');
-    if(p.requestFullscreen)p.requestFullscreen().catch(function(){});
+    if(p.requestFullscreen) p.requestFullscreen().catch(function(){});
+  }
+
+  if(!link){
+    loading.classList.remove('active');
+    playerVideo.src='https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
+    playerVideo.onloadeddata=alCargar;
     return;
   }
-  
+
   loading.classList.add('active');
   var messageId=null;
   var match=link.match(/\/(\d+)(?:\?|$)/);
   if(match) messageId=match[1];
-  
+
   if(!messageId){
     loading.classList.remove('active');
     document.getElementById('pSubtitle').innerText='Video no disponible';
     playerVideo.src='https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
-    playerVideo.play().catch(function(){});
-    isPlaying=true;updatePlayIcon();showControls();
+    playerVideo.onloadeddata=alCargar;
     return;
   }
-  
+
   try {
     var url=EDGE_FUNCTION_URL+'?chat_id='+TELEGRAM_CHANNEL_ID+'&message_id='+messageId;
     console.log('🎬 Cargando:', url);
     playerVideo.src=url;
     playerVideo.load();
-    playerVideo.oncanplay=function(){
-      loading.classList.remove('active');
-      if(window._startTime && window._startTime > 0){
-        playerVideo.currentTime = window._startTime;
-      }
-      playerVideo.play().catch(function(){});
-      isPlaying=true;
-      updatePlayIcon();
-      showControls();
-      checkOrientation();
-      var p=document.getElementById('playerScreen');
-      if(p.requestFullscreen)p.requestFullscreen().catch(function(){});
-    };
+    playerVideo.onloadeddata=alCargar;
     playerVideo.onerror=function(){
       loading.classList.remove('active');
       document.getElementById('pSubtitle').innerText='Video no disponible';
       playerVideo.src='https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
-      playerVideo.play().catch(function(){});
-      isPlaying=true;updatePlayIcon();showControls();
+      playerVideo.onloadeddata=alCargar;
     };
     if(currentVideoLinks.latino && (currentVideoLinks.ingles || currentVideoLinks.otros)){
       audioBtn.style.display='flex';
@@ -1575,11 +1572,8 @@ async function savePosition(){
   if(playerVideo && currentContentId && userName && playerVideo.currentTime > 5){
     try {
       await supabaseClient.from('mi_lista').upsert({
-        usuario_nombre: userName.toLowerCase(),
-        contenido_id: currentContentId,
-        estado: 'continue',
-        posicion: Math.floor(playerVideo.currentTime),
-        idioma: currentLang
+        usuario_nombre: userName.toLowerCase(), contenido_id: currentContentId,
+        estado: 'continue', posicion: Math.floor(playerVideo.currentTime), idioma: currentLang
       }, { onConflict: 'usuario_nombre,contenido_id' });
     } catch(e) { console.error(e); }
   }
@@ -1591,22 +1585,35 @@ function closePlayer(){
   document.getElementById('langMenu').classList.remove('active');
   document.getElementById('playerLoading').classList.remove('active');
   hidePauseOverlay();
-  if(playerVideo){playerVideo.pause();playerVideo.currentTime=0;}
+  if(playerVideo){ playerVideo.pause(); playerVideo.currentTime=0; playerVideo.removeAttribute('src'); playerVideo.load(); }
   isPlaying=false;
   if(document.fullscreenElement)document.exitFullscreen();
 }
 
 function togglePlay(){
   if(!playerVideo)return;
-  if(playerVideo.paused){playerVideo.play();isPlaying=true;hidePauseOverlay();}
-  else{playerVideo.pause();isPlaying=false;}
-  updatePlayIcon();showControls();
+  if(playerVideo.paused){
+    var p = playerVideo.play();
+    if(p && p.catch){
+      p.catch(function(err){ console.log('❌ Error al reproducir:', err); });
+    }
+    isPlaying=true;
+    hidePauseOverlay();
+  } else {
+    playerVideo.pause();
+    isPlaying=false;
+  }
+  updatePlayIcon();
+  showControls();
 }
 
 function updatePlayIcon(){
   var icon=document.getElementById('playIcon');if(!icon)return;
-  if(isPlaying)icon.innerHTML='<rect x="7" y="5" width="3.5" height="14" rx="1"/><rect x="13.5" y="5" width="3.5" height="14" rx="1"/>';
-  else icon.innerHTML='<path d="M8 5 L19 12 L8 19 Z"/>';
+  if(isPlaying){
+    icon.innerHTML='<rect x="7" y="5" width="3.5" height="14" rx="1"/><rect x="13.5" y="5" width="3.5" height="14" rx="1"/>';
+  } else {
+    icon.innerHTML='<path d="M8 5 L19 12 L8 19 Z"/>';
+  }
 }
 
 function skip(sec){if(playerVideo)playerVideo.currentTime=Math.max(0,playerVideo.currentTime+sec);showControls();}
@@ -1641,6 +1648,9 @@ function toggleFullscreen(){
   else{if(document.exitFullscreen)document.exitFullscreen();}
 }
 
+/* ============================================
+   OVERLAY PAUSA ESTILO NETFLIX
+   ============================================ */
 var pauseInterval=null;
 var pauseIndex=0;
 var pauseList=[];
@@ -1648,25 +1658,15 @@ var pauseList=[];
 function showPauseOverlay(){
   var overlay=document.getElementById('pauseOverlay');
   if(!overlay)return;
-  
-  var pool = ALL_ITEMS.filter(function(x){
-    return !currentContentId || x.id !== currentContentId;
-  });
+  var pool = ALL_ITEMS.filter(function(x){ return !currentContentId || x.id !== currentContentId; });
   pool.sort(function(){return Math.random()-.5;});
   pauseList = pool.slice(0,10);
   pauseIndex = 0;
-  
-  if(!pauseList.length){
-    overlay.classList.add('active');
-    return;
-  }
-  
+  if(!pauseList.length){ overlay.classList.add('active'); return; }
   updatePauseDisplay();
   overlay.classList.add('active');
-  
   var pc=document.getElementById('playerControls');
   if(pc)pc.classList.add('hidden');
-  
   clearInterval(pauseInterval);
   pauseInterval = setInterval(function(){
     pauseIndex = (pauseIndex + 1) % pauseList.length;
@@ -1677,31 +1677,25 @@ function showPauseOverlay(){
 function updatePauseDisplay(){
   var item = pauseList[pauseIndex];
   if(!item)return;
-  
   var bg = document.getElementById('pauseBg');
   var bgSharp = document.getElementById('pauseBgSharp');
-  
   bg.style.opacity = '0';
   bgSharp.style.opacity = '0';
-  
   setTimeout(function(){
     bg.style.backgroundImage = "url('"+item.img+"')";
     bgSharp.style.backgroundImage = "url('"+item.img+"')";
     bg.style.opacity = '1';
     bgSharp.style.opacity = '.35';
   }, 200);
-  
   document.getElementById('pauseTitleBig').innerText = item.title;
   document.getElementById('pauseMetaBig').innerText = item.meta || '';
   document.getElementById('pauseDescBig').innerText = item.syn || '';
-  
   var container = document.getElementById('pauseThumbnails');
   var h = '';
   pauseList.forEach(function(x, i){
     h += '<div class="pause-thumb'+(i===pauseIndex?' active':'')+'" onclick="event.stopPropagation();jumpToPause('+i+')"><div class="pause-thumb-poster" style="background-image:url(\''+x.img+'\')"></div><div class="pause-thumb-name">'+x.title+'</div></div>';
   });
   container.innerHTML = h;
-  
   setTimeout(function(){
     var activeThumb = container.querySelector('.pause-thumb.active');
     if(activeThumb){
@@ -1735,7 +1729,8 @@ function hidePauseOverlay(){
 function resumeVideo(){
   hidePauseOverlay();
   if(playerVideo){
-    playerVideo.play().catch(function(){});
+    var p = playerVideo.play();
+    if(p && p.catch){ p.catch(function(){}); }
     isPlaying=true;
     updatePlayIcon();
     showControls();
@@ -1747,18 +1742,17 @@ function playSuggestion(id){
   savePosition();
   var item = ALL_ITEMS.filter(function(x){return x.id===id;})[0];
   if(!item)return;
-  var links = {
-    latino: item.linkLat || '',
-    ingles: item.linkIng || '',
-    otros: item.linkOtr || ''
-  };
+  var links = { latino: item.linkLat || '', ingles: item.linkIng || '', otros: item.linkOtr || '' };
   openPlayer(item.title, item.meta, links, item.id);
 }
 
+/* ============================================
+   EVENTOS DEL VIDEO
+   ============================================ */
 document.addEventListener('DOMContentLoaded',function(){
   playerVideo=document.getElementById('playerVideo');
   if(!playerVideo)return;
-  
+
   playerVideo.addEventListener('timeupdate',function(){
     if(!playerVideo.duration)return;
     var pct=(playerVideo.currentTime/playerVideo.duration)*100;
@@ -1766,7 +1760,6 @@ document.addEventListener('DOMContentLoaded',function(){
     document.getElementById('pThumb').style.left=pct+'%';
     document.getElementById('pCurrent').innerText=formatTime(playerVideo.currentTime);
     document.getElementById('pDuration').innerText=formatTime(playerVideo.duration);
-    
     if(!playerVideo._lastSave || Date.now()-playerVideo._lastSave > 10000){
       if(playerVideo.currentTime > 5 && !playerVideo.paused){
         savePosition();
@@ -1774,13 +1767,25 @@ document.addEventListener('DOMContentLoaded',function(){
       }
     }
   });
-  
+
+  // Sincronizar isPlaying con el estado REAL del video
+  playerVideo.addEventListener('playing',function(){
+    isPlaying=true;
+    updatePlayIcon();
+    hidePauseOverlay();
+  });
+
   playerVideo.addEventListener('pause',function(){
+    isPlaying=false;
+    updatePlayIcon();
     if(playerVideo.currentTime > 0 && !playerVideo.ended && playerVideo.src && !document.getElementById('langMenu').classList.contains('active')){
       showPauseOverlay();
     }
   });
+
   playerVideo.addEventListener('play',function(){
+    isPlaying=true;
+    updatePlayIcon();
     hidePauseOverlay();
   });
 });
