@@ -271,10 +271,11 @@ body.edit-mode .edit-overlay{display:flex !important}
 .spinner{width:60px;height:60px;border:4px solid rgba(255,255,255,.15);border-top-color:#fff;border-radius:50%;animation:spin 1s linear infinite;margin-bottom:20px}
 @keyframes spin{to{transform:rotate(360deg)}}
 .player-loading p{font-size:14px;color:#8e8e93;font-weight:500}
+
+/* ========== PAUSA OVERLAY ESTILO NETFLIX ========== */
 .pause-overlay{position:absolute;inset:0;z-index:7;display:none;flex-direction:column;overflow:hidden;background:#000}
 .pause-overlay.active{display:flex}
-.pause-bg{position:absolute;left:-150px;right:-150px;top:-150px;bottom:-150px;background-size:cover;background-position:center 30%;filter:blur(60px) brightness(.4);transition:opacity .6s ease;background-repeat:no-repeat}
-.pause-bg-sharp{display:none}
+.pause-bg{position:absolute;left:-50vw;right:-50vw;top:-50vh;bottom:-50vh;background-color:#000;background-size:cover;background-position:center 30%;background-repeat:no-repeat;filter:blur(80px) brightness(.4);transition:opacity .6s ease}
 .pause-bg-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.85) 0%,rgba(0,0,0,.7) 40%,rgba(0,0,0,.98) 100%)}
 .pause-content{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;justify-content:center;padding:80px 40px 120px;pointer-events:none;max-width:900px}
 .pause-brand{font-size:96px;font-weight:900;letter-spacing:12px;line-height:1;margin-bottom:38px;text-transform:uppercase;background:linear-gradient(180deg,#fff 0%,#999 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding-left:8px;animation:fadeInUp .5s ease}
@@ -308,6 +309,7 @@ body.edit-mode .edit-overlay{display:flex !important}
   .pause-thumb-name{font-size:10px}
   .pause-close{top:12px;left:12px}
 }
+
 .empty-state{text-align:center;padding:80px 30px;color:#636366}
 .empty-state svg{width:60px;height:60px;stroke:#333;stroke-width:1.5;fill:none;margin-bottom:20px}
 .empty-state h3{font-size:18px;font-weight:700;color:#fff;margin-bottom:8px}
