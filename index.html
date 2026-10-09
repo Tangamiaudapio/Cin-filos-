@@ -275,8 +275,8 @@ body.edit-mode .edit-overlay{display:flex !important}
 /* ========== PAUSA OVERLAY ESTILO NETFLIX ========== */
 .pause-overlay{position:absolute;inset:0;z-index:7;display:none;flex-direction:column;overflow:hidden;background:#000}
 .pause-overlay.active{display:flex}
-.pause-bg{position:absolute;left:-100vw;right:-100vw;top:-100vh;bottom:-100vh;background-color:#000;background-size:cover;background-position:center 30%;background-repeat:no-repeat;filter:blur(60px) brightness(.55) saturate(1.1);transition:opacity .6s ease;will-change:transform;transform:translateZ(0)}
-.pause-bg-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.35) 40%,rgba(0,0,0,.9) 100%)}
+.pause-bg{position:absolute;inset:0;background-color:#000;background-size:cover;background-position:center;background-repeat:no-repeat;opacity:0;transition:opacity .8s ease}
+.pause-bg-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.6) 0%,rgba(0,0,0,.4) 40%,rgba(0,0,0,.92) 100%)}
 .pause-content{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;justify-content:center;padding:80px 40px 120px;pointer-events:none;max-width:900px}
 .pause-brand{font-size:96px;font-weight:900;letter-spacing:12px;line-height:1;margin-bottom:38px;text-transform:uppercase;background:linear-gradient(180deg,#fff 0%,#999 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding-left:8px;animation:fadeInUp .5s ease}
 .pause-label{font-size:11px;color:#ddd;letter-spacing:5px;text-transform:uppercase;font-weight:700;margin-bottom:14px;opacity:.9;text-shadow:0 2px 8px rgba(0,0,0,.8)}
@@ -1684,7 +1684,7 @@ function updatePauseDisplay(){
   setTimeout(function(){
     bg.style.backgroundImage = "url('"+item.img+"')";
     bg.style.opacity = '1';
-  }, 200);
+  }, 400);
   document.getElementById('pauseTitleBig').innerText = item.title;
   document.getElementById('pauseMetaBig').innerText = item.meta || '';
   document.getElementById('pauseDescBig').innerText = item.syn || '';
@@ -1820,3 +1820,4 @@ document.addEventListener('DOMContentLoaded',checkPC);
 </script>
 </body>
 </html>
+
