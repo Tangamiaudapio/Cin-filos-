@@ -40,7 +40,7 @@ body.edit-mode .edit-overlay{display:flex !important}
 .search-overlay svg{width:18px;height:18px;stroke:#8e8e93;stroke-width:2;fill:none;flex-shrink:0}
 .search-overlay input{flex:1;background:transparent;border:none;color:#fff;font-size:15px;outline:none;font-family:'Inter',sans-serif}
 .hero{position:relative;margin:0 16px;height:540px;border-radius:20px;overflow:hidden;background:#0a0a0a}
-.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center 30%;transition:filter .3s ease}
+.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center 30%}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 0%,rgba(0,0,0,.2) 40%,rgba(0,0,0,.75) 75%,#000 100%)}
 .hero-content{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding:24px 22px 28px;text-align:center}
 .emmy{margin-bottom:18px}
@@ -62,14 +62,13 @@ body.edit-mode .edit-overlay{display:flex !important}
 .section-header::after{content:'';position:absolute;bottom:0;left:0;width:36px;height:2px;background:#fff;border-radius:2px}
 .section-header h2{font-size:22px;font-weight:700;letter-spacing:-.5px}
 .see-more-btn{margin-left:auto;font-size:11px;font-weight:700;background:transparent;border:1px solid rgba(255,255,255,.2);color:#fff;padding:6px 14px;border-radius:14px;cursor:pointer;font-family:'Inter',sans-serif}
-.see-more-btn:active{background:rgba(255,255,255,.1)}
 .carousel{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none}
 .carousel::-webkit-scrollbar{display:none}
 .chart-card{flex:0 0 200px;display:flex;align-items:flex-end;gap:6px;cursor:pointer;position:relative}
 .chart-number{font-size:80px;font-weight:800;line-height:.8;letter-spacing:-6px;color:#000;-webkit-text-stroke:2px #fff;flex-shrink:0}
 .chart-poster{width:110px;height:160px;border-radius:10px;background-size:cover;background-position:center;flex-shrink:0}
-.poster-wide{flex:0 0 280px;height:160px;border-radius:12px;background-size:cover;background-position:center;cursor:pointer;transition:transform .2s;position:relative}
-.poster-vert{flex:0 0 140px;height:210px;border-radius:12px;background-size:cover;background-position:center;cursor:pointer;transition:transform .2s;position:relative}
+.poster-wide{flex:0 0 280px;height:160px;border-radius:12px;background-size:cover;background-position:center;cursor:pointer;position:relative}
+.poster-vert{flex:0 0 140px;height:210px;border-radius:12px;background-size:cover;background-position:center;cursor:pointer;position:relative}
 .news-mini{flex:0 0 260px;background:#0d0d0d;border:1px solid #1c1c1e;border-radius:12px;overflow:hidden;cursor:pointer}
 .news-mini-img{width:100%;height:140px;background-size:cover;background-position:center}
 .news-mini-body{padding:12px 14px}
@@ -104,12 +103,12 @@ body.edit-mode .edit-overlay{display:flex !important}
 .detail-rating-info{flex:1}
 .detail-rating-value{font-size:18px;font-weight:800;line-height:1}
 .detail-rating-count{font-size:11px;color:#8e8e93;margin-top:4px}
-.comments-title{font-size:15px;font-weight:700;padding:0 22px;margin-bottom:12px;text-align:center}
-.comment{margin:0 auto 10px;padding:14px;background:#0d0d0d;border:1px solid #1c1c1e;border-radius:14px;display:flex;gap:12px;max-width:600px;width:100%;box-sizing:border-box}
+.comments-title{font-size:15px;font-weight:700;padding:0 22px;margin-bottom:12px;text-align:left}
+.comment{margin:0 22px 10px;padding:14px;background:#0d0d0d;border:1px solid #1c1c1e;border-radius:14px;display:flex;gap:12px}
 .comment-avatar{width:36px;height:36px;border-radius:50%;background:#1c1c1e;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0}
 .comment-user{font-size:13px;font-weight:600;margin-bottom:4px}
 .comment-text{font-size:13px;color:#bbb;line-height:1.5}
-.comment-form{margin:0 auto 16px;display:flex;gap:10px;max-width:600px;width:100%;box-sizing:border-box;padding:0 22px}
+.comment-form{margin:0 22px 16px;display:flex;gap:10px}
 .comment-form input{flex:1;background:#1c1c1e;border:none;border-radius:20px;padding:12px 16px;color:#fff;font-size:14px;outline:none;font-family:'Inter',sans-serif}
 .comment-form button{background:#fff;color:#000;border:none;padding:0 20px;border-radius:20px;font-size:13px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer}
 .profile-avatar-wrap{position:relative;width:110px;height:110px;margin:30px auto 14px;cursor:pointer}
@@ -163,8 +162,7 @@ body.edit-mode .edit-overlay{display:flex !important}
 .about-stat-big-num{font-size:38px;font-weight:900;letter-spacing:-1px}
 .about-stat-big-label{font-size:11px;color:#8e8e93;letter-spacing:2px;text-transform:uppercase;margin-top:8px}
 .social-icons-row{display:flex;justify-content:center;gap:22px;padding:20px 22px 40px}
-.social-icon-only{width:76px;height:76px;border-radius:22px;display:flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none;transition:transform .2s}
-.social-icon-only:active{transform:scale(.95)}
+.social-icon-only{width:76px;height:76px;border-radius:22px;display:flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none}
 .social-icon-only.tg{background:linear-gradient(135deg,#2AABEE,#229ED9)}
 .social-icon-only.fb{background:#1877F2}
 .social-icon-only.tk{background:#111;border:1px solid #2c2c2e}
@@ -217,6 +215,8 @@ body.edit-mode .edit-overlay{display:flex !important}
 .modal-option-title{font-size:15px;font-weight:600;color:#fff;margin-bottom:2px}
 .modal-option-desc{font-size:11px;color:#8e8e93}
 .modal-cancel{width:100%;padding:16px;background:transparent;border:none;color:#8e8e93;font-size:14px;font-weight:600;font-family:'Inter',sans-serif;margin-top:6px;cursor:pointer}
+
+/* ========== REPRODUCTOR ========== */
 .player-screen{position:fixed;inset:0;background:#000;z-index:99999;display:none;overflow:hidden}
 .player-screen.active{display:block}
 .player-rotate-msg{position:absolute;inset:0;background:#000;z-index:20;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px}
@@ -239,8 +239,8 @@ body.edit-mode .edit-overlay{display:flex !important}
 .player-bottom{position:absolute;bottom:0;left:0;right:0;padding:20px 24px 32px}
 .player-meta-row{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:14px}
 .player-info{flex:1;min-width:0}
-.player-title{font-size:12px;color:#b0b0b0;margin-bottom:6px;letter-spacing:.5px;text-transform:uppercase}
-.player-subtitle{font-size:26px;font-weight:800;letter-spacing:-.5px;line-height:1.2}
+.player-title{font-size:13px;color:#e5e5e5;margin-bottom:10px;letter-spacing:3px;text-transform:uppercase;font-weight:700}
+.player-subtitle{font-size:44px;font-weight:900;letter-spacing:-1.5px;line-height:1.05;text-shadow:0 4px 30px rgba(0,0,0,.9);word-break:break-word}
 .player-actions{display:flex;gap:10px;align-items:center;flex-shrink:0}
 .player-action-btn{width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,.4);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.15);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative}
 .player-action-btn svg{width:20px;height:20px;stroke:#fff;stroke-width:2;fill:none}
@@ -263,6 +263,20 @@ body.edit-mode .edit-overlay{display:flex !important}
 .spinner{width:60px;height:60px;border:4px solid rgba(255,255,255,.15);border-top-color:#fff;border-radius:50%;animation:spin 1s linear infinite;margin-bottom:20px}
 @keyframes spin{to{transform:rotate(360deg)}}
 .player-loading p{font-size:14px;color:#8e8e93;font-weight:500}
+
+/* ========== PAUSA OVERLAY ========== */
+.pause-overlay{position:absolute;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(20px);z-index:7;display:none;flex-direction:column;justify-content:center;padding:30px 24px;overflow-y:auto}
+.pause-overlay.active{display:flex}
+.pause-overlay-title{font-size:18px;font-weight:800;margin-bottom:4px;letter-spacing:-.3px}
+.pause-overlay-sub{font-size:12px;color:#8e8e93;margin-bottom:22px}
+.pause-suggestions{display:flex;gap:12px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none}
+.pause-suggestions::-webkit-scrollbar{display:none}
+.pause-suggestion{flex:0 0 130px;cursor:pointer}
+.pause-suggestion-poster{width:130px;height:195px;border-radius:10px;background-size:cover;background-position:center;margin-bottom:8px;border:1px solid rgba(255,255,255,.1)}
+.pause-suggestion-name{font-size:12px;font-weight:600;line-height:1.3;text-align:center}
+.pause-continue-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;color:#000;border:none;padding:14px 30px;border-radius:50px;font-size:14px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;margin:24px auto 0;width:fit-content;box-shadow:0 10px 40px rgba(255,255,255,.2)}
+.pause-continue-btn svg{width:16px;height:16px;fill:#000}
+
 .empty-state{text-align:center;padding:80px 30px;color:#636366}
 .empty-state svg{width:60px;height:60px;stroke:#333;stroke-width:1.5;fill:none;margin-bottom:20px}
 .empty-state h3{font-size:18px;font-weight:700;color:#fff;margin-bottom:8px}
@@ -271,8 +285,8 @@ body.edit-mode .edit-overlay{display:flex !important}
 .filter-row::-webkit-scrollbar{display:none}
 .filter-btn{flex:0 0 auto;padding:10px 18px;border-radius:20px;background:#1c1c1e;color:#8e8e93;font-size:12px;font-weight:600;border:1px solid #2c2c2e;font-family:'Inter',sans-serif;white-space:nowrap;cursor:pointer}
 .filter-btn.active{background:#fff;color:#000;border-color:#fff}
+
 @media (min-width:900px){
-  .screen{padding-bottom:60px}
   .bottom-nav{display:none !important}
   .pc-nav{position:fixed;top:0;left:0;right:0;padding:18px 60px;display:flex;justify-content:space-between;align-items:center;background:rgba(20,20,22,.5);backdrop-filter:blur(28px);border-bottom:1px solid rgba(255,255,255,.05);z-index:1000}
   .pc-nav .logo{font-size:26px;font-weight:900;letter-spacing:8px}
@@ -295,9 +309,7 @@ body.edit-mode .edit-overlay{display:flex !important}
   .tabs,.genres,.filter-row{padding-left:60px;padding-right:60px}
   #s-home .top-header,#s-explore .top-header,#s-list .top-header,#s-profile .top-header{display:none !important}
   #s-explore{padding-top:100px}
-  #s-list{padding-top:110px}
-  #s-profile{padding-top:110px}
-  #s-about{padding-top:110px}
+  #s-list,#s-profile,#s-about{padding-top:110px}
   .detail-content{padding:36px 60px;max-width:1200px}
   .detail-title{font-size:58px;margin-top:-140px}
   .related-grid{grid-template-columns:repeat(6,1fr);padding:20px 60px 60px}
@@ -307,6 +319,7 @@ body.edit-mode .edit-overlay{display:flex !important}
   #adminAdd,#adminUsers,#adminContent{max-width:1000px;margin:0 auto}
   .modal-overlay{align-items:center}
   .modal-sheet{border-radius:20px;max-width:520px}
+  .player-subtitle{font-size:56px}
 }
 @media (max-width:899px){
   .pc-nav{display:none !important}
@@ -340,7 +353,7 @@ body.edit-mode .edit-overlay{display:flex !important}
   </div>
   <div class="right">
     <input type="text" class="search-pc" placeholder="Buscar" oninput="doSearchPC(this.value)">
-    <button class="edit-mode-btn" id="editModeBtnPC" onclick="toggleEditMode()" title="Modo Edición"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button>
+    <button class="edit-mode-btn" id="editModeBtnPC" onclick="toggleEditMode()"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button>
     <button class="bw-btn" onclick="toggleBW()"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button>
     <button class="admin-btn" id="adminBtnPC" onclick="openAdmin()" style="display:none">+</button>
     <div class="avatar" id="userAvatarWrapPC"><span id="userAvatarPC">?</span><span class="avatar-verified"><svg viewBox="0 0 24 24"><polyline points="5 12 10 17 19 7"/></svg></span></div>
@@ -350,7 +363,7 @@ body.edit-mode .edit-overlay{display:flex !important}
 <div class="screen active" id="s-home">
 <div class="top-header"><h1>Inicio <svg onclick="toggleSearch()" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></h1>
 <div class="header-right">
-<button class="edit-mode-btn" onclick="toggleEditMode()" title="Modo Edición"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button>
+<button class="edit-mode-btn" onclick="toggleEditMode()"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button>
 <button class="bw-btn" onclick="toggleBW()"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button>
 <button class="admin-btn" id="adminBtn" onclick="openAdmin()">+</button>
 <div class="avatar" id="userAvatarWrap"><span id="userAvatar">?</span><span class="avatar-verified" id="avatarVerified"><svg viewBox="0 0 24 24"><polyline points="5 12 10 17 19 7"/></svg></span></div>
@@ -612,6 +625,15 @@ body.edit-mode .edit-overlay{display:flex !important}
 <div class="spinner"></div>
 <p>Cargando video...</p>
 </div>
+<div class="pause-overlay" id="pauseOverlay">
+<div class="pause-overlay-title">¿Qué te gustaría ver?</div>
+<div class="pause-overlay-sub">Otras recomendaciones para ti</div>
+<div class="pause-suggestions" id="pauseSuggestions"></div>
+<button class="pause-continue-btn" onclick="event.stopPropagation();resumeVideo()">
+<svg viewBox="0 0 24 24"><path d="M8 5 L19 12 L8 19 Z"/></svg>
+Continuar viendo
+</button>
+</div>
 <div class="lang-menu" id="langMenu">
 <div class="lang-menu-title">Idioma del audio</div>
 <h2 id="langMenuTitle">Elige el idioma</h2>
@@ -708,11 +730,11 @@ function toggleEditMode(){
 isEditMode=!isEditMode;
 document.body.classList.toggle('edit-mode',isEditMode);
 document.querySelectorAll('.edit-mode-btn').forEach(function(b){b.classList.toggle('active',isEditMode);});
-console.log(isEditMode?'✏️ Modo Edición ON':'✅ Modo Edición OFF');
+console.log(isEditMode?'✏️ Edición ON':'✅ Edición OFF');
 }
 
 /* ============================================
-   CARGA DE CONTENIDO DESDE SUPABASE
+   CARGA DESDE SUPABASE
    ============================================ */
 async function loadContentFromSupabase(){
 try {
@@ -721,8 +743,8 @@ try {
     .select('*')
     .order('id', { ascending: false });
   
-  if(error){ console.error('Error cargando:', error); return; }
-  if(!data || !data.length){ console.log('⚠️ No hay contenido en Supabase'); return; }
+  if(error){ console.error(error); return; }
+  if(!data || !data.length){ console.log('Sin contenido'); return; }
   
   ALL_ITEMS = data.map(function(item){
     return {
@@ -741,9 +763,9 @@ try {
     };
   });
   
-  console.log('✅ Cargadas ' + ALL_ITEMS.length + ' pelis de Supabase');
+  console.log('✅ Cargadas ' + ALL_ITEMS.length + ' pelis');
 } catch(e) {
-  console.error('Error:', e);
+  console.error(e);
 }
 }
 
@@ -767,10 +789,30 @@ try {
     .slice(0,5)
     .map(function(x){return parseInt(x[0]);});
   
-  console.log('✅ Top 5 por votos:', TOP_5_IDS);
-} catch(e) {
-  console.error('Error Top5:', e);
+  console.log('✅ Top 5:', TOP_5_IDS);
+} catch(e) { console.error(e); }
 }
+
+async function loadMyListFromSupabase(){
+try {
+  const { data, error } = await supabaseClient
+    .from('mi_lista')
+    .select('*')
+    .eq('usuario_nombre', userName.toLowerCase());
+  if(error || !data) return;
+  myList = [];
+  data.forEach(function(item){
+    var found = ALL_ITEMS.filter(function(x){return x.id === item.contenido_id;})[0];
+    if(found){
+      var copy = JSON.parse(JSON.stringify(found));
+      copy.status = item.estado;
+      copy.posicion = item.posicion || 0;
+      copy.idioma = item.idioma || 'latino';
+      myList.push(copy);
+    }
+  });
+  console.log('✅ Mi Lista: ' + myList.length + ' items');
+} catch(e) { console.error(e); }
 }
 
 /* ============================================
@@ -785,32 +827,36 @@ if(c!==OWNER_CODE&&c!==USER_CODE){document.getElementById('nameError').innerText
 isOwner=(c===OWNER_CODE);isAdmin=isOwner;userName=n;userCode=c;
 
 try {
-  await supabaseClient.from('usuarios').upsert({ 
-    nombre: n.toLowerCase(), codigo: c, rol: isOwner ? 'owner' : 'usuario' 
+  await supabaseClient.from('usuarios').upsert({
+    nombre: n.toLowerCase(), codigo: c, rol: isOwner ? 'owner' : 'usuario'
   }, { onConflict: 'nombre' });
   console.log('✅ Usuario guardado');
 } catch(e) { console.error(e); }
 
 usuariosRegistrados[n.toLowerCase()]={name:n,owner:isOwner,admin:isAdmin};
 var ini=n.substring(0,2).toUpperCase();
-['userAvatar','userAvatar2','userAvatar4','userAvatar6','userAvatarPC','profileAvatar'].forEach(function(id){var el=document.getElementById(id);if(el)el.innerText=ini;});
+['userAvatar','userAvatar2','userAvatar4','userAvatar6','userAvatarPC','profileAvatar'].forEach(function(id){
+  var el=document.getElementById(id);
+  if(el)el.innerText=ini;
+});
 document.getElementById('profileName').innerText=n;
 document.getElementById('profileHandle').innerText='@'+n.toLowerCase().replace(/\s+/g,'');
 document.getElementById('welcomeScreen').style.display='none';
 if(isAdmin){
-document.querySelectorAll('.admin-btn').forEach(function(b){b.style.display='flex';});
-document.querySelectorAll('.edit-mode-btn').forEach(function(b){b.style.display='flex';});
-document.querySelectorAll('.avatar').forEach(function(a){a.classList.add('verified');});
-document.getElementById('verifiedBadge').style.display='inline-flex';
+  document.querySelectorAll('.admin-btn').forEach(function(b){b.style.display='flex';});
+  document.querySelectorAll('.edit-mode-btn').forEach(function(b){b.style.display='flex';});
+  document.querySelectorAll('.avatar').forEach(function(a){a.classList.add('verified');});
+  document.getElementById('verifiedBadge').style.display='inline-flex';
 }
 
-// Cargar contenido e iniciar
 checkPC();
 await loadContentFromSupabase();
 await loadTop5FromVotes();
+await loadMyListFromSupabase();
 initHero();
 buildHomeSections();
 buildExplore();
+updateCounters();
 }
 
 /* ============================================
@@ -858,7 +904,7 @@ document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('a
 if(btn&&btn.classList.contains('nav-item'))btn.classList.add('active');
 document.querySelectorAll('.pc-link').forEach(function(b){b.classList.toggle('active',b.dataset.pc===id);});
 if(id==='list')renderList();
-if(id==='profile')buildFavRow();
+if(id==='profile'){buildFavRow();updateCounters();}
 window.scrollTo(0,0);
 }
 
@@ -873,7 +919,7 @@ else{home.style.display='block';res.style.display='none';document.getElementById
 }
 function editOverlayHTML(x){
 if(!x.id)return '';
-return '<div class="edit-overlay"><button onclick="event.stopPropagation();editContent('+x.id+')" title="Editar"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button><button class="delete" onclick="event.stopPropagation();deleteContent('+x.id+',\''+x.title.replace(/\'/g,"\\'")+'\')" title="Eliminar"><svg viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></button></div>';
+return '<div class="edit-overlay"><button onclick="event.stopPropagation();editContent('+x.id+')"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button><button class="delete" onclick="event.stopPropagation();deleteContent('+x.id+',\''+x.title.replace(/\'/g,"\\'")+'\')"><svg viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></button></div>';
 }
 function searchHTML(m){
 var h='<div style="padding:0 22px"><div class="grid" style="padding:0">';
@@ -941,8 +987,7 @@ document.getElementById('d-cat').innerText=parts[1]||'Drama';
 document.getElementById('d-dur').innerText=parts[2]||(isSerie?'Serie':'1h 45min');
 var r=4+(title.length%10)/10;if(r>5)r=5;
 document.getElementById('d-rating-val').innerText=r.toFixed(1);
-var votosCount=(commentsByTitle[title]||[]).length;
-document.getElementById('d-rating-cnt').innerText=votosCount+' valoraciones';
+document.getElementById('d-rating-cnt').innerText='0 valoraciones';
 var stars='';
 for(var i=1;i<=5;i++){
   var fill=i<=Math.round(r)?'#FFD700':'#555';
@@ -956,33 +1001,43 @@ others.forEach(function(x){
   h+='<div class="related-item"><div onclick="openDetail(\''+x.title+'\',\''+x.meta+'\',\''+x.syn+'\',\''+x.img+'\','+x.isSerie+')"><div class="related-poster" style="background-image:url(\''+x.img+'\')"></div><div class="related-name">'+x.title+'</div></div>'+editOverlayHTML(x)+'</div>';
 });
 document.getElementById('relatedGrid').innerHTML=h;
-renderComments(title);
+loadCommentsForDetail(item.id);
 updatePlusButtons();
 document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
 document.getElementById('s-detail').classList.add('active');
 window.scrollTo(0,0);
 }
 
-async function loadCommentsFromSupabase(title){
-var item=ALL_ITEMS.filter(function(x){return x.title===title;})[0]||{};
-if(!item.id) return [];
+async function loadCommentsForDetail(itemId){
+var title=currentDetail.title;
 try {
   const { data, error } = await supabaseClient
     .from('comentarios')
     .select('*')
-    .eq('contenido_id', item.id)
+    .eq('contenido_id', itemId)
     .order('creado_en', { ascending: false });
-  if(error || !data) return [];
-  return data.map(function(c){
-    return { user: c.usuario_nombre, text: c.texto };
+  
+  if(error || !data || !data.length){
+    commentsByTitle[title]=[];
+    renderComments(title);
+    return;
+  }
+  commentsByTitle[title] = data.map(function(c){
+    return {user: c.usuario_nombre, text: c.texto};
   });
-} catch(e) { return []; }
+  document.getElementById('d-rating-cnt').innerText = data.length + ' valoraciones';
+  renderComments(title);
+} catch(e) {
+  console.error(e);
+}
 }
 
 function renderComments(title){
-var arr=commentsByTitle[title]||[{user:'JuanPerez',text:'Increíble, la fotografía es de otro nivel.'},{user:'MariaR',text:'Buena, pero el final me dejó con ganas de más.'}];
-if(!commentsByTitle[title])commentsByTitle[title]=arr;
+var arr=commentsByTitle[title]||[];
 var h='';
+if(!arr.length){
+  h='<div class="comment"><div class="comment-avatar">?</div><div><div class="comment-text" style="color:#636366">Sin comentarios aún. Sé el primero.</div></div></div>';
+}
 arr.forEach(function(c){
   h+='<div class="comment"><div class="comment-avatar">'+c.user.substring(0,2).toUpperCase()+'</div><div><div class="comment-user">'+c.user+'</div><div class="comment-text">'+c.text+'</div></div></div>';
 });
@@ -994,19 +1049,16 @@ var inp=document.getElementById('commentInput');var txt=inp.value.trim();
 if(!txt||!currentDetail)return;
 var item=ALL_ITEMS.filter(function(x){return x.title===currentDetail.title;})[0]||{};
 try {
-  const { error } = await supabaseClient.from('comentarios').insert({
+  await supabaseClient.from('comentarios').insert({
     contenido_id: item.id || null,
     usuario_nombre: userName || 'Tú',
     texto: txt,
     estrellas: null
   });
-  if(error){ console.error('Error:', error); }
-  else { console.log('✅ Comentario guardado'); }
+  console.log('✅ Comentario guardado');
 } catch(e) { console.error(e); }
-if(!commentsByTitle[currentDetail.title])commentsByTitle[currentDetail.title]=[];
-commentsByTitle[currentDetail.title].push({user:userName||'Tú',text:txt});
 inp.value='';
-renderComments(currentDetail.title);
+await loadCommentsForDetail(item.id);
 updateCounters();
 }
 
@@ -1031,10 +1083,9 @@ if(currentDetail){
       estrellas: _pendingRating
     });
     console.log('✅ Rating guardado');
+    await loadCommentsForDetail(item.id);
+    await loadTop5FromVotes();
   } catch(e) { console.error(e); }
-  if(!commentsByTitle[currentDetail.title])commentsByTitle[currentDetail.title]=[];
-  commentsByTitle[currentDetail.title].unshift({user:userName||'Tú',text:'⭐ '+_pendingRating+'/5 — '+txt});
-  renderComments(currentDetail.title);
   updateCounters();
 }
 document.getElementById('ratingModal').classList.remove('active');
@@ -1061,23 +1112,26 @@ if(!currentDetail)return;
 var item=ALL_ITEMS.filter(function(x){return x.title===currentDetail.title;})[0]||{};
 try {
   await supabaseClient.from('mi_lista').upsert({
-    usuario_nombre: userName || 'Tú',
+    usuario_nombre: userName.toLowerCase() || 'tú',
     contenido_id: item.id || 1,
-    estado: status
+    estado: status,
+    posicion: 0,
+    idioma: 'latino'
   }, { onConflict: 'usuario_nombre,contenido_id' });
   console.log('✅ Guardado en Mi Lista');
+  await loadMyListFromSupabase();
 } catch(e) { console.error(e); }
-var idx=-1;
-for(var i=0;i<myList.length;i++){if(myList[i].title===currentDetail.title){idx=i;break;}}
-if(idx>=0)myList[idx].status=status;
-else{var newItem=JSON.parse(JSON.stringify(currentDetail));newItem.status=status;myList.push(newItem);}
 closeModal();updatePlusButtons();updateCounters();
 }
 function removeFromList(){
 if(!currentDetail)return;
 var idx=-1;
 for(var i=0;i<myList.length;i++){if(myList[i].title===currentDetail.title){idx=i;break;}}
-if(idx>=0)myList.splice(idx,1);
+if(idx>=0){
+  var itemId = myList[idx].id;
+  supabaseClient.from('mi_lista').delete().eq('usuario_nombre', userName.toLowerCase()).eq('contenido_id', itemId).then(function(){});
+  myList.splice(idx,1);
+}
 closeModal();updatePlusButtons();updateCounters();
 }
 function closeModal(){document.getElementById('modalOverlay').classList.remove('active');}
@@ -1094,8 +1148,7 @@ updatePlusButtons();updateCounters();
    PERFIL
    ============================================ */
 function buildFavRow(){
-var row=document.getElementById('favRow');
-if(!row)return;
+var row=document.getElementById('favRow');if(!row)return;
 var h='';
 ALL_ITEMS.slice(0,3).forEach(function(x){
   h+='<div class="fav-poster" onclick="openDetail(\''+x.title+'\',\''+x.meta+'\',\''+x.syn+'\',\''+x.img+'\','+x.isSerie+')" style="background-image:url(\''+x.img.replace('/original/','/w300/')+'\')"></div>';
@@ -1128,9 +1181,9 @@ document.getElementById('profileTabAct').style.display=tab==='act'?'block':'none
 }
 function updateCounters(){
 var totalComments=0;for(var k in commentsByTitle)totalComments+=commentsByTitle[k].length;
-document.getElementById('statComments').innerText=totalComments;
-document.getElementById('statLikes').innerText=Math.floor(totalComments*1.5);
-document.getElementById('statListChip').innerText=myList.length;
+var sc=document.getElementById('statComments');if(sc)sc.innerText=totalComments;
+var sl=document.getElementById('statLikes');if(sl)sl.innerText=Math.floor(totalComments*1.5);
+var slc=document.getElementById('statListChip');if(slc)slc.innerText=myList.length;
 }
 function updatePlusButtons(){
 var found=false;
@@ -1198,13 +1251,13 @@ b.addEventListener('click',function(){
 });
 function renderAdminUsers(){
 var list=document.getElementById('adminUserList');var h='';
-if(!Object.keys(usuariosRegistrados).length)h='<div style="text-align:center;padding:40px 20px;color:#8e8e93;font-size:13px">Aún no hay usuarios registrados</div>';
+if(!Object.keys(usuariosRegistrados).length)h='<div style="text-align:center;padding:40px 20px;color:#8e8e93;font-size:13px">Sin usuarios</div>';
 for(var key in usuariosRegistrados){
   var u=usuariosRegistrados[key];
   var roleClass=u.owner?'owner':(u.admin?'admin':'');
   var roleText=u.owner?'Propietario':(u.admin?'Administrador':'Usuario');
   var menuBtn=u.owner?'':'<button class="u-menu-btn" onclick="toggleUserMenu(event,\''+key+'\')">⋮</button>';
-  var menu=u.owner?'':'<div class="u-menu" id="menu-'+key+'"><div class="u-menu-item" onclick="makeAdmin(\''+key+'\')">Hacer Administrador</div><div class="u-menu-item" onclick="removeAdmin(\''+key+'\')">Quitar Administrador</div><div class="u-menu-item danger" onclick="kickUser(\''+key+'\')">Expulsar</div></div>';
+  var menu=u.owner?'':'<div class="u-menu" id="menu-'+key+'"><div class="u-menu-item" onclick="makeAdmin(\''+key+'\')">Hacer Admin</div><div class="u-menu-item" onclick="removeAdmin(\''+key+'\')">Quitar Admin</div><div class="u-menu-item danger" onclick="kickUser(\''+key+'\')">Expulsar</div></div>';
   h+='<div class="user-row"><div class="u-info"><div class="u-avatar">'+u.name.substring(0,2).toUpperCase()+'</div><div><div class="u-name">'+u.name+'</div><div class="u-role '+roleClass+'">'+roleText+'</div></div></div>'+menuBtn+menu+'</div>';
 }
 list.innerHTML=h;
@@ -1224,25 +1277,28 @@ var list=document.getElementById('adminContentList');
 list.innerHTML='<div style="text-align:center;padding:40px;color:#8e8e93">Cargando...</div>';
 try {
   const { data, error } = await supabaseClient.from('contenido').select('*').order('id', { ascending: false });
-  if(error){ list.innerHTML='<div style="text-align:center;padding:40px;color:#ff453a">Error</div>'; return; }
-  if(!data||!data.length){ list.innerHTML='<div style="text-align:center;padding:40px;color:#8e8e93">Sin contenido aún</div>'; return; }
+  if(error){ list.innerHTML='<div style="padding:40px;color:#ff453a">Error</div>'; return; }
+  if(!data||!data.length){ list.innerHTML='<div style="padding:40px;color:#8e8e93">Sin contenido</div>'; return; }
   var h='';
   data.forEach(function(item){
     h+='<div class="user-row" style="margin-bottom:12px"><div class="u-info"><div class="u-avatar" style="background-image:url(\''+item.img_vertical+'\')"></div><div><div class="u-name">'+item.titulo+'</div><div class="u-role">'+item.categoria+' · ID: '+item.id+'</div></div></div><div style="display:flex;gap:8px"><button class="u-menu-btn" onclick="editContent('+item.id+')" style="background:transparent;border:1px solid #3a3a3c"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:#fff;stroke-width:2;fill:none"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button><button class="u-menu-btn" onclick="deleteContent('+item.id+',\''+item.titulo.replace(/\'/g,"\\'")+'\')" style="background:transparent;border:1px solid #3a3a3c"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:#fff;stroke-width:2;fill:none"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></button></div></div>';
   });
   list.innerHTML=h;
-} catch(e) { list.innerHTML='<div style="text-align:center;padding:40px;color:#ff453a">Error</div>'; }
+} catch(e) { list.innerHTML='<div style="padding:40px;color:#ff453a">Error</div>'; }
 }
 
 async function editContent(id){
 try {
   const { data, error } = await supabaseClient.from('contenido').select('*').eq('id', id).single();
-  if(error || !data){ alert('Error cargando'); return; }
+  if(error || !data){ alert('Error'); return; }
+  
+  document.getElementById('adminScreen').style.display='block';
   document.querySelectorAll('.admin-tab').forEach(function(t){t.classList.remove('active');});
-  document.querySelector('.admin-tab').classList.add('active');
+  document.querySelectorAll('.admin-tab')[0].classList.add('active');
   document.getElementById('adminAdd').style.display='block';
   document.getElementById('adminUsers').style.display='none';
   document.getElementById('adminContent').style.display='none';
+  
   document.getElementById('adminName').value=data.titulo||'';
   document.getElementById('adminSyn').value=data.sinopsis||'';
   document.getElementById('imgUrlV').value=data.img_vertical||'';
@@ -1252,8 +1308,17 @@ try {
   if(document.getElementById('linkLat'))document.getElementById('linkLat').value=data.link_latino||'';
   if(document.getElementById('linkIng'))document.getElementById('linkIng').value=data.link_ingles||'';
   if(document.getElementById('linkOtr'))document.getElementById('linkOtr').value=data.link_otros||'';
+  
+  _adminCat = data.categoria || 'peliculas';
+  _adminGenre = data.genero || 'Drama';
+  document.querySelectorAll('#catBtns .cat-btn').forEach(function(b){
+    b.classList.toggle('active', b.dataset.cat === _adminCat);
+  });
+  document.querySelectorAll('#genreBtns .cat-btn').forEach(function(b){
+    b.classList.toggle('active', b.dataset.genre === _adminGenre);
+  });
+  
   window._editingContentId = id;
-  alert('✅ Editando: ' + data.titulo + '\n\nModifica y publica.');
 } catch(e) { console.error(e); alert('Error'); }
 }
 
@@ -1261,7 +1326,7 @@ async function deleteContent(id, titulo){
 if(!confirm('¿Eliminar "'+titulo+'"?'))return;
 try {
   const { error } = await supabaseClient.from('contenido').delete().eq('id', id);
-  if(error){ alert('❌ Error: '+error.message); return; }
+  if(error){ alert('Error: '+error.message); return; }
   alert('✅ Eliminado');
   renderAdminContent();
   await loadContentFromSupabase();
@@ -1278,7 +1343,7 @@ var imgH=document.getElementById('imgUrlH').value.trim();
 var linkLat=document.getElementById('linkLat')?.value.trim()||'';
 var linkIng=document.getElementById('linkIng')?.value.trim()||'';
 var linkOtr=document.getElementById('linkOtr')?.value.trim()||'';
-if(!name||!imgV){alert('Nombre y póster vertical son obligatorios');return;}
+if(!name||!imgV){alert('Nombre y póster son obligatorios');return;}
 var meta=(new Date().getFullYear())+' · '+_adminGenre;
 var isSerie=(_adminCat==='series'||_adminCat==='animes'||_adminCat==='kdramas'||_adminCat==='telenovelas');
 var payload={
@@ -1295,24 +1360,17 @@ try {
     result = await supabaseClient.from('contenido').insert(payload).select().single();
   }
   if(result.error){ alert('❌ '+result.error.message); return; }
-  console.log('✅ Guardado');
   alert(window._editingContentId ? '✅ Actualizado' : '✅ Publicado');
-  
-  // Recargar todo desde Supabase
   await loadContentFromSupabase();
   await loadTop5FromVotes();
 } catch(e) { alert('❌ Error de conexión'); return; }
 
 window._editingContentId = null;
-document.getElementById('adminName').value='';
-document.getElementById('adminSyn').value='';
-document.getElementById('imgUrlV').value='';
-document.getElementById('imgUrlH').value='';
+['adminName','adminSyn','imgUrlV','imgUrlH','linkLat','linkIng','linkOtr'].forEach(function(id){
+  var el=document.getElementById(id);if(el)el.value='';
+});
 document.getElementById('imgPreviewV').style.backgroundImage='';
 document.getElementById('imgPreviewH').style.backgroundImage='';
-if(document.getElementById('linkLat'))document.getElementById('linkLat').value='';
-if(document.getElementById('linkIng'))document.getElementById('linkIng').value='';
-if(document.getElementById('linkOtr'))document.getElementById('linkOtr').value='';
 
 buildHomeSections();
 buildExplore();
@@ -1337,7 +1395,7 @@ return '<div class="grid-item"><div onclick="openDetail(\''+x.title+'\',\''+x.me
 }
 
 function buildHomeSections(){
-// TOP 5
+// Top 5
 var top5 = [];
 if(TOP_5_IDS.length > 0){
   TOP_5_IDS.forEach(function(id){
@@ -1345,30 +1403,31 @@ if(TOP_5_IDS.length > 0){
     if(found) top5.push(found);
   });
 }
-// Si no hay votos, usar los primeros 5
 if(top5.length === 0) top5 = ALL_ITEMS.slice(0,5);
 
 var h='';
 top5.forEach(function(x,i){
   h+='<div class="chart-card" onclick="openDetail(\''+x.title+'\',\''+x.meta+'\',\''+x.syn+'\',\''+x.img+'\','+x.isSerie+')"><div class="chart-number">'+(i+1)+'</div><div class="chart-poster" style="background-image:url(\''+x.img+'\')"></div></div>';
 });
-document.getElementById('carousel-top5').innerHTML=h || '<div style="color:#636366;padding:14px">Sin contenido</div>';
+var c5=document.getElementById('carousel-top5');
+if(c5)c5.innerHTML=h || '<div style="color:#636366;padding:14px">Sin contenido</div>';
 
-// NOTICIAS
+// Noticias
 var nh='';
 NEWS.forEach(function(n){
   nh+='<div class="news-mini"><div class="news-mini-img" style="background-image:url(\''+n.img+'\')"></div><div class="news-mini-body"><div class="news-mini-tag">'+n.tag+'</div><div class="news-mini-title">'+n.title+'</div></div></div>';
 });
-document.getElementById('carousel-news').innerHTML=nh;
+var cn=document.getElementById('carousel-news');if(cn)cn.innerHTML=nh;
 
-// ESTRENOS (los últimos agregados)
+// Estrenos
 var eh='';
 ALL_ITEMS.slice(0,4).forEach(function(x){
   eh+='<div class="poster-wide" onclick="openDetail(\''+x.title+'\',\''+x.meta+'\',\''+x.syn+'\',\''+x.img+'\','+x.isSerie+')" style="background-image:url(\''+x.imgH+'\')">'+editOverlayHTML(x)+'</div>';
 });
-document.getElementById('carousel-estrenos').innerHTML=eh || '<div style="color:#636366;padding:14px">Sin contenido</div>';
+var ce=document.getElementById('carousel-estrenos');
+if(ce)ce.innerHTML=eh || '<div style="color:#636366;padding:14px">Sin contenido</div>';
 
-// CATEGORÍAS
+// Categorías
 ['peliculas','series','animes','kdramas','telenovelas','documentales'].forEach(function(c){
   var arr=ALL_ITEMS.filter(function(x){return x.cat===c;});
   var el=document.getElementById('carousel-'+c);
@@ -1387,12 +1446,12 @@ function buildExplore(){
   var el=document.querySelector('#cat-'+c+' .grid');
   if(!el)return;
   var arr=ALL_ITEMS.filter(function(x){return x.cat===c;});
-  el.innerHTML=arr.length?arr.map(itemCardHTML).join(''):'<div style="grid-column:1/-1;text-align:center;color:#636366;padding:60px 20px">Sin contenido aún.</div>';
+  el.innerHTML=arr.length?arr.map(itemCardHTML).join(''):'<div style="grid-column:1/-1;text-align:center;color:#636366;padding:60px 20px">Sin contenido.</div>';
 });
 }
 
 /* ============================================
-   CATEGORÍA (VER MÁS)
+   CATEGORÍA
    ============================================ */
 var catLastScreen='home';
 function openCategory(cat){
@@ -1402,8 +1461,7 @@ document.getElementById('catTitle').innerText={
   telenovelas:'Telenovelas',documentales:'Documentales',estrenos:'Estrenos',
   top5:'Top 5 Semanal',news:'Noticias'
 }[cat]||'Categoría';
-var grid=document.getElementById('catGrid');
-grid.style.gridTemplateColumns='';
+var grid=document.getElementById('catGrid');grid.style.gridTemplateColumns='';
 if(cat==='news'){
   grid.style.gridTemplateColumns='1fr';
   var nh='';
@@ -1425,7 +1483,7 @@ if(cat==='news'){
   grid.innerHTML=ALL_ITEMS.slice(0,4).map(itemCardHTML).join('');
 }else{
   var arr=ALL_ITEMS.filter(function(x){return x.cat===cat;});
-  grid.innerHTML=arr.length?arr.map(itemCardHTML).join(''):'<div style="grid-column:1/-1;text-align:center;color:#636366;padding:60px 20px">Sin contenido aún.</div>';
+  grid.innerHTML=arr.length?arr.map(itemCardHTML).join(''):'<div style="grid-column:1/-1;text-align:center;color:#636366;padding:60px 20px">Sin contenido.</div>';
 }
 document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
 document.getElementById('s-category').classList.add('active');
@@ -1439,8 +1497,10 @@ function backFromCategory(){go(catLastScreen,null);}
 var playerVideo,controlsTimer,isPlaying=false;
 var currentVideoLinks={};
 var currentLang='latino';
+var currentVideoKey='';
+var currentContentId=null;
 
-function playFromHero(){openPlayer(HERO_ITEMS[heroIdx].title,HERO_ITEMS[heroIdx].cat+' · '+HERO_ITEMS[heroIdx].dur,{});}
+function playFromHero(){openPlayer(HERO_ITEMS[heroIdx].title,HERO_ITEMS[heroIdx].cat+' · '+HERO_ITEMS[heroIdx].dur,{},null);}
 function playFromDetail(){
   var item=ALL_ITEMS.filter(function(x){return x.title===currentDetail.title;})[0]||{};
   var links={
@@ -1448,20 +1508,46 @@ function playFromDetail(){
     ingles: item.linkIng || '',
     otros: item.linkOtr || ''
   };
-  openPlayer(document.getElementById('d-title').innerText,document.getElementById('d-cat').innerText+' · '+document.getElementById('d-year').innerText,links);
+  openPlayer(document.getElementById('d-title').innerText,document.getElementById('d-cat').innerText+' · '+document.getElementById('d-year').innerText,links,item.id);
 }
 
-function openPlayer(title,subtitle,links){
+async function openPlayer(title,subtitle,links,contentId){
   document.getElementById('playerScreen').classList.add('active');
-  document.getElementById('pTitle').innerText=title||'Reproduciendo';
-  document.getElementById('pSubtitle').innerText=subtitle||'';
+  document.getElementById('pTitle').innerText='CINEFILOS';
+  document.getElementById('pSubtitle').innerText=title||'Reproduciendo';
   playerVideo=document.getElementById('playerVideo');
   currentVideoLinks=links||{};
+  currentContentId=contentId;
+  currentVideoKey = (title||'default').replace(/\s+/g,'_').toLowerCase();
   currentLang='latino';
+  
+  // Buscar posición guardada en Supabase
+  var startTime = 0;
+  var savedLang = 'latino';
+  if(contentId && userName){
+    try {
+      const { data } = await supabaseClient
+        .from('mi_lista')
+        .select('posicion,idioma')
+        .eq('usuario_nombre', userName.toLowerCase())
+        .eq('contenido_id', contentId)
+        .single();
+      if(data && data.posicion > 5){
+        startTime = data.posicion;
+        savedLang = data.idioma || 'latino';
+        console.log('▶️ Reanudando en:', formatTime(startTime));
+      }
+    } catch(e) {}
+  }
+  window._startTime = startTime;
+  if(links && links[savedLang]) currentLang = savedLang;
+  
+  // Si hay múltiples idiomas → mostrar menú
   var idiomasDisponibles=[];
   if(currentVideoLinks.latino) idiomasDisponibles.push({key:'latino',label:'Latino'});
   if(currentVideoLinks.ingles) idiomasDisponibles.push({key:'ingles',label:'Inglés'});
   if(currentVideoLinks.otros) idiomasDisponibles.push({key:'otros',label:'Otros'});
+  
   if(idiomasDisponibles.length>1){ mostrarMenuIdiomas(idiomasDisponibles); return; }
   if(idiomasDisponibles.length===1){ currentLang=idiomasDisponibles[0].key; }
   cargarVideo(currentLang);
@@ -1499,10 +1585,11 @@ async function cargarVideo(idioma){
   var loading=document.getElementById('playerLoading');
   var audioBtn=document.getElementById('audioBtn');
   
+  // Si no hay link → reproducir demo
   if(!link){
     loading.classList.remove('active');
     playerVideo.src='https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
-    playerVideo.currentTime=0;
+    playerVideo.currentTime = window._startTime || 0;
     playerVideo.play().catch(function(){});
     isPlaying=true;
     updatePlayIcon();
@@ -1517,16 +1604,26 @@ async function cargarVideo(idioma){
   var messageId=null;
   var match=link.match(/\/(\d+)(?:\?|$)/);
   if(match) messageId=match[1];
-  if(!messageId){ loading.classList.remove('active'); alert('Link inválido'); return; }
+  
+  if(!messageId){
+    loading.classList.remove('active');
+    document.getElementById('pSubtitle').innerText='Video no disponible';
+    playerVideo.src='https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
+    playerVideo.play().catch(function(){});
+    isPlaying=true;updatePlayIcon();showControls();
+    return;
+  }
   
   try {
     var url=EDGE_FUNCTION_URL+'?chat_id='+TELEGRAM_CHANNEL_ID+'&message_id='+messageId;
     console.log('🎬 Cargando:', url);
     playerVideo.src=url;
-    playerVideo.currentTime=0;
     playerVideo.load();
     playerVideo.oncanplay=function(){
       loading.classList.remove('active');
+      if(window._startTime && window._startTime > 0){
+        playerVideo.currentTime = window._startTime;
+      }
       playerVideo.play().catch(function(){});
       isPlaying=true;
       updatePlayIcon();
@@ -1537,14 +1634,20 @@ async function cargarVideo(idioma){
     };
     playerVideo.onerror=function(){
       loading.classList.remove('active');
-      alert('Error al cargar el video');
+      document.getElementById('pSubtitle').innerText='Video no disponible';
+      playerVideo.src='https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
+      playerVideo.play().catch(function(){});
+      isPlaying=true;updatePlayIcon();showControls();
     };
     if(currentVideoLinks.latino && (currentVideoLinks.ingles || currentVideoLinks.otros)){
       audioBtn.style.display='flex';
     } else {
       audioBtn.style.display='none';
     }
-  } catch(e){ loading.classList.remove('active'); alert('Error de conexión'); }
+  } catch(e){
+    loading.classList.remove('active');
+    document.getElementById('pSubtitle').innerText='Error de conexión';
+  }
 }
 
 function checkOrientation(){
@@ -1555,57 +1658,156 @@ function checkOrientation(){
   if(active&&isPortrait&&!isFullscreen&&window.innerWidth<900)msg.style.display='flex';
   else msg.style.display='none';
 }
+
+async function savePosition(){
+  if(playerVideo && currentContentId && userName && playerVideo.currentTime > 5){
+    try {
+      await supabaseClient.from('mi_lista').upsert({
+        usuario_nombre: userName.toLowerCase(),
+        contenido_id: currentContentId,
+        estado: 'continue',
+        posicion: Math.floor(playerVideo.currentTime),
+        idioma: currentLang
+      }, { onConflict: 'usuario_nombre,contenido_id' });
+    } catch(e) { console.error(e); }
+  }
+}
+
 function closePlayer(){
+  savePosition();
   document.getElementById('playerScreen').classList.remove('active');
   document.getElementById('langMenu').classList.remove('active');
   document.getElementById('playerLoading').classList.remove('active');
-  if(playerVideo){playerVideo.pause();playerVideo.currentTime=0;playerVideo.src='';}
+  hidePauseOverlay();
+  if(playerVideo){playerVideo.pause();playerVideo.currentTime=0;}
   isPlaying=false;
   if(document.fullscreenElement)document.exitFullscreen();
 }
+
 function togglePlay(){
   if(!playerVideo)return;
-  if(playerVideo.paused){playerVideo.play();isPlaying=true;}else{playerVideo.pause();isPlaying=false;}
+  if(playerVideo.paused){playerVideo.play();isPlaying=true;hidePauseOverlay();}
+  else{playerVideo.pause();isPlaying=false;}
   updatePlayIcon();showControls();
 }
+
 function updatePlayIcon(){
   var icon=document.getElementById('playIcon');if(!icon)return;
   if(isPlaying)icon.innerHTML='<rect x="7" y="5" width="3.5" height="14" rx="1"/><rect x="13.5" y="5" width="3.5" height="14" rx="1"/>';
   else icon.innerHTML='<path d="M8 5 L19 12 L8 19 Z"/>';
 }
+
 function skip(sec){if(playerVideo)playerVideo.currentTime=Math.max(0,playerVideo.currentTime+sec);showControls();}
+
 function screenTap(e){
-  if(e.target.closest('.player-icon')||e.target.closest('.player-play')||e.target.closest('.player-skip')||e.target.closest('.player-bottom')||e.target.closest('.lang-menu'))return;
+  if(e.target.closest('.player-icon')||e.target.closest('.player-play')||e.target.closest('.player-skip')||e.target.closest('.player-bottom')||e.target.closest('.lang-menu')||e.target.closest('.pause-overlay'))return;
+  if(document.getElementById('pauseOverlay').classList.contains('active'))return;
   var c=document.getElementById('playerControls');
   if(c.classList.contains('hidden')){c.classList.remove('hidden');showControls();}
   else c.classList.add('hidden');
 }
+
 function showControls(){
   var c=document.getElementById('playerControls');if(!c)return;
   c.classList.remove('hidden');
   clearTimeout(controlsTimer);
   controlsTimer=setTimeout(function(){c.classList.add('hidden');},3500);
 }
+
 function seek(e){
   if(!playerVideo)return;
   var rect=document.getElementById('pBar').getBoundingClientRect();
   var pct=(e.clientX-rect.left)/rect.width;
   playerVideo.currentTime=pct*playerVideo.duration;
 }
+
 function formatTime(s){if(isNaN(s)||!s)return '0:00';var m=Math.floor(s/60);var sec=Math.floor(s%60);return m+':'+(sec<10?'0':'')+sec;}
+
 function toggleFullscreen(){
   var p=document.getElementById('playerScreen');
   if(!document.fullscreenElement){if(p.requestFullscreen)p.requestFullscreen();}
   else{if(document.exitFullscreen)document.exitFullscreen();}
 }
+
+/* OVERLAY PAUSA */
+function showPauseOverlay(){
+  var overlay=document.getElementById('pauseOverlay');
+  var container=document.getElementById('pauseSuggestions');
+  if(!overlay || !container)return;
+  
+  var pool = ALL_ITEMS.filter(function(x){
+    return !currentContentId || x.id !== currentContentId;
+  });
+  pool.sort(function(){return Math.random()-.5;});
+  var suggestions = pool.slice(0,8);
+  
+  var h='';
+  suggestions.forEach(function(x){
+    h+='<div class="pause-suggestion" onclick="event.stopPropagation();playSuggestion('+x.id+')"><div class="pause-suggestion-poster" style="background-image:url(\''+x.img+'\')"></div><div class="pause-suggestion-name">'+x.title+'</div></div>';
+  });
+  container.innerHTML=h || '<div style="color:#636366;padding:20px">Sin sugerencias</div>';
+  
+  overlay.classList.add('active');
+  var pc=document.getElementById('playerControls');
+  if(pc)pc.classList.add('hidden');
+}
+
+function hidePauseOverlay(){
+  var overlay=document.getElementById('pauseOverlay');
+  if(overlay)overlay.classList.remove('active');
+}
+
+function resumeVideo(){
+  hidePauseOverlay();
+  if(playerVideo){
+    playerVideo.play().catch(function(){});
+    isPlaying=true;
+    updatePlayIcon();
+    showControls();
+  }
+}
+
+function playSuggestion(id){
+  hidePauseOverlay();
+  savePosition();
+  var item = ALL_ITEMS.filter(function(x){return x.id===id;})[0];
+  if(!item)return;
+  var links = {
+    latino: item.linkLat || '',
+    ingles: item.linkIng || '',
+    otros: item.linkOtr || ''
+  };
+  openPlayer(item.title, item.meta, links, item.id);
+}
+
 document.addEventListener('DOMContentLoaded',function(){
-  playerVideo=document.getElementById('playerVideo');if(!playerVideo)return;
+  playerVideo=document.getElementById('playerVideo');
+  if(!playerVideo)return;
+  
   playerVideo.addEventListener('timeupdate',function(){
+    if(!playerVideo.duration)return;
     var pct=(playerVideo.currentTime/playerVideo.duration)*100;
     document.getElementById('pFill').style.width=pct+'%';
     document.getElementById('pThumb').style.left=pct+'%';
     document.getElementById('pCurrent').innerText=formatTime(playerVideo.currentTime);
     document.getElementById('pDuration').innerText=formatTime(playerVideo.duration);
+    
+    // Guardar posición cada 10 segundos
+    if(!playerVideo._lastSave || Date.now()-playerVideo._lastSave > 10000){
+      if(playerVideo.currentTime > 5 && !playerVideo.paused){
+        savePosition();
+        playerVideo._lastSave = Date.now();
+      }
+    }
+  });
+  
+  playerVideo.addEventListener('pause',function(){
+    if(playerVideo.currentTime > 0 && !playerVideo.ended && playerVideo.src && !document.getElementById('langMenu').classList.contains('active')){
+      showPauseOverlay();
+    }
+  });
+  playerVideo.addEventListener('play',function(){
+    hidePauseOverlay();
   });
 });
 
@@ -1629,12 +1831,9 @@ if(window.innerWidth>=900){
   pcNav.style.setProperty('display','flex','important');
   bottomNav.style.setProperty('display','none','important');
   if(isAdmin){
-    var ab=document.getElementById('adminBtnPC');
-    if(ab)ab.style.display='flex';
-    var eb=document.getElementById('editModeBtnPC');
-    if(eb)eb.style.display='flex';
-    var av=document.getElementById('userAvatarWrapPC');
-    if(av)av.classList.add('verified');
+    var ab=document.getElementById('adminBtnPC');if(ab)ab.style.display='flex';
+    var eb=document.getElementById('editModeBtnPC');if(eb)eb.style.display='flex';
+    var av=document.getElementById('userAvatarWrapPC');if(av)av.classList.add('verified');
   }
 }else{
   pcNav.style.setProperty('display','none','important');
@@ -1646,3 +1845,4 @@ document.addEventListener('DOMContentLoaded',checkPC);
 </script>
 </body>
 </html>
+
