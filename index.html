@@ -9,6 +9,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{background:#000;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#fff;overflow-x:hidden;min-height:100vh}
+body.player-active{overflow:hidden;height:100vh;width:100vw;position:fixed;top:0;left:0}
 .screen{display:none;padding-bottom:90px;min-height:100vh}
 .screen.active{display:block}
 html{transition:filter .5s ease}
@@ -270,10 +271,10 @@ body.edit-mode .edit-overlay{display:flex !important}
 .spinner{width:60px;height:60px;border:4px solid rgba(255,255,255,.15);border-top-color:#fff;border-radius:50%;animation:spin 1s linear infinite;margin-bottom:20px}
 @keyframes spin{to{transform:rotate(360deg)}}
 .player-loading p{font-size:14px;color:#8e8e93;font-weight:500}
-.pause-overlay{position:absolute;inset:0;z-index:7;display:none;flex-direction:column;overflow:hidden}
+.pause-overlay{position:absolute;inset:0;z-index:7;display:none;flex-direction:column;overflow:hidden;background:#000}
 .pause-overlay.active{display:flex}
-.pause-bg{position:absolute;inset:-60px;background-size:cover;background-position:center 30%;filter:blur(50px) brightness(.45);transform:scale(1.15);transition:opacity .6s ease}
-.pause-bg-sharp{position:absolute;inset:0;background-size:cover;background-position:center 25%;opacity:.35;transition:opacity .6s ease}
+.pause-bg{position:absolute;inset:0;background-size:cover;background-position:center 30%;filter:blur(50px) brightness(.45);transform:scale(1.4);transition:opacity .6s ease;will-change:transform,opacity}
+.pause-bg-sharp{position:absolute;inset:0;background-size:cover;background-position:center 25%;opacity:.35;transition:opacity .6s ease;will-change:opacity}
 .pause-bg-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.7) 0%,rgba(0,0,0,.85) 60%,rgba(0,0,0,.95) 100%)}
 .pause-content{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;justify-content:center;padding:80px 40px 120px;pointer-events:none}
 .pause-label{font-size:12px;color:#e5e5e5;letter-spacing:4px;text-transform:uppercase;font-weight:700;margin-bottom:20px;opacity:.9}
@@ -1397,9 +1398,6 @@ window.scrollTo(0,0);
 }
 function backFromCategory(){go(catLastScreen,null);}
 
-/* ============================================
-   REPRODUCTOR (con fix de autoplay)
-   ============================================ */
 var playerVideo,controlsTimer,isPlaying=false;
 var currentVideoLinks={};
 var currentLang='latino';
@@ -1422,6 +1420,7 @@ function playFromDetail(){
 
 function openPlayer(title,subtitle,links,contentId){
   document.getElementById('playerScreen').classList.add('active');
+  document.body.classList.add('player-active');
   document.getElementById('pTitle').innerText='CINEFILOS';
   document.getElementById('pSubtitle').innerText=title||'Reproduciendo';
   playerVideo=document.getElementById('playerVideo');
@@ -1430,7 +1429,6 @@ function openPlayer(title,subtitle,links,contentId){
   currentLang='latino';
   window._startTime = 0;
 
-  // Cargar posición guardada SIN bloquear (sin await)
   if(currentContentId && userName){
     supabaseClient.from('mi_lista')
       .select('posicion,idioma')
@@ -1582,6 +1580,7 @@ async function savePosition(){
 function closePlayer(){
   savePosition();
   document.getElementById('playerScreen').classList.remove('active');
+  document.body.classList.remove('player-active');
   document.getElementById('langMenu').classList.remove('active');
   document.getElementById('playerLoading').classList.remove('active');
   hidePauseOverlay();
@@ -1648,9 +1647,6 @@ function toggleFullscreen(){
   else{if(document.exitFullscreen)document.exitFullscreen();}
 }
 
-/* ============================================
-   OVERLAY PAUSA ESTILO NETFLIX
-   ============================================ */
 var pauseInterval=null;
 var pauseIndex=0;
 var pauseList=[];
@@ -1746,9 +1742,6 @@ function playSuggestion(id){
   openPlayer(item.title, item.meta, links, item.id);
 }
 
-/* ============================================
-   EVENTOS DEL VIDEO
-   ============================================ */
 document.addEventListener('DOMContentLoaded',function(){
   playerVideo=document.getElementById('playerVideo');
   if(!playerVideo)return;
@@ -1768,7 +1761,6 @@ document.addEventListener('DOMContentLoaded',function(){
     }
   });
 
-  // Sincronizar isPlaying con el estado REAL del video
   playerVideo.addEventListener('playing',function(){
     isPlaying=true;
     updatePlayIcon();
@@ -1818,3 +1810,4 @@ document.addEventListener('DOMContentLoaded',checkPC);
 </script>
 </body>
 </html>
+
